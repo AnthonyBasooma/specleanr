@@ -92,7 +92,7 @@
             "input_data": "https://aqua.igb-berlin.de/download/matched-biodiv-data-bdb09d5c-957f-11ef-aad4-8935a9f30073.csv",
             "colname_species": "species",
             "species_names": "Squalius cephalus, Salmo trutta, Thymallus thymallus, Anguilla anguilla",
-            "pct": 70,
+            "pct": 90,
             "bool_merge": true
         }
     }
