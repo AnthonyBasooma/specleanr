@@ -1,6 +1,6 @@
 #' @title Model evaluation metrics
 #'
-#' @param data Species environmental data generated during bootstrapping or subsampling.
+#' @param data Species environmental data generated during bootstrapping or subsampling data.
 #' @param predictions Model predictions from the \code{predict} function from stats package.
 #' @param response The presence absence or presence only for presence-only models.
 #' @param model Parameter to set the model of choices. Only \code{GLM} and \code{RF} are allowed.
