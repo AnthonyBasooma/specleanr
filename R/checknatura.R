@@ -76,7 +76,7 @@ naturaranges <- function(data, species, lat, lon, verbose=FALSE, discard=TRUE, b
 
   if(missing(data)) stop('Dataframe mising')
 
-  if(is(data, 'vector') || is(data, 'atomic') || is(data, 'list')) stop('Only data.frame accepted for x input parameter.')
+  if(is(data, 'vector') || is(data, 'atomic') || is(data, 'list')) stop('Only data.frame accepted for x input parametersss.')
 
   if(nrow(data)<1) stop('Data provided has zero reocrds. Check to contine.')
 
