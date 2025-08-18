@@ -33,7 +33,8 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/eOutlier.html">Environmental outlier detection with bootstrapping and principal component analysis.</a></li>
+<li><a class="dropdown-item" href="../articles/addspeciesecologicalranges.html">Flag outliers based on species ecological ranges.</a></li>
+    <li><a class="dropdown-item" href="../articles/eOutlier.html">Environmental outlier detection with bootstrapping and principal component analysis.</a></li>
     <li><a class="dropdown-item" href="../articles/generaloutlier.html">General outlier detection for univariate datasets</a></li>
     <li><a class="dropdown-item" href="../articles/Plants.html">Detecting environmental outliers in species distribution models for plants.</a></li>
   </ul>
@@ -300,7 +301,7 @@ data. Important in the next steps.</p></li>
 <span>                             list<span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                             minpts <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">thymallus_referencedata</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 94 21</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 95 21</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="outlier-detection-for-both-single-and-multiple-species-no-pca-or-bootstrapping">3. Outlier detection for both single and multiple species (No PCA or
@@ -400,25 +401,25 @@ identifying the optimal threshold.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">multspecies_clean</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        bio1     bio2     bio3     bio4     bio5     bio6     bio7     bio8</span></span>
 <span><span class="co">#&gt; 1  8.340094 8.558521 31.95564 691.9463 23.15800 -3.62450 26.78250 15.38925</span></span>
-<span><span class="co">#&gt; 2 10.705156 9.007730 30.22804 798.7291 26.63425 -3.16500 29.79925 18.81887</span></span>
-<span><span class="co">#&gt; 3  7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
-<span><span class="co">#&gt; 4  8.390240 8.568895 31.32536 722.0088 23.12525 -4.22925 27.35450 17.21496</span></span>
+<span><span class="co">#&gt; 2 10.042927 9.046562 30.40682 776.2538 26.19925 -3.55250 29.75175 19.52196</span></span>
+<span><span class="co">#&gt; 3 10.705156 9.007730 30.22804 798.7291 26.63425 -3.16500 29.79925 18.81887</span></span>
+<span><span class="co">#&gt; 4  7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
 <span><span class="co">#&gt; 5  7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
-<span><span class="co">#&gt; 6 10.253646 7.772875 27.32694 784.7963 25.38475 -3.05925 28.44400 19.79350</span></span>
+<span><span class="co">#&gt; 6  7.916781 8.393229 31.47658 698.7467 22.16225 -4.50275 26.66500 16.48808</span></span>
 <span><span class="co">#&gt;        bio9    bio10       bio11 bio12 bio13 bio14    bio15 bio16 bio17 bio18</span></span>
 <span><span class="co">#&gt; 1 1.1871250 16.93192 -0.08562502   789    97    44 28.08648   274   136   274</span></span>
-<span><span class="co">#&gt; 2 2.3845417 20.33225  0.70933336   536    60    28 23.59082   169    90   162</span></span>
-<span><span class="co">#&gt; 3 0.6048333 16.19358 -0.60591668  1364   175    79 25.91408   479   270   479</span></span>
-<span><span class="co">#&gt; 4 0.9156250 17.21496 -0.48479167  1142   143    68 23.92640   391   228   391</span></span>
+<span><span class="co">#&gt; 2 1.9554167 19.52196  0.38324997   644    80    35 28.87415   227   111   227</span></span>
+<span><span class="co">#&gt; 3 2.3845417 20.33225  0.70933336   536    60    28 23.59082   169    90   162</span></span>
+<span><span class="co">#&gt; 4 0.6048333 16.19358 -0.60591668  1364   175    79 25.91408   479   270   479</span></span>
 <span><span class="co">#&gt; 5 0.6048333 16.19358 -0.60591668  1364   175    79 25.91408   479   270   479</span></span>
-<span><span class="co">#&gt; 6 1.9766250 19.79350  0.50708336   595    69    27 28.35505   195    89   195</span></span>
+<span><span class="co">#&gt; 6 0.6603751 16.48808 -0.61391664  1320   169    77 25.28074   459   264   459</span></span>
 <span><span class="co">#&gt;   bio19        x        y            groups</span></span>
 <span><span class="co">#&gt; 1   145 10.08333 48.41667 Anguilla anguilla</span></span>
-<span><span class="co">#&gt; 2   104 18.75000 47.41667 Anguilla anguilla</span></span>
-<span><span class="co">#&gt; 3   274 13.58333 47.91667 Anguilla anguilla</span></span>
-<span><span class="co">#&gt; 4   230 13.75000 48.08333 Anguilla anguilla</span></span>
+<span><span class="co">#&gt; 2   115 16.91667 48.25000 Anguilla anguilla</span></span>
+<span><span class="co">#&gt; 3   104 18.75000 47.41667 Anguilla anguilla</span></span>
+<span><span class="co">#&gt; 4   274 13.58333 47.91667 Anguilla anguilla</span></span>
 <span><span class="co">#&gt; 5   274 13.58333 47.91667 Anguilla anguilla</span></span>
-<span><span class="co">#&gt; 6   101 17.75000 46.91667 Anguilla anguilla</span></span>
+<span><span class="co">#&gt; 6   266 13.75000 47.91667 Anguilla anguilla</span></span>
 <span></span>
 <span><span class="va">thymallus_qcdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_clean_data.html">extract_clean_data</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">thymallus_referencedata</span>, </span>
 <span>                             outliers <span class="op">=</span> <span class="va">thymallus_outlier_detection</span>, </span>
@@ -429,54 +430,54 @@ identifying the optimal threshold.</p>
 <span>                                outliers <span class="op">=</span> <span class="va">multiple_spp_out_detection</span>, </span>
 <span>                                EIF <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">multiple_spp_qcdata</span><span class="op">)</span></span>
-<span><span class="co">#&gt;        bio1     bio2     bio3     bio4     bio5     bio6     bio7     bio8</span></span>
-<span><span class="co">#&gt; 3  7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
-<span><span class="co">#&gt; 4  8.390240 8.568895 31.32536 722.0088 23.12525 -4.22925 27.35450 17.21496</span></span>
-<span><span class="co">#&gt; 5  7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
-<span><span class="co">#&gt; 7  7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
-<span><span class="co">#&gt; 9  7.916781 8.393229 31.47658 698.7467 22.16225 -4.50275 26.66500 16.48808</span></span>
-<span><span class="co">#&gt; 11 7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
-<span><span class="co">#&gt;         bio9    bio10      bio11 bio12 bio13 bio14    bio15 bio16 bio17 bio18</span></span>
-<span><span class="co">#&gt; 3  0.6048333 16.19358 -0.6059167  1364   175    79 25.91408   479   270   479</span></span>
-<span><span class="co">#&gt; 4  0.9156250 17.21496 -0.4847917  1142   143    68 23.92640   391   228   391</span></span>
-<span><span class="co">#&gt; 5  0.6048333 16.19358 -0.6059167  1364   175    79 25.91408   479   270   479</span></span>
-<span><span class="co">#&gt; 7  0.6048333 16.19358 -0.6059167  1364   175    79 25.91408   479   270   479</span></span>
-<span><span class="co">#&gt; 9  0.6603751 16.48808 -0.6139166  1320   169    77 25.28074   459   264   459</span></span>
-<span><span class="co">#&gt; 11 0.6048333 16.19358 -0.6059167  1364   175    79 25.91408   479   270   479</span></span>
-<span><span class="co">#&gt;    bio19        x        y       label            groups        EIF</span></span>
-<span><span class="co">#&gt; 3    274 13.58333 47.91667 not outlier Anguilla anguilla -0.4482500</span></span>
-<span><span class="co">#&gt; 4    230 13.75000 48.08333 not outlier Anguilla anguilla -0.1633636</span></span>
-<span><span class="co">#&gt; 5    274 13.58333 47.91667 not outlier Anguilla anguilla -0.4482500</span></span>
-<span><span class="co">#&gt; 7    274 13.58333 47.91667 not outlier Anguilla anguilla -0.4482500</span></span>
-<span><span class="co">#&gt; 9    266 13.75000 47.91667 not outlier Anguilla anguilla -0.4492954</span></span>
-<span><span class="co">#&gt; 11   274 13.58333 47.91667 not outlier Anguilla anguilla -0.4482500</span></span>
+<span><span class="co">#&gt;       bio1     bio2     bio3     bio4     bio5     bio6     bio7     bio8</span></span>
+<span><span class="co">#&gt; 1 8.340094 8.558521 31.95564 691.9463 23.15800 -3.62450 26.78250 15.38925</span></span>
+<span><span class="co">#&gt; 4 7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
+<span><span class="co">#&gt; 5 7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
+<span><span class="co">#&gt; 6 7.916781 8.393229 31.47658 698.7467 22.16225 -4.50275 26.66500 16.48808</span></span>
+<span><span class="co">#&gt; 8 8.688948 8.375896 30.39067 733.9625 23.53350 -4.02725 27.56075 17.66537</span></span>
+<span><span class="co">#&gt; 9 7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
+<span><span class="co">#&gt;        bio9    bio10       bio11 bio12 bio13 bio14    bio15 bio16 bio17 bio18</span></span>
+<span><span class="co">#&gt; 1 1.1871250 16.93192 -0.08562502   789    97    44 28.08648   274   136   274</span></span>
+<span><span class="co">#&gt; 4 0.6048333 16.19358 -0.60591668  1364   175    79 25.91408   479   270   479</span></span>
+<span><span class="co">#&gt; 5 0.6048333 16.19358 -0.60591668  1364   175    79 25.91408   479   270   479</span></span>
+<span><span class="co">#&gt; 6 0.6603751 16.48808 -0.61391664  1320   169    77 25.28074   459   264   459</span></span>
+<span><span class="co">#&gt; 8 1.0729584 17.66537 -0.34283331  1053   134    61 24.62582   361   206   361</span></span>
+<span><span class="co">#&gt; 9 0.6048333 16.19358 -0.60591668  1364   175    79 25.91408   479   270   479</span></span>
+<span><span class="co">#&gt;   bio19        x        y       label            groups         EIF</span></span>
+<span><span class="co">#&gt; 1   145 10.08333 48.41667 not outlier Anguilla anguilla  0.46887495</span></span>
+<span><span class="co">#&gt; 4   274 13.58333 47.91667 not outlier Anguilla anguilla -0.44825000</span></span>
+<span><span class="co">#&gt; 5   274 13.58333 47.91667 not outlier Anguilla anguilla -0.44825000</span></span>
+<span><span class="co">#&gt; 6   266 13.75000 47.91667 not outlier Anguilla anguilla -0.44929538</span></span>
+<span><span class="co">#&gt; 8   207 13.91667 48.08333 not outlier Anguilla anguilla  0.04781837</span></span>
+<span><span class="co">#&gt; 9   274 13.58333 47.91667 not outlier Anguilla anguilla -0.44825000</span></span>
 <span></span>
 <span></span>
 <span><span class="va">thymallus_qc_labelled</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_data.html">classify_data</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">thymallus_referencedata</span>, </span>
 <span>                              outliers <span class="op">=</span> <span class="va">thymallus_outlier_detection</span>, </span>
 <span>                              EIF <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">thymallus_qc_labelled</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       bio1     bio2     bio3     bio4     bio5     bio6     bio7     bio8</span></span>
-<span><span class="co">#&gt; 1 7.519135 8.307521 31.21427 699.6627 21.70950 -4.90500 26.61450 16.09933</span></span>
-<span><span class="co">#&gt; 2 7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
-<span><span class="co">#&gt; 3 8.130990 9.155687 33.54192 693.5986 22.50525 -4.79100 27.29625 16.58138</span></span>
-<span><span class="co">#&gt; 4 4.896625 7.973625 32.91588 622.3517 17.77100 -6.45325 24.22425 12.55783</span></span>
-<span><span class="co">#&gt; 6 7.765240 8.342354 31.78373 687.5156 21.74550 -4.50175 26.24725 16.19358</span></span>
-<span><span class="co">#&gt; 7 8.390240 8.568895 31.32536 722.0088 23.12525 -4.22925 27.35450 17.21496</span></span>
-<span><span class="co">#&gt;         bio9    bio10      bio11 bio12 bio13 bio14    bio15 bio16 bio17 bio18</span></span>
-<span><span class="co">#&gt; 1  0.2436249 16.09933 -1.0310835  1213   158    69 26.63618   427   238   427</span></span>
-<span><span class="co">#&gt; 2  0.6048333 16.19358 -0.6059167  1364   175    79 25.91408   479   270   479</span></span>
-<span><span class="co">#&gt; 3  0.9313333 16.58138 -0.4191251  1307   174    69 33.66177   499   233   499</span></span>
-<span><span class="co">#&gt; 4 -1.7837499 12.55783 -2.5295832  1438   190    77 30.74920   531   262   531</span></span>
-<span><span class="co">#&gt; 6  0.6048333 16.19358 -0.6059167  1364   175    79 25.91408   479   270   479</span></span>
-<span><span class="co">#&gt; 7  0.9156250 17.21496 -0.4847917  1142   143    68 23.92640   391   228   391</span></span>
-<span><span class="co">#&gt;   bio19        x        y       label        EIF</span></span>
-<span><span class="co">#&gt; 1   239 13.91667 47.91667 not outlier  0.7538385</span></span>
-<span><span class="co">#&gt; 2   274 13.58333 47.91667 not outlier  1.1614247</span></span>
-<span><span class="co">#&gt; 3   234 13.08333 47.75000 not outlier  0.8690646</span></span>
-<span><span class="co">#&gt; 4   265 13.08333 47.58333 not outlier -0.8110591</span></span>
-<span><span class="co">#&gt; 6   274 13.58333 47.91667 not outlier  1.1614247</span></span>
-<span><span class="co">#&gt; 7   230 13.75000 48.08333 not outlier  1.4368549</span></span></code></pre></div>
+<span><span class="co">#&gt;        bio1     bio2     bio3     bio4     bio5     bio6     bio7     bio8</span></span>
+<span><span class="co">#&gt; 5  7.519135 8.307521 31.21427 699.6627 21.70950 -4.90500 26.61450 16.09933</span></span>
+<span><span class="co">#&gt; 6  5.290083 8.268625 33.26678 635.7107 18.46425 -6.39125 24.85550 13.10142</span></span>
+<span><span class="co">#&gt; 7  5.290083 8.268625 33.26678 635.7107 18.46425 -6.39125 24.85550 13.10142</span></span>
+<span><span class="co">#&gt; 8  7.782344 8.558562 33.16437 660.7922 21.44375 -4.36275 25.80650 15.84971</span></span>
+<span><span class="co">#&gt; 10 8.130990 9.155687 33.54192 693.5986 22.50525 -4.79100 27.29625 16.58138</span></span>
+<span><span class="co">#&gt; 11 8.390240 8.568895 31.32536 722.0088 23.12525 -4.22925 27.35450 17.21496</span></span>
+<span><span class="co">#&gt;          bio9    bio10      bio11 bio12 bio13 bio14    bio15 bio16 bio17 bio18</span></span>
+<span><span class="co">#&gt; 5   0.2436249 16.09933 -1.0310835  1213   158    69 26.63618   427   238   427</span></span>
+<span><span class="co">#&gt; 6  -1.4955000 13.10142 -2.3458333  1440   193    76 31.47408   536   261   536</span></span>
+<span><span class="co">#&gt; 7  -1.4955000 13.10142 -2.3458333  1440   193    76 31.47408   536   261   536</span></span>
+<span><span class="co">#&gt; 8  -0.2946250 15.84971 -0.2946250  1279   170    66 34.78019   489   215   489</span></span>
+<span><span class="co">#&gt; 10  0.9313333 16.58138 -0.4191251  1307   174    69 33.66177   499   233   499</span></span>
+<span><span class="co">#&gt; 11  0.9156250 17.21496 -0.4847917  1142   143    68 23.92640   391   228   391</span></span>
+<span><span class="co">#&gt;    bio19        x        y       label        EIF</span></span>
+<span><span class="co">#&gt; 5    239 13.91667 47.91667 not outlier  0.7616301</span></span>
+<span><span class="co">#&gt; 6    266 13.25000 47.58333 not outlier -0.7404310</span></span>
+<span><span class="co">#&gt; 7    266 13.25000 47.58333 not outlier -0.7404310</span></span>
+<span><span class="co">#&gt; 8    215 11.58333 47.75000 not outlier  1.3096489</span></span>
+<span><span class="co">#&gt; 10   234 13.08333 47.75000 not outlier  0.8768432</span></span>
+<span><span class="co">#&gt; 11   230 13.75000 48.08333 not outlier  1.4445692</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="visualize-labeled-data-in-environmental-space-">6. Visualize labeled data in environmental space.<a class="anchor" aria-label="anchor" href="#visualize-labeled-data-in-environmental-space-"></a>
@@ -606,7 +607,7 @@ components, the argument <strong>q</strong> is used.</p></li>
 <span>                                  <span class="st">'iforest'</span><span class="op">)</span>,</span>
 <span>                      bootSettings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>run <span class="op">=</span> <span class="cn">TRUE</span>, maxrecords <span class="op">=</span> <span class="fl">100</span>, nb <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
 <span>                      pc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>exec <span class="op">=</span> <span class="cn">TRUE</span>, npc <span class="op">=</span> <span class="fl">6</span>, q <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The cummulative proprotion for PCs 6 is 0.99255</span></span></code></pre></div>
+<span><span class="co">#&gt; The cummulative proprotion for PCs 6 is 0.99258</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="visulise-outliers-after-bootstrapping-and-bootstrapping">Visulise outliers after bootstrapping and bootstrapping<a class="anchor" aria-label="anchor" href="#visulise-outliers-after-bootstrapping-and-bootstrapping"></a>
@@ -658,7 +659,7 @@ evolving community-developed biodiversity data standard. PLoS ONE, 7(1).
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anthony Basooma.</p>
+  <p>Developed by Anthony Basooma, Thomas Hein, Astrid Schmidt-Kloiber, Florian Borgwardt.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -2,10 +2,11 @@ pandoc: 3.1.11
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
+  addspeciesecologicalranges: addspeciesecologicalranges.html
   eOutlier: eOutlier.html
   generaloutlier: generaloutlier.html
   Plants: Plants.html
-last_built: 2025-08-14T17:47Z
+last_built: 2025-08-18T11:06Z
 urls:
   reference: https://anthonybasooma.github.io/specleanr/reference
   article: https://anthonybasooma.github.io/specleanr/articles

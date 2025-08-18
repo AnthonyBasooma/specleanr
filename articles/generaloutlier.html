@@ -33,7 +33,8 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/eOutlier.html">Environmental outlier detection with bootstrapping and principal component analysis.</a></li>
+<li><a class="dropdown-item" href="../articles/addspeciesecologicalranges.html">Flag outliers based on species ecological ranges.</a></li>
+    <li><a class="dropdown-item" href="../articles/eOutlier.html">Environmental outlier detection with bootstrapping and principal component analysis.</a></li>
     <li><a class="dropdown-item" href="../articles/generaloutlier.html">General outlier detection for univariate datasets</a></li>
     <li><a class="dropdown-item" href="../articles/Plants.html">Detecting environmental outliers in species distribution models for plants.</a></li>
   </ul>
@@ -103,14 +104,14 @@ removing outlier in <em>iris</em> dataset which is incorporated in the
 <span><span class="va">dfinal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">irisdata1</span>, <span class="va">rowsOutNA1</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="detecting-outlier-in-changed-iris-dataset">Detecting outlier in changed iris dataset*<a class="anchor" aria-label="anchor" href="#detecting-outlier-in-changed-iris-dataset"></a>
+<h3 id="detecting-outlier-in-changed-iris-dataset">Detecting outlier in changed iris dataset<a class="anchor" aria-label="anchor" href="#detecting-outlier-in-changed-iris-dataset"></a>
 </h3>
 <p>We can only use univariate methods to detect only in in variable such
 as Sepal.Length or we can exclude the species column and also use
 multivariate methods such as isolation forest, Mahalanobis outlier
 detection method or One class support vector machines. To identify the
 methods allowed in this package, run
-<code>**extractMethod()**</code></p>
+<strong><code>extractMethod()</code></strong></p>
 <p><strong>NOTE</strong> * Because we are considering univariate
 analysis, the parameter <strong>sdm</strong> is set to
 <strong>FALSE</strong>.</p>
@@ -149,7 +150,7 @@ detection</strong></p>
 <span><span class="co">#extractMethods()</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="visualiss-the-number-of-outliers-detected-by-each-method">Visualiss the number of outliers detected by each method<a class="anchor" aria-label="anchor" href="#visualiss-the-number-of-outliers-detected-by-each-method"></a>
+<h3 id="visualise-the-number-of-outliers-detected-by-each-method">Visualise the number of outliers detected by each method<a class="anchor" aria-label="anchor" href="#visualise-the-number-of-outliers-detected-by-each-method"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -219,7 +220,7 @@ be provided as demonstrated below.</li>
 <span><span class="co">#&gt; 0 (0%) NAs removed for parameter Sepal.Width.</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="visualise-the-number-of-outliers-detected-by-each-method">Visualise the number of outliers detected by each method<a class="anchor" aria-label="anchor" href="#visualise-the-number-of-outliers-detected-by-each-method"></a>
+<h3 id="visualise-the-number-of-outliers-detected-by-each-method-1">Visualise the number of outliers detected by each method<a class="anchor" aria-label="anchor" href="#visualise-the-number-of-outliers-detected-by-each-method-1"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -272,7 +273,7 @@ labelling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controll
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anthony Basooma.</p>
+  <p>Developed by Anthony Basooma, Thomas Hein, Astrid Schmidt-Kloiber, Florian Borgwardt.</p>
 </div>
 
 <div class="pkgdown-footer-right">
