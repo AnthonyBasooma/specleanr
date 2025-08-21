@@ -21,6 +21,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/addspeciesecologicalranges.html">Flag outliers based on species ecological ranges.</a></li>
     <li><a class="dropdown-item" href="../articles/eOutlier.html">Environmental outlier detection with bootstrapping and principal component analysis.</a></li>
     <li><a class="dropdown-item" href="../articles/generaloutlier.html">General outlier detection for univariate datasets</a></li>
+    <li><a class="dropdown-item" href="../articles/loessmethodoptimisation.html">Optimising the LOESS method used for automatic identification of the outlier thresholds.</a></li>
     <li><a class="dropdown-item" href="../articles/Plants.html">Detecting environmental outliers in species distribution models for plants.</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -51,7 +52,8 @@
 <span>  var_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  warn <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  plot <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="fl">0.6</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -82,7 +84,12 @@ outliers obtained at a low threshold is indicated. Default <strong>TRUE</strong>
 
 
 <dt id="arg-plot">plot<a class="anchor" aria-label="anchor" href="#arg-plot"></a></dt>
-<dd><p><code>logical</code>. to show plot of loess fitted function with minima and maxima (optimal threshold and clean data).</p></dd>
+<dd><p><code>logical</code>. to show plot of loess fitted function with local and global maxima (optimal threshold and clean data).</p></dd>
+
+
+<dt id="arg-cutoff">cutoff<a class="anchor" aria-label="anchor" href="#arg-cutoff"></a></dt>
+<dd><p><code>numeric</code>. Ranging from 0.5 to 0.8 indicating the cutoff to initiate the
+LOESS model to optimize the identification of absolute outliers.</p></dd>
 
 </dl></div>
     <div class="section level2">

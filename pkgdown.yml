@@ -5,8 +5,9 @@ articles:
   addspeciesecologicalranges: addspeciesecologicalranges.html
   eOutlier: eOutlier.html
   generaloutlier: generaloutlier.html
+  loessmethodoptimisation: loessmethodoptimisation.html
   Plants: Plants.html
-last_built: 2025-08-18T11:06Z
+last_built: 2025-08-21T15:51Z
 urls:
   reference: https://anthonybasooma.github.io/specleanr/reference
   article: https://anthonybasooma.github.io/specleanr/articles

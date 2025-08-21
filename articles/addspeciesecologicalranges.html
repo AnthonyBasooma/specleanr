@@ -36,6 +36,7 @@
 <li><a class="dropdown-item" href="../articles/addspeciesecologicalranges.html">Flag outliers based on species ecological ranges.</a></li>
     <li><a class="dropdown-item" href="../articles/eOutlier.html">Environmental outlier detection with bootstrapping and principal component analysis.</a></li>
     <li><a class="dropdown-item" href="../articles/generaloutlier.html">General outlier detection for univariate datasets</a></li>
+    <li><a class="dropdown-item" href="../articles/loessmethodoptimisation.html">Optimising the LOESS method used for automatic identification of the outlier thresholds.</a></li>
     <li><a class="dropdown-item" href="../articles/Plants.html">Detecting environmental outliers in species distribution models for plants.</a></li>
   </ul>
 </li>
@@ -197,8 +198,8 @@ labeling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controlle
 <span><span class="co">#&gt; [1] 19</span></span>
 <span></span>
 <span><span class="co">#reference data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">sqcep</span><span class="op">)</span></span>
-<span><span class="co">#&gt; NULL</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">sqcep</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 19</span></span>
 <span></span>
 <span><span class="va">squalius_qc_labeled</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_data.html">classify_data</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">sqcep</span>, outliers <span class="op">=</span> <span class="va">squalius_outlier</span><span class="op">)</span></span></code></pre></div>
 </div>
