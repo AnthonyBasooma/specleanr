@@ -50,7 +50,7 @@
 <span>  <span class="va">data</span>,</span>
 <span>  <span class="va">outliers</span>,</span>
 <span>  sp <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">plotsetting</span>,</span>
 <span>  var_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  warn <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -76,8 +76,9 @@
 considered during outlier detection.</p></dd>
 
 
-<dt id="arg-plot">plot<a class="anchor" aria-label="anchor" href="#arg-plot"></a></dt>
-<dd><p><code>logical</code>. to show plot of loess fitted function with local and global maxima (optimal threshold and clean data).</p></dd>
+<dt id="arg-plotsetting">plotsetting<a class="anchor" aria-label="anchor" href="#arg-plotsetting"></a></dt>
+<dd><p><code>list</code>. to show plot of loess fitted function with local and global maxima (optimal threshold and clean data).
+The list had two parameters. 1) plot to indicate the plot and group to provide the plot title.</p></dd>
 
 
 <dt id="arg-var-col">var_col<a class="anchor" aria-label="anchor" href="#arg-var-col"></a></dt>

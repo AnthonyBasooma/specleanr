@@ -74,14 +74,14 @@
 <div class="section level3">
 <h3 id="process-of-identifying-environmental-outliers">Process of identifying environmental outliers.<a class="anchor" aria-label="anchor" href="#process-of-identifying-environmental-outliers"></a>
 </h3>
-<p>The process of identifying environmental outliers is generally classified into <strong>five steps</strong> as detailed below (Figure 1);</p>
+<p>The process of identifying environmental outliers is generally classified into <strong>four steps</strong> as detailed below (Figure 1);</p>
 <figure><img src="reference/figures/Figure1.png" alt="Figure 1. Workflow for processing species occurrence data within the specleanr R-package for environmental outlier detection, removal, and evaluation."><figcaption aria-hidden="true">
 Figure 1. Workflow for processing species occurrence data within the specleanr R-package for environmental outlier detection, removal, and evaluation.
 </figcaption></figure><!--(![This is the caption!](img/rmarkdown_hex.png))--><ol style="list-style-type: decimal">
 <li>
 <strong>Arranging of species records and environmental data</strong>.</li>
 </ol>
-<p>This includes collecting species data from either online sources or locally stored data. The user can check for species records for geographical, taxonomic, or temporal inconsistencies such as missing coordinates, interchanged coordinates, species name spelling mistakes, and wrong event dates. Environmental data, mainly in the raster format, is based chiefly on user needs, but numerous sources include WORLDCLIM (Fick &amp; Hijmans, 2017) and CHELSA (Karger et al., 2017) for bioclimatic variables; Hydrography90m for stream or river-based hydromorphological parameters such as stream order, flow accumulation, stream power index, and stream transportation index (Amatulli et al., 2022); and Copernicus for land use changes <a href="https://www.copernicus.eu/en" class="external-link uri">https://www.copernicus.eu/en</a>.</p>
+<p>This includes collecting species data from either online sources or locally stored data. The user can check for species records for geographical, taxonomic, or temporal inconsistencies such as missing coordinates, interchanged coordinates, species name spelling mistakes, and wrong event dates. Environmental data, mainly in the raster format, is based chiefly on user needs, but numerous sources include WORLDCLIM (Fick &amp; Hijmans, 2017) and CHELSA (Karger et al., 2017) for bioclimatic variables; Hydrography90m for stream or river-based hydromorphological parameters such as stream order, flow accumulation, stream power index, and stream transportation index (Amatulli et al., 2022); and Copernicus for land use changes <a href="https://www.copernicus.eu/en" class="external-link uri">https://www.copernicus.eu/en</a>. A comprehensive database for environmental predictors can be accessed at <a href="https://hydrography.org/environment90m/environment90m_layers" class="external-link uri">https://hydrography.org/environment90m/environment90m_layers</a>.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>
 <strong>Extracting the environmental predictors</strong>.</li>

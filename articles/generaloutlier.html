@@ -70,10 +70,20 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anthonybasooma.github.io/specleanr/">specleanr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="introduction-to-general-data-outlier-detection">Introduction to general data outlier detection<a class="anchor" aria-label="anchor" href="#introduction-to-general-data-outlier-detection"></a>
+</h2>
+<ul>
+<li>Two approaches are supported, namely 1) setting only one variable of
+interest and 2) setting multiple variables of interest.</li>
+</ul>
 <div class="section level3">
-<h3 id="introduction-to-general-data-outlier-detection">Introduction to general data outlier detection<a class="anchor" aria-label="anchor" href="#introduction-to-general-data-outlier-detection"></a>
+<h3 id="setting-one-variable-of-interest">Setting one variable of interest<a class="anchor" aria-label="anchor" href="#setting-one-variable-of-interest"></a>
 </h3>
 <ul>
+<li><p>We used the <strong>iris</strong> dataset, which is embedded in
+the <strong>datasets</strong> package which is always preinstalled in
+R.</p></li>
 <li><p>The presence of outliers is a general concern even is data which
 is not specifically for species distribution modelling. Also, the same
 approach of adhoc selection of outlier detection method is considered to
@@ -83,9 +93,12 @@ outlier detection methods to identify <em>absolute outliers</em> in the
 datasets which can later be removed.</p></li>
 <li><p>The same process is followed but the no data extraction and
 evaluating model performance is required.</p></li>
-<li><p>Below is a detailed workflow for objectively detecting and
-removing outlier in <em>iris</em> dataset which is incorporated in the
-<em>dataset</em> package in <em>R programming Language</em></p></li>
+</ul>
+<p><strong>1. Preparing data</strong></p>
+<ul>
+<li>To enable identify and extract outliers, we introduced noticeable
+outliers in iris dataset. This is done exclusively for instructional
+purposes only.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -103,10 +116,7 @@ removing outlier in <em>iris</em> dataset which is incorporated in the
 <span></span>
 <span></span>
 <span><span class="va">dfinal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">irisdata1</span>, <span class="va">rowsOutNA1</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="detecting-outlier-in-changed-iris-dataset">Detecting outlier in changed iris dataset<a class="anchor" aria-label="anchor" href="#detecting-outlier-in-changed-iris-dataset"></a>
-</h3>
+<p>Detecting outlier in changed iris dataset</p>
 <p>We can only use univariate methods to detect only in in variable such
 as Sepal.Length or we can exclude the species column and also use
 multivariate methods such as isolation forest, Mahalanobis outlier
@@ -129,7 +139,7 @@ be removed. Otherwise, the rows with NAs will be removed using
 In summary, increasing <strong>missingness</strong> may lead to loss
 many rows especially if any column has more missing values.</p></li>
 </ul>
-<p><strong>Filter out only setosa data before outlier
+<p><strong>2. Filter out only setosa data before outlier
 detection</strong></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -149,19 +159,14 @@ detection</strong></p>
 <span><span class="co">#&gt; 1 (1.85%) NAs removed for parameter Sepal.Width.</span></span>
 <span></span>
 <span><span class="co">#extractMethods()</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="visualise-the-number-of-outliers-detected-by-each-method">Visualise the number of outliers detected by each method<a class="anchor" aria-label="anchor" href="#visualise-the-number-of-outliers-detected-by-each-method"></a>
-</h3>
+<p><strong>3. Visualize the number of outliers detected by each
+method</strong></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/ggoutliers.html">ggoutliers</a></span><span class="op">(</span><span class="va">setosa_outlier_detection</span><span class="op">)</span></span></code></pre></div>
-<p><img src="generaloutlier_files/figure-html/ploting-1.png" width="576" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
-<h3 id="obtaining-quality-controlled-dataset-using-loess-method-or-data-labelling">Obtaining quality controlled dataset using loess method or data
-labelling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controlled-dataset-using-loess-method-or-data-labelling"></a>
-</h3>
+<p><img src="generaloutlier_files/figure-html/ploting2-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><strong>4 Obtaining quality controlled dataset using loess method or
+data labeling</strong></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">setosa_qc_loess</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_clean_data.html">extract_clean_data</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">setosadf</span>, </span>
@@ -176,10 +181,7 @@ labelling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controll
 <span><span class="co">#&gt; [1] 54</span></span>
 <span></span>
 <span><span class="va">setosa_qc_labeled</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_data.html">classify_data</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">setosadf</span>, outliers <span class="op">=</span> <span class="va">setosa_outlier_detection</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="visualise-labelled-quality-controlled-dataset">Visualise labelled quality controlled dataset<a class="anchor" aria-label="anchor" href="#visualise-labelled-quality-controlled-dataset"></a>
-</h3>
+<p><strong>5 Visualize labelled quality controlled dataset</strong></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
@@ -194,7 +196,7 @@ labelling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controll
 <p><img src="generaloutlier_files/figure-html/clean%20data%20extraction%20and%20labelling_multiple-1.png" width="432" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
-<h3 id="for-multiple-species">For multiple species<a class="anchor" aria-label="anchor" href="#for-multiple-species"></a>
+<h3 id="for-multiple-species-but-using-only-variable-of-interest">For multiple species but using only variable of interest<a class="anchor" aria-label="anchor" href="#for-multiple-species-but-using-only-variable-of-interest"></a>
 </h3>
 <p><strong>NOTE</strong></p>
 <ul>
@@ -202,6 +204,8 @@ labelling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controll
 changed to <strong>TRUE</strong> and the <strong>var_col</strong> should
 be provided as demonstrated below.</li>
 </ul>
+<p><strong>6. Outlier detection across the species groups in iris
+dataset</strong></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">multspp_outlier_detection</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multidetect.html">multidetect</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dfinal</span>, </span>
@@ -219,19 +223,14 @@ be provided as demonstrated below.</li>
 <span><span class="co">#&gt; 1 (1.85%) NAs removed for parameter Sepal.Width.</span></span>
 <span><span class="co">#&gt; 0 (0%) NAs removed for parameter Sepal.Width.</span></span>
 <span><span class="co">#&gt; 0 (0%) NAs removed for parameter Sepal.Width.</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="visualise-the-number-of-outliers-detected-by-each-method-1">Visualise the number of outliers detected by each method<a class="anchor" aria-label="anchor" href="#visualise-the-number-of-outliers-detected-by-each-method-1"></a>
-</h3>
+<p><strong>7 Visualise the number of outliers detected by each
+method</strong></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/ggoutliers.html">ggoutliers</a></span><span class="op">(</span><span class="va">multspp_outlier_detection</span><span class="op">)</span></span></code></pre></div>
 <p><img src="generaloutlier_files/figure-html/ploting_single-1.png" width="576" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
-<h3 id="obtaining-quality-controlled-dataset-using-loess-method-or-data-labelling-1">Obtaining quality controlled dataset using loess method or data
-labelling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controlled-dataset-using-loess-method-or-data-labelling-1"></a>
-</h3>
+<p><strong>8 Obtaining quality controlled dataset using loess method or
+data labeling</strong></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">multsp_qc_loess</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_clean_data.html">extract_clean_data</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">dfinal</span>, </span>
@@ -250,10 +249,7 @@ labelling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controll
 <span><span class="va">multi_qc_labeled</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_data.html">classify_data</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">dfinal</span>, </span>
 <span>                                      outliers <span class="op">=</span> <span class="va">multspp_outlier_detection</span>,</span>
 <span>                                  var_col <span class="op">=</span> <span class="st">'Species'</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="visualise-labelled-quality-controlled-dataset-1">Visualise labelled quality controlled dataset<a class="anchor" aria-label="anchor" href="#visualise-labelled-quality-controlled-dataset-1"></a>
-</h3>
+<p><strong>10 Visualise labelled quality controlled dataset</strong></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/ggenvironmentalspace.html">ggenvironmentalspace</a></span><span class="op">(</span><span class="va">multi_qc_labeled</span>, </span>
@@ -265,7 +261,62 @@ labelling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controll
 <span>                     ylab <span class="op">=</span> <span class="st">"Number of records"</span>,</span>
 <span>                     xlab <span class="op">=</span> <span class="st">"Outlier labels"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="generaloutlier_files/figure-html/visualise%20data%20labelling-1.png" width="624" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level3">
+<h3 id="the-second-approach-is-setting-multiple-variables-of-interest">The second approach is setting multiple variables of interest<a class="anchor" aria-label="anchor" href="#the-second-approach-is-setting-multiple-variables-of-interest"></a>
+</h3>
+<ul>
+<li>We used the same dataset but now indicating multiple variables of
+interest, e.g., Sepal.Length and Sepal.Width</li>
+</ul>
+<p><strong>11. Outlier detection</strong></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">multivariables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multidetect.html">multidetect</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dfinal</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Sepal.Length'</span>, <span class="st">'Sepal.Width'</span><span class="op">)</span>, output <span class="op">=</span> <span class="st">'outlier'</span>,</span>
+<span>                      var_col <span class="op">=</span> <span class="st">'Species'</span>,</span>
+<span>                      methods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'zscore'</span>, <span class="st">'adjbox'</span>,</span>
+<span>                                  <span class="st">'logboxplot'</span>, <span class="st">'distboxplot'</span>,</span>
+<span>                                  <span class="st">'iqr'</span>, <span class="st">'semiqr'</span>,<span class="st">'seqfences'</span>,<span class="st">'hampel'</span>,</span>
+<span>                                  <span class="st">'jknife'</span><span class="op">)</span>, </span>
+<span>                      warn <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                      sdm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><strong>12. Visualize the number of outliers detected by each
+method</strong></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/ggoutliers.html">ggoutliers</a></span><span class="op">(</span><span class="va">multivariables</span><span class="op">)</span></span></code></pre></div>
+<p><img src="generaloutlier_files/figure-html/ploting-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><strong>13. Data extraction</strong></p>
+<ul>
+<li>During data extraction, two approaches exist: setting the outliers
+to NA or returning already quality-controlled data for the variable of
+interest.</li>
+</ul>
+<p><strong>NOTE</strong></p>
+<ul>
+<li>For this approach, only threshold setting is allowed. Data
+classification will be implemented in the upcoming package versions
+using the LOESS method.</li>
+<li>Only univariate methods are allowed, and the variable is handled
+exclusively from the other. This means outlier detection is implemented
+in only the variable set during outlier detection in <strong>Step
+12</strong>.</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#outliers will be returned to NA for each variable</span></span>
+<span></span>
+<span><span class="va">lenwidth_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_clean_data.html">extract_clean_data</a></span><span class="op">(</span><span class="va">dfinal</span>, outliers <span class="op">=</span> <span class="va">multivariables</span>, </span>
+<span>                                     var_col <span class="op">=</span> <span class="st">'Species'</span>, outlier_to_NA <span class="op">=</span> <span class="cn">TRUE</span>, threshold <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">lenwidth_clean</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 154</span></span>
+<span></span>
+<span><span class="va">lenwidth_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_clean_data.html">extract_clean_data</a></span><span class="op">(</span><span class="va">dfinal</span>, outliers <span class="op">=</span> <span class="va">multivariables</span>, </span>
+<span>                                     var_col <span class="op">=</span> <span class="st">'Species'</span>, outlier_to_NA <span class="op">=</span> <span class="cn">FALSE</span>, threshold <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">lenwidth_long</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 305</span></span></code></pre></div>
 <p><em>The package is undergoing peer review for publication</em></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

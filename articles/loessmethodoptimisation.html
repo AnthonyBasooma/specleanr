@@ -109,15 +109,12 @@ further analysis.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">efidata</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">jdsdata</span><span class="op">)</span> </span>
-<span><span class="co">#===================================</span></span>
-<span><span class="co">#Step 1Retrieve online data for the species: polygon to limit the extent to get records.</span></span>
-<span><span class="co">#=====================================</span></span>
+<span></span>
 <span><span class="va">danube</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">"danube.shp.zip"</span>,</span>
 <span>                                  package <span class="op">=</span> <span class="st">'specleanr'</span><span class="op">)</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="va">df_online</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getdata.html">getdata</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Squalius cephalus"</span>, <span class="st">'Salmo trutta'</span>,</span>
-<span>                              <span class="st">"Thymallus thymallus"</span>,<span class="st">"Anguilla anguilla"</span><span class="op">)</span>,</span>
+<span><span class="va">df_online</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getdata.html">getdata</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Squalius cephalus"</span>, <span class="st">'Salmo trutta'</span>,<span class="st">"Thymallus thymallus"</span><span class="op">)</span>,</span>
 <span>                     extent <span class="op">=</span> <span class="va">danube</span>,</span>
 <span>                     gbiflim <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>                     inatlim <span class="op">=</span> <span class="fl">50</span>,</span>
@@ -130,8 +127,7 @@ further analysis.</p>
 <span>                              country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'JDS4_sampling_ID'</span><span class="op">)</span>,</span>
 <span>                              lats <span class="op">=</span> <span class="st">'lat'</span>, lons <span class="op">=</span> <span class="st">'lon'</span>,</span>
 <span>                              species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'speciesname'</span>, <span class="st">'scientificName'</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#Species names are re-cleaned since the species names from vertnet are changed.</span></span>
+<span><span class="co">#Cleaning data</span></span>
 <span></span>
 <span><span class="va">cleannames_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/check_names.html">check_names</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mergealldfs</span>, colsp <span class="op">=</span> <span class="st">'species'</span>, pct <span class="op">=</span> <span class="fl">90</span>,</span>
 <span>                             merge <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -154,7 +150,7 @@ plotting<a class="anchor" aria-label="anchor" href="#oultier-detection-threshold
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span>    mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>    mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span>, <span class="fl">1.5</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
 <span>    oma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
 <span>    mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.7</span>, <span class="fl">0.8</span>, <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -185,24 +181,28 @@ plotting<a class="anchor" aria-label="anchor" href="#oultier-detection-threshold
 <span>                        warn <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimal_threshold.html">optimal_threshold</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">refdata</span>, outliers <span class="op">=</span> <span class="va">outdet</span>, </span>
-<span>                             plot <span class="op">=</span> <span class="cn">TRUE</span>, cutoff <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span>
+<span>                             plotsetting <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>plot <span class="op">=</span> <span class="cn">TRUE</span>, group <span class="op">=</span> <span class="va">s</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">opt</span></span>
 <span>  </span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Number of rows are less than variables and some methods may not</span></span>
+<span><span class="co">#&gt; function properly.</span></span>
+<span><span class="co">#&gt; Warning: Number of rows are less than variables and some methods may not</span></span>
 <span><span class="co">#&gt; function properly.</span></span></code></pre></div>
-<p><img src="loessmethodoptimisation_files/figure-html/outlierdetoptplot-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="loessmethodoptimisation_files/figure-html/outlierdetoptplot-1.png" width="720" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="summary-explanation">Summary explanation<a class="anchor" aria-label="anchor" href="#summary-explanation"></a>
 </h3>
-<p>To ensure the LOESS model was only fitted if a group or species had
-absolute outliers, we set a cutoff of 0.6. So, LOESS will not be fitted
-if outliers are not detected in less than half of the outlier detection
-methods. For example, in the figure above, the threshold was only
-optimised for <em>Salmo trutta</em>, <em>Squalius cephalus</em>, and
-<em>Thymallus thymallus</em>. In both <em>Anguilla anguilla</em> and
-<em>Barbatula barbatula</em>, the outliers with the highest weight was
-0.41 and 0.5 respectively.</p>
+<p>To ensure the <strong>LOESS</strong> model was only fitted if a group
+or species had absolute outliers, we set a cutoff of
+<strong>0.6</strong>. So, LOESS will not be fitted if outliers are not
+detected in less than half of the outlier detection methods. For
+example, in the figure above, the threshold was only optimized for
+<em>Salmo trutta</em>, <em>Anguilla anguilla</em>, and <em>Thymallus
+thymallus</em>. In <em>Barbatula barbatula</em> and <em>Squalius
+cephalus</em> the outliers with the highest weight was 0.41 and 0.5
+respectively.</p>
 </div>
 <div class="section level3">
 <h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
