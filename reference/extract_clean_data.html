@@ -57,7 +57,8 @@
 <span>  autothreshold <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pabs <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>  loess <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  outlier_to_NA <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  outlier_to_NA <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="fl">0.6</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -112,6 +113,11 @@ the absolute outliers are removed instead. This because some records  in the bes
        This parameter is experimented to ouput dataframe when multiple variables of concerns are considered
        during outlier detection.</p>
 <p>###param multiple TRUE for multiple species and FALSE for single species considered during outlier detection.</p></dd>
+
+
+<dt id="arg-cutoff">cutoff<a class="anchor" aria-label="anchor" href="#arg-cutoff"></a></dt>
+<dd><p><code>numeric</code>. Ranging from 0.5 to 0.8 indicating the cutoff to initiate the
+LOESS model to optimize the identification of absolute outliers.</p></dd>
 
 </dl></div>
     <div class="section level2">
