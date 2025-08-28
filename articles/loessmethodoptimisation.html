@@ -97,6 +97,11 @@ optimal threshold (global or local maximum), the data points retained
 are asymptotic, meaning no more records are flagged out. The optimal
 threshold is then used to retain the quality-controlled dataset used in
 further analysis.</p>
+<p><strong>NOTE</strong></p>
+<ul>
+<li>If errors in the workflow is associated with FishBase, rerun after 2
+to 5 minutes.</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="examples-using-fish-species">Examples using fish species<a class="anchor" aria-label="anchor" href="#examples-using-fish-species"></a>
@@ -186,11 +191,7 @@ plotting<a class="anchor" aria-label="anchor" href="#oultier-detection-threshold
 <span>  <span class="va">opt</span></span>
 <span>  </span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Number of rows are less than variables and some methods may not</span></span>
-<span><span class="co">#&gt; function properly.</span></span>
 <span><span class="co">#&gt; [1] 11</span></span>
-<span><span class="co">#&gt; Warning: Number of rows are less than variables and some methods may not</span></span>
-<span><span class="co">#&gt; function properly.</span></span>
 <span><span class="co">#&gt; [1] 15</span></span>
 <span><span class="co">#&gt; [1] 65</span></span>
 <span><span class="co">#&gt; [1] 96</span></span>
@@ -214,16 +215,15 @@ respectively.</p>
 <h3 id="simulating-for-small-datasets-less-than-25-records">Simulating for small datasets less than 25 records<a class="anchor" aria-label="anchor" href="#simulating-for-small-datasets-less-than-25-records"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">11351</span><span class="op">)</span></span>
-<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">32</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">6</span>, <span class="fl">1</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">113554333</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">32</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">6</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#add outlier rows</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">409</span>, <span class="fl">43</span>, <span class="fl">76</span>, <span class="fl">23</span><span class="op">)</span></span>
 <span><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2409</span>, <span class="fl">10</span>, <span class="fl">43</span>, <span class="fl">22</span><span class="op">)</span></span>
-<span><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">509</span>, <span class="fl">0.43</span>, <span class="fl">76</span>, <span class="fl">23</span><span class="op">)</span></span>
+<span><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1509</span>, <span class="fl">0.43</span>, <span class="fl">76</span>, <span class="fl">23</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span><span class="op">)</span></span>
 <span></span>
@@ -241,18 +241,78 @@ respectively.</p>
 <span>                      warn <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Visualize the threshold</strong></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">opt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimal_threshold.html">optimal_threshold</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">df2</span>, outliers <span class="op">=</span> <span class="va">outdet2</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">opt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimal_threshold.html">optimal_threshold</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">df2</span>, </span>
+<span>                          outliers <span class="op">=</span> <span class="va">outdet2</span>, </span>
 <span>                         plotsetting <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="loessmethodoptimisation_files/figure-html/visualise%20data-1.png" width="700"></p>
+<p><img src="loessmethodoptimisation_files/figure-html/visualise%20data-1.png" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">opt1</span></span>
 <span><span class="co">#&gt;  localmaxima globalmaxima </span></span>
-<span><span class="co">#&gt;    0.3343434    0.7000000</span></span></code></pre></div>
+<span><span class="co">#&gt;    0.3333333    0.7000000</span></span></code></pre></div>
 <ul>
 <li>In the above scenario, the outlier detection exponentially increased
 and therefore absolute outliers were recorded denoted when the
-predictions exponetially increased.</li>
+predictions exponentially increased. The optimal threshold of 0.7 will
+be automatically determined which filters out the three absolute
+outliers introduced in the data.</li>
+</ul>
+<p><strong>Record weights used quality controlled data
+extraction.</strong></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#get the weights for the flagged records</span></span>
+<span></span>
+<span><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ocindex.html">ocindex</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">outdet2</span>, absolute <span class="op">=</span> <span class="cn">TRUE</span>, props <span class="op">=</span> <span class="cn">TRUE</span>, threshold <span class="op">=</span> <span class="fl">0.1</span>, warn <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">weights</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   absoluteoutliers absolute_propn</span></span>
+<span><span class="co">#&gt; 1       1509.00000      0.8333333</span></span>
+<span><span class="co">#&gt; 2         -0.24090      0.8333333</span></span>
+<span><span class="co">#&gt; 3         29.67535      0.2500000</span></span>
+<span><span class="co">#&gt; 4         29.93587      0.1666667</span></span>
+<span><span class="co">#&gt; 5         30.21504      0.1666667</span></span>
+<span><span class="co">#&gt; 6        409.00000      0.8333333</span></span>
+<span></span>
+<span><span class="va">dfclean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_clean_data.html">extract_clean_data</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">df2</span>, outliers <span class="op">=</span> <span class="va">outdet2</span>, loess <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dfclean</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           a        b           c        d</span></span>
+<span><span class="co">#&gt; 1  31.25813 3.737545 -0.82219326 7.503630</span></span>
+<span><span class="co">#&gt; 2  31.02957 2.119252  0.13058514 6.440053</span></span>
+<span><span class="co">#&gt; 3  33.29139 5.233229  1.18249791 6.088826</span></span>
+<span><span class="co">#&gt; 4  31.96807 2.922396  0.82110108 5.327947</span></span>
+<span><span class="co">#&gt; 5  32.61594 2.546680 -0.83512143 5.219957</span></span>
+<span><span class="co">#&gt; 6  29.67535 4.710109  0.55900929 5.895726</span></span>
+<span><span class="co">#&gt; 7  31.76902 3.506267 -0.46201898 6.381637</span></span>
+<span><span class="co">#&gt; 8  31.45304 3.843909 -1.65670047 6.140398</span></span>
+<span><span class="co">#&gt; 9  32.04668 2.965477  0.64843924 6.047407</span></span>
+<span><span class="co">#&gt; 10 32.73326 4.184567 -1.00567760 5.731261</span></span>
+<span><span class="co">#&gt; 11 33.21300 5.091759  0.38357100 4.818790</span></span>
+<span><span class="co">#&gt; 12 30.21504 3.176954 -1.17762603 5.049447</span></span>
+<span><span class="co">#&gt; 13 33.21133 4.047397 -1.35670434 5.635227</span></span>
+<span><span class="co">#&gt; 14 32.66286 4.972343  1.44484341 5.595836</span></span>
+<span><span class="co">#&gt; 15 31.96946 4.216062  0.53427151 6.666718</span></span>
+<span><span class="co">#&gt; 16 31.05610 3.842254 -0.01738607 5.205542</span></span>
+<span><span class="co">#&gt; 17 31.71313 3.653900 -0.66187088 6.121317</span></span>
+<span><span class="co">#&gt; 18 29.93587 4.788469 -0.45837542 6.988470</span></span>
+<span><span class="co">#&gt; 19 31.05060 4.961393 -1.43076151 5.958698</span></span>
+<span><span class="co">#&gt; 20 32.97297 3.277845 -0.85659474 6.011441</span></span>
+<span><span class="co">#&gt; 21 33.29464 3.245113  2.54273477 7.643912</span></span>
+<span><span class="co">#&gt; 22 31.49925 4.432043  0.01498154 5.916007</span></span>
+<span><span class="co">#&gt; 23 34.18672 4.237679 -2.22131128 7.192626</span></span>
+<span><span class="co">#&gt; 24 31.64430 5.113328  1.21073632 5.014243</span></span>
+<span><span class="co">#&gt; 25 32.01278 5.279782 -0.80406361 6.343229</span></span>
+<span><span class="co">#&gt; 26 31.44525 5.176739  0.41815878 5.454909</span></span>
+<span><span class="co">#&gt; 27 31.50548 3.282632 -0.65628423 6.113609</span></span>
+<span><span class="co">#&gt; 28 32.48145 2.885475  0.39630888 5.864295</span></span>
+<span><span class="co">#&gt; 29 31.09465 3.842594  1.03801580 6.327794</span></span>
+<span><span class="co">#&gt; 30 31.75320 3.720425  1.08670241 4.024865</span></span></code></pre></div>
+<p><strong>NOTE</strong></p>
+<ul>
+<li>The outliers are removed from the dataset from the dataset
+automatically using the LOESS method.</li>
+<li>The legend is sometimes hidden.</li>
 </ul>
 </div>
 <div class="section level3">
