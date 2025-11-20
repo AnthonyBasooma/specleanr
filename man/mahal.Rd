@@ -53,11 +53,11 @@ Flags outliers based on Mahalanobis distance matrix for all records.
 }
 \examples{
 
-\dontrun{
+\donttest{
 
 data("efidata")
 
-gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
+
 
 danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 
@@ -65,18 +65,16 @@ db <- sf::st_read(danube, quiet=TRUE)
 
 wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 
-refdata <- pred_extract(data = gbd, raster= wcd ,
+refdata <- pred_extract(data = efidata, raster= wcd ,
                        lat = 'decimalLatitude',
                        lon= 'decimalLongitude',
-                       colsp = 'speciescheck',
+                       colsp = "scientificName",
                       bbox = db,
                        minpts = 10)
 
 #outliers
-outliers <- mahal(data = refdata[['Salmo trutta']], exclude = c("x", "y"),
+outliers <- mahal(data = refdata[["Thymallus thymallus"]], exclude = c("x", "y"),
                         output='outlier')
-
-
 }
 }
 \references{

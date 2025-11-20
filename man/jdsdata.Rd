@@ -19,11 +19,8 @@ Species ecological parameters such as ecological ranges both native and alien
 }
 \examples{
 
-\dontrun{
-
 data("jdsdata")
 jdsdata
-}
 
 
 }

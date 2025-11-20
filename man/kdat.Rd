@@ -18,11 +18,8 @@ k constants fro flagging outliers with several chnages in the fences.
 }
 \examples{
 
-\dontrun{
-
 data("kdat")
 kdat
-}
 
 }
 \references{

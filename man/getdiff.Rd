@@ -23,12 +23,9 @@ get dataframe from the large dataframe.
 }
 \examples{
 
-\dontrun{
-
 x = data.frame(id=c(1,2,3,4,5),  name=c('a','b','c', 'd','e'))
 
 y=data.frame(id=c(1,2,3,4,7,6,5), tens=c(10,29,37,46,58, 34, 44),
                  name=c('a','b','c','d','e', 'f','g'))
 
-}
 }

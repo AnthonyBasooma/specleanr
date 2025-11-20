@@ -54,7 +54,7 @@
 getdata <- function(data, colsp = NULL, extent = NULL,
                      db = c("gbif", 'vertnet', 'inat'),
                      gbiflim = 5e4, vertlim = 1e3,
-                     inatlim =3e3, verbose= FALSE, warn =FALSE, pct = 80, sn = F, ...){
+                     inatlim =3e3, verbose= FALSE, warn =FALSE, pct = 80, sn = FALSE, ...){
 
   if(is(data, 'data.frame') && is.null(colsp)){
 
@@ -199,7 +199,7 @@ getdata <- function(data, colsp = NULL, extent = NULL,
         }
       }else if(xdb=='vertnet'){
 
-        sptx <- scan(text = checksppx, what = ' ', quiet = T)
+        sptx <- scan(text = checksppx, what = ' ', quiet = TRUE)
 
         if(!is.null(extent)) vbbox <- extentvalues(extent, xdb) else vbbox <- NULL #vector of bbox values
 
@@ -300,7 +300,7 @@ getdata <- function(data, colsp = NULL, extent = NULL,
                                lats = c('latitude','decimallatitude'),
                                lons = c('decimallongitude', 'longitude'),
                                species = c('scientificname','scientific_name'),
-                               date = c('datetime', 'year','eventdate','dates'),
+                               date = c('datetime', 'year','eventdate','dates', 'lastParsed'),
                                country = c('place_guess'))
     }else{
       #handles if no data is returned by all repositories

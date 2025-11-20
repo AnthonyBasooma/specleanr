@@ -34,7 +34,6 @@
 #'
 #' @export
 #'
-#'
 ggenvironmentalspace <- function(qcdata,
                                  xvar = NULL,
                                  yvar = NULL,

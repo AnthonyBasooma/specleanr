@@ -80,9 +80,7 @@ Preliminary data cleaning including removing duplicates, records
   outside a particular basin, and NAs.
 }
 \examples{
-
-\dontrun{
-
+\donttest{
 data("efidata")
 
 danube <- system.file('extdata/danube.shp.zip', package='specleanr')
@@ -100,8 +98,6 @@ referencedata <- pred_extract(data = efidata,
                           colsp = 'scientificName',
                           bbox = danubebasin,
                           list= TRUE, #list will be generated for all species
-                          minpts = 7, merge=T)
+                          minpts = 7, merge=TRUE)
 }
-
-
 }

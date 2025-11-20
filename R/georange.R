@@ -22,7 +22,7 @@
 #' }
 #'
 #'
-geo_ranges <- function(data, colsp =NULL, verbose=F, pct = 90,sn =FALSE, warn=FALSE,
+geo_ranges <- function(data, colsp =NULL, verbose=FALSE, pct = 90,sn =FALSE, warn=FALSE,
                        synonym = fishbase(tables = 'synonym'),
                        ranges = fishbase(tables = 'ranges')){
 

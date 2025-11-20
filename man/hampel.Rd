@@ -29,31 +29,27 @@ Flag suspicious outliers based on the Hampel filter method..
 }
 \details{
 The Hampel filter method is a robust decision-based filter that considers
-the median and MAD. Outliers lies beyond \deqn{[x-* λ*MAD; x+ λ*MAD]} and
-λ of 3 was considered (Pearson et al. 2016).
+the median and MAD. Outliers lies beyond \deqn{[x-* lmbda*MAD; x+ lmbda*MAD]} and
+lmbda of 3 was considered (Pearson et al. 2016).
 }
 \examples{
 
-\dontrun{
-
+\donttest{
 data("efidata")
-
-gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 
 danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 db <- sf::st_read(danube, quiet=TRUE)
 
 wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 
-refdata <- pred_extract(data = gbd, raster= wcd ,
+refdata <- pred_extract(data = efidata, raster= wcd ,
                           lat = 'decimalLatitude',
                           lon= 'decimalLongitude',
-                          colsp = 'speciescheck',
+                          colsp = "scientificName",
                           bbox = db,
                           minpts = 10)
 
- hampout <- hampel(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-
+ hampout <- hampel(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
 }
 
 }

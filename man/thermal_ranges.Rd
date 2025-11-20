@@ -7,7 +7,7 @@
 thermal_ranges(
   x,
   colsp = NULL,
-  verbose = F,
+  verbose = FALSE,
   pct = 90,
   sn = FALSE,
   synonym = fishbase(tables = "synonym"),

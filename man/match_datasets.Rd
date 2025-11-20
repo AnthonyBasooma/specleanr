@@ -49,8 +49,6 @@ varying names for the 5 parameters should be indicated.
 }
 \examples{
 
-\dontrun{
-
 data(jdsdata)
 
 data(efidata)
@@ -61,8 +59,6 @@ matchdfs <- match_datasets(datasets = list(jds = jdsdata, efi = efidata),
                            species = c('speciesname','scientificName'),
                            country=c('JDS4_site_ID'),
                            date=c('Date', 'sampling_date'))
-
-}
 
 }
 \references{

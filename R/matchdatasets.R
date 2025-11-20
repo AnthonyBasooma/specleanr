@@ -23,8 +23,6 @@ ifnull <- function(x, y, std) {
   return(lst)
 }
 
-
-
 #Data harmonizing for offline data based on Darwin Core terms.
 
 
@@ -56,8 +54,6 @@ ifnull <- function(x, y, std) {
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
 #' data(jdsdata)
 #'
 #' data(efidata)
@@ -68,8 +64,6 @@ ifnull <- function(x, y, std) {
 #'                            species = c('speciesname','scientificName'),
 #'                            country=c('JDS4_site_ID'),
 #'                            date=c('Date', 'sampling_date'))
-#'
-#' }
 #'
 #' @references
 #' Wieczorek J, Bloom D, Guralnick R, Blum S, Döring M, Giovanni R, et al. (2012)
