@@ -4,9 +4,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' extractMethods()
-#' }
 #'
 #'
 extractMethods <- function(){
@@ -59,17 +57,14 @@ extractMethods <- function(){
 #' @return \code{vector} method broad categories
 #'
 #' @export
-#'
 #' @examples
-#'
-#' \dontrun{
 #'
 #' x <- broad_classify(category = "mult")
 #'
-#' }
-#'
 
 broad_classify <- function(category){
+
+  match.arg(category, choices = c('uni', 'mult'))
 
   if(category=='uni'){
 
@@ -96,7 +91,6 @@ broad_classify <- function(category){
 #'      methods fails to execute.
 #'
 #' @return Handle errors
-#'
 #'
 handle_true_errors <- function(func, fname=NULL, spname=NULL, verbose=FALSE, warn=FALSE, silence_true_errors = TRUE){
 
@@ -218,7 +212,7 @@ detect <- function(x,
     #compute principal component analysis to reduce dimensions
 
     #pc and bootstrap parameters
-    defaults_pc <- list(exec=FALSE, q=T, npc = 3, pcvar = 'PC1')
+    defaults_pc <- list(exec=FALSE, q=TRUE, npc = 3, pcvar = 'PC1')
 
     pc     <- modifyList(defaults_pc, pc)
     pcs    <- pc$exec
@@ -251,7 +245,7 @@ detect <- function(x,
                        }
                      }
       )
-      if(!is.null(df)) df else stop("PCA not computed due to cannot rescale a constant/zero error.")
+      if(!is.null(df)) df else stop("PCA not computed due to zero or constant variance among variables. Remove all columns with zero variance.")
 
       if(isTRUE(boot)){
 
@@ -803,8 +797,95 @@ detect <- function(x,
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
+#' #' #====
+#' #1. Mult detect for general data analysis using iris data
+#' #===
+#' # the outliers are introduced for testing purposes
+#' irisdata1 <- iris
 #'
+#' #introduce outlier data and NAs
+#' rowsOutNA1 <- data.frame(x= c(344, NA,NA, NA),
+#'                          x2 = c(34, 45, 544, NA),
+#'                          x3= c(584, 5, 554, NA),
+#'                          x4 = c(575, 4554,474, NA),
+#'                          x5 =c('setosa', 'setosa', 'setosa', "setosa"))
+#'
+#' colnames(rowsOutNA1) <- colnames(irisdata1)
+#'
+#' dfinal <- rbind(irisdata1, rowsOutNA1)
+#'
+#' #===========
+#'
+#' setosadf <- dfinal[dfinal$Species%in%"setosa",c("Sepal.Width", 'Species')]
+#'
+#' setosa_outlier_detection <- multidetect(data = setosadf,
+#'                                         var = 'Sepal.Width',
+#'                                         multiple = FALSE, #'one species
+#'                                         methods = c("adjbox", "iqr", "hampel","jknife",
+#'                                                     "seqfences", "mixediqr",
+#'                                                     "distboxplot", "semiqr",
+#'                                                     "zscore", "logboxplot", "medianrule"),
+#'                                         silence_true_errors = FALSE,
+#'                                         missingness = 0.1,
+#'                                         sdm = FALSE,
+#'                                         na.inform = TRUE)
+#' #======
+#' #2.all species
+#' #=====
+#' multspp_outlier_detection <- multidetect(data = dfinal,
+#'                                          var = 'Sepal.Width',
+#'                                          multiple = TRUE, #'for multiple species or groups
+#'                                          var_col = "Species",
+#'                                          methods = c("adjbox", "iqr", "hampel","jknife",
+#'                                                      "seqfences", "mixediqr",
+#'                                                      "distboxplot", "semiqr",
+#'                                                      "zscore", "logboxplot", "medianrule"),
+#'                                          silence_true_errors = FALSE,
+#'                                          missingness = 0.1,
+#'                                          sdm = FALSE,
+#'                                          na.inform = TRUE)
+#'
+#' ggoutliers(multspp_outlier_detection)
+#'
+#'
+#' #======
+#' #3. Multidetect for environmental data
+#' #======
+#' #'Species data
+#' data("abdata")
+#'
+#' #area of interest
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
+#'
+#' worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
+#'
+#' abpred <- pred_extract(data = abdata,
+#'                      raster= worldclim ,
+#'                      lat = 'decimalLatitude',
+#'                      lon= 'decimalLongitude',
+#'                      colsp = 'species',
+#'                      bbox = db,
+#'                      minpts = 10,
+#'                      list=TRUE,
+#'                      merge=FALSE)
+#'
+#'
+#' about_df <- multidetect(data = abpred, multiple = FALSE,
+#'                      var = 'bio6',
+#'                      output = 'outlier',
+#'                      exclude = c('x','y'),
+#'                      methods = c('zscore', 'adjbox','iqr', 'semiqr','hampel', 'kmeans',
+#'                                 'logboxplot', 'lof','iforest', 'mahal', 'seqfences'))
+#'
+#' ggoutliers(about_df)
+#'
+#'
+#' #==========
+#' #4. For mulitple species in species distribution models
+#' #======
 #' data("efidata")
 #' data("jdsdata")
 #'
@@ -814,50 +895,43 @@ detect <- function(x,
 #'                             species = c('speciesname','scientificName'),
 #'                             date = c('Date', 'sampling_date'),
 #'                             country = c('JDS4_site_ID'))
-#'
-#'
-#'datacheck <- check_names(matchdata, colsp = 'species', pct = 90, merge =TRUE)
-#'
-#'
-#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
-#'
-#' db <- sf::st_read(danube, quiet=TRUE)
-#'
-#'
-#'worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
-#'
-#'rdata <- pred_extract(data = datacheck,
+#' #extract data
+#' rdata <- pred_extract(data = matchdata,
 #'                      raster= worldclim ,
 #'                      lat = 'decimalLatitude',
 #'                      lon= 'decimalLongitude',
-#'                      colsp = 'speciescheck',
+#'                      colsp = 'species',
 #'                      bbox = db,
 #'                      minpts = 10,
 #'                      list=TRUE,
-#'                      merge=F)
-#'
-#'
-#'out_df <- multidetect(data = rdata, multiple = TRUE,
-#'                      var = 'bio6',
-#'                      output = 'outlier',
-#'                      exclude = c('x','y'),
-#'                      methods = c('zscore', 'adjbox','iqr', 'semiqr','hampel', 'kmeans',
-#'                                 'logboxplot', 'lof','iforest', 'mahal', 'seqfences'))
-#'
+#'                      merge=FALSE)
 #'
 #' #optimal ranges in the multidetect: made up
+#' multspout_df <- multidetect(data = rdata, multiple = TRUE,
+#'                       var = 'bio6',
+#'                       output = 'outlier',
+#'                       exclude = c('x','y'),
+#'                       methods = c('zscore', 'adjbox','iqr', 'semiqr','hampel', 'kmeans',
+#'                                   'logboxplot', 'lof','iforest', 'mahal', 'seqfences'))
 #'
-#' optdata <- data.frame(species= c("Salmo trutta", "Abramis brama"),
-#'                       mintemp = c(6, 1.6),maxtemp = c(20, 21),
-#'                        meantemp = c(8.5, 10.4), #ecoparam
+#' ggoutliers(multspout_df, "Anguilla anguilla")
+#'
+#' #====================================
+#' #5. use optimal ranges as a method
+#' #create species ranges
+#' #===================================
+#' #max temperature of "Thymallus thymallus" is made up to make it appear in outliers
+#'
+#' optdata <- data.frame(species= c("Phoxinus phoxinus", "Thymallus thymallus"),
+#'                       mintemp = c(6, 1.6),maxtemp = c(20, 8.6),
+#'                       meantemp = c(8.69, 8.4), #'ecoparam
 #'                       direction = c('greater', 'greater'))
-#' #species record
 #'
-#' salmoabramis <- rdata["Salmo trutta"]
+#' ttdata <- rdata["Thymallus thymallus"]
 #'
 #' #even if one species, please indicate multiple to TRUE, since its picked from pred_extract function
 #'
-#' out_df <- multidetect(data = salmoabramis, multiple = TRUE,
+#' thymallus_out_ranges <- multidetect(data = ttdata, multiple = TRUE,
 #'                       var = 'bio1',
 #'                       output = 'outlier',
 #'                       exclude = c('x','y'),
@@ -865,11 +939,9 @@ detect <- function(x,
 #'                                   'logboxplot', 'lof','iforest', 'mahal', 'seqfences', 'optimal'),
 #'                       optpar = list(optdf=optdata, optspcol = 'species',
 #'                                     mincol = "mintemp", maxcol = "maxtemp"))
-#' #plot the number of outliers
 #'
-#' #ggoutliers(out_df, 1)
-#'
-#' }
+#' ggoutliers(thymallus_out_ranges)
+#'}
 #'
 #' @references
 #' \enumerate{
@@ -902,7 +974,7 @@ multidetect <- function(data,
                         lofpar = list(metric='manhattan', mode='soft', minPts= 10),
                         methods,
                         bootSettings = list(run=FALSE, nb=5, maxrecords = 30, seed=1135, th = 0.6),
-                        pc = list(exec = FALSE, npc=2, q = T, pcvar = 'PC1'),
+                        pc = list(exec = FALSE, npc=2, q = TRUE, pcvar = 'PC1'),
                         verbose=FALSE, spname=NULL,warn=FALSE,
                         missingness = 0.1,
                         silence_true_errors = TRUE,

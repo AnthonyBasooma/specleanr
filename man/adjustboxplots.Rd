@@ -43,12 +43,8 @@ outlier: to return dataframe with only outliers.}
 Adjust the boxplots bounding fences using medcouple to flag suspicious outliers.
 }
 \examples{
-
-\dontrun{
-
+\donttest{
 data("efidata")
-
-gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 
 danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 
@@ -56,15 +52,15 @@ db <- sf::st_read(danube, quiet=TRUE)
 
 wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 
-refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-                       colsp = 'speciescheck',
+refdata <- pred_extract(data = efidata, raster= wcd ,
+                      lat = 'decimalLatitude', lon= 'decimalLongitude',
+                       colsp = "scientificName",
                        bbox = db,
                        minpts = 10)
 
-adout <- adjustboxplots(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
+adout <- adjustboxplots(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
 
 }
-
 }
 \references{
 Hubert M, Vandervieren E. 2008. An adjusted boxplot for skewed distributions.

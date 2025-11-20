@@ -98,7 +98,7 @@ datafinal <- match_datasets(datasets = list(jds = jdsdata, efi=efidata),
                             date = c('Date', 'sampling_date'),
                             country = c('JDS4_site_ID'))
 
-gbd <- check_names(data = datafinal, colsp='species', pct=90, merge=TRUE)
+efidata <- check_names(data = datafinal, colsp='species', pct=90, merge=TRUE)
 
 danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 
@@ -106,12 +106,13 @@ db <- sf::st_read(danube, quiet=TRUE)
 
 wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 
-refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-                        colsp = 'speciescheck',
+refdata <- pred_extract(data = efidata, raster= wcd ,
+                         lat = 'decimalLatitude', lon= 'decimalLongitude',
+                        colsp = "scientificName",
                        bbox = db,
                         minpts = 10)
 
-saldata <- refdata[['Salmo trutta']]
+saldata <- refdata[["Thymallus thymallus"]]
 #1. checking the annual maean temperature (bio1) are within the ranges in FishBase
 salmotherange <- thermal_ranges(x = "Salmo trutta")
 

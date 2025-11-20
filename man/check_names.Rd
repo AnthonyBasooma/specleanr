@@ -9,7 +9,7 @@ check_names(
   colsp = NULL,
   verbose = FALSE,
   pct = 90,
-  merge = F,
+  merge = FALSE,
   sn = FALSE,
   ecosystem = FALSE,
   rm_duplicates = FALSE

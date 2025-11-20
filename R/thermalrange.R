@@ -20,7 +20,7 @@
 #' x <- thermal_ranges(x = "Salmo trutta")
 #' }
 #'
-thermal_ranges <- function(x, colsp =NULL, verbose=F, pct = 90, sn =FALSE,
+thermal_ranges <- function(x, colsp = NULL, verbose = FALSE, pct = 90, sn =FALSE,
                            synonym = fishbase(tables = 'synonym'),
                            ranges = fishbase(tables = 'ranges')){
 

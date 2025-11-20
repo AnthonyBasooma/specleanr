@@ -46,7 +46,7 @@ All classifications have been used in the function and each affects the data clu
 }
 \examples{
 
-\dontrun{
+\donttest{
 
 data(jdsdata)
 data(efidata)
@@ -57,24 +57,23 @@ matchdata <- match_datasets(datasets = list(jds = jdsdata, efi = efidata),
                             country= c('JDS4_site_ID'),
                             date=c('sampling_date', 'Date'))
 
-datacheck <- check_names(matchdata, var_col= 'species', pct = 90, merge =TRUE)
 
+danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 
-db <- sf::st_read(system.file('extdata/danube/basinfinal.shp', package='specleanr'), quiet=TRUE)
+db <- sf::st_read(danube, quiet=TRUE)
 
 
 worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 
-rdata <- pred_extract(data = datacheck,
+rdata <- pred_extract(data = matchdata,
                       raster= worldclim ,
                       lat = 'decimalLatitude',
                       lon= 'decimalLongitude',
-                      var_col = 'speciescheck',
+                      colsp = 'species',
                       bbox = db,
-                      multiple = TRUE,
                       minpts = 10,
                       list=TRUE,
-                      merge=F)
+                      merge=FALSE)
 
 
 out_df <- multidetect(data = rdata, multiple = TRUE,
@@ -85,7 +84,7 @@ out_df <- multidetect(data = rdata, multiple = TRUE,
 
 #extracting use the absolute method for one species
 
-extractabs <- extract_clean_data_label(refdata = rdata, outliers = out_df)
+extractabs <- classify_data(refdata = rdata, outliers = out_df)
 }
 
 }

@@ -39,9 +39,7 @@
 #' @export
 #'
 #' @examples
-#'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
@@ -59,10 +57,8 @@
 #'                           colsp = 'scientificName',
 #'                           bbox = danubebasin,
 #'                           list= TRUE, #list will be generated for all species
-#'                           minpts = 7, merge=T)
-#' }
-#'
-#'
+#'                           minpts = 7, merge=TRUE)
+#'}
 
 pred_extract <- function(data, raster, lat = NULL,
                          lon = NULL, bbox = NULL,

@@ -20,12 +20,8 @@
 #' @export
 #'
 #' @examples
-#'
-#' \dontrun{
-#'
+#' \donttest{
 #'data("efidata")
-#'
-#'gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #'danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -33,15 +29,15 @@
 #'
 #'wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#'refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-#'                        colsp = 'speciescheck',
+#'refdata <- pred_extract(data = efidata, raster= wcd ,
+#'                       lat = 'decimalLatitude', lon= 'decimalLongitude',
+#'                        colsp = "scientificName",
 #'                        bbox = db,
 #'                        minpts = 10)
 #'
-#'adout <- adjustboxplots(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
+#'adout <- adjustboxplots(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
 #'
-#' }
-#'
+#'}
 #' @references Hubert M, Vandervieren E. 2008. An adjusted boxplot for skewed distributions.
 #' Computational Statistics and Data Analysis 52:5186-5201.
 #'
@@ -95,11 +91,9 @@ adjustboxplots <- function(data, var, output = 'outlier', a=-4, b=3, coef=1.5,pc
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #'danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -107,14 +101,14 @@ adjustboxplots <- function(data, var, output = 'outlier', a=-4, b=3, coef=1.5,pc
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude',
+#' refdata <- pred_extract(data = efidata, raster= wcd , lat = 'decimalLatitude',
 #'                           lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  iqrout <- interquartile(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-#' }
+#'  iqrout <- interquartile(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
+#'}
 #' @references
 #'  Rousseeuw PJ, Hubert M. 2011. Robust statistics for outlier detection. Wiley Interdisciplinary Reviews
 #'  Data Mining and Knowledge Discovery 1:73-79.
@@ -152,7 +146,7 @@ interquartile <- function(data, var, output, x=1.5, pc = FALSE, pcvar = NULL, bo
 #'
 #' @details
 #' SemiInterquantile Ranges introduced adjusts for whiskers on either
-#' side to flag suspicious outliers [Q1 – 3(Q2 (median) − Q1); Q3 + 3(Q3 − Q2)] \code{((Kimber 1990))}.
+#' side to flag suspicious outliers [Q1 – 3(Q2 (median) - Q1); Q3 + 3(Q3 - Q2)] \code{((Kimber 1990))}.
 #' However, SIQR introduced the same constant values for bounding fences
 #' for the lower and upper quartiles \code{(Rousseeuw & Hubert 2011)}, which leads to
 #' outlier swamping and masking.
@@ -165,12 +159,9 @@ interquartile <- function(data, var, output, x=1.5, pc = FALSE, pcvar = NULL, bo
 #' @export
 #'
 #' @examples
-#'
-#' \dontrun{
+#'\donttest{
 #'
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -178,14 +169,14 @@ interquartile <- function(data, var, output, x=1.5, pc = FALSE, pcvar = NULL, bo
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
+#'                           lat = 'decimalLatitude', lon= 'decimalLongitude',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  semiout <- semiIQR(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-#'
-#' }
+#'  semiout <- semiIQR(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
+#'}
 #'
 #' @references
 #' Kimber AC. 1990. Exploratory Data Analysis for Possibly Censored Data From Skewed Distributions.
@@ -200,10 +191,10 @@ semiIQR <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FAL
 
   semiQL=  stats::quantile(var, 0.5)- stats::quantile(var, 0.25)
 
-  #SIQRU = Q3 − Q2
+  #SIQRU = Q3 - Q2
   semiQU=  stats::quantile(var, 0.75) - stats::quantile(var, 0.5)
 
-  #[Q1 − 3SIQRL ;
+  #[Q1 - 3SIQRL ;
   lowbound  = stats::quantile(var, 0.25) - x*semiQL
 
   #Q3 + 3SIQRU]
@@ -228,8 +219,8 @@ semiIQR <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FAL
 #'
 #' @details
 #' The Hampel filter method is a robust decision-based filter that considers
-#' the median and MAD. Outliers lies beyond \deqn{[x-* λ*MAD; x+ λ*MAD]} and
-#' λ of 3 was considered (Pearson et al. 2016).
+#' the median and MAD. Outliers lies beyond \deqn{[x-* lmbda*MAD; x+ lmbda*MAD]} and
+#' lmbda of 3 was considered (Pearson et al. 2016).
 #'
 #'
 #' @importFrom stats median mad
@@ -242,32 +233,27 @@ semiIQR <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FAL
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                           lat = 'decimalLatitude',
 #'                           lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  hampout <- hampel(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-#'
-#' }
+#'  hampout <- hampel(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
+#'}
 #'
 #' @references
 #' Pearson Ronald, Neuvo Y, Astola J, Gabbouj M. 2016. The Class of Generalized Hampel Filters.
 #' 2546-2550 2015 23rd European Signal Processing Conference (EUSIPCO).
-#'
 #'
 #'
 hampel <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FALSE){
@@ -311,12 +297,8 @@ hampel <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FALS
 #' @export
 #'
 #' @examples
-#'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -324,17 +306,16 @@ hampel <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FALS
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                         lat = 'decimalLatitude',
 #'                         lon= 'decimalLongitude',
-#'                         colsp = 'speciescheck',
+#'                         colsp = "scientificName",
 #'                         bbox = db,
 #'                         minpts = 10)
 #'
-#' jkout <- jknife(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
+#' jkout <- jknife(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
 #'
-#' }
-#'
+#'}
 #' @references
 #'
 #' \enumerate{
@@ -351,7 +332,6 @@ hampel <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FALS
 jknife <- function(data, var, output ='outlier', mode='soft', pc = FALSE, pcvar = NULL, boot = FALSE){
 
   pars <- pcboot(pb = data, var = var, pc = pc, boot = boot, pcvar = pcvar)
-
 
   var <-  pars[["var"]]
   data <- pars[['data']]
@@ -447,11 +427,8 @@ jknife <- function(data, var, output ='outlier', mode='soft', pc = FALSE, pcvar 
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -459,14 +436,14 @@ jknife <- function(data, var, output ='outlier', mode='soft', pc = FALSE, pcvar 
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
+#'                           lat = 'decimalLatitude', lon= 'decimalLongitude',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  zout <- zscore(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-#'
-#' }
+#'  zout <- zscore(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
+#'}
 #'
 zscore <- function(data, var, output = 'outlier', type = 'mild', mode = 'soft', pc = FALSE, pcvar = NULL, boot = FALSE){
 
@@ -538,12 +515,8 @@ zscore <- function(data, var, output = 'outlier', type = 'mild', mode = 'soft', 
 #' some outlier detection methods. Journal of Applied Statistics 38:2133-2149
 #'
 #' @examples
-#'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -551,16 +524,15 @@ zscore <- function(data, var, output = 'outlier', type = 'mild', mode = 'soft', 
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
+#'                         lat = 'decimalLatitude', lon= 'decimalLongitude',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  logout <- logboxplot(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
+#'  logout <- logboxplot(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
 #'
-#' }
-#'
-#'
+#'}
 #'
 logboxplot <- function(data, var, output, x=1.5, pc = FALSE, pcvar = NULL, boot = FALSE){
 
@@ -601,11 +573,10 @@ logboxplot <- function(data, var, output, x=1.5, pc = FALSE, pcvar = NULL, boot 
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#'
+#' \donttest{
 #'
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -613,15 +584,15 @@ logboxplot <- function(data, var, output, x=1.5, pc = FALSE, pcvar = NULL, boot 
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
+#'                            lat = 'decimalLatitude', lon= 'decimalLongitude',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  logout <- mixediqr(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-#' }
+#'  logout <- mixediqr(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
 #'
-#'
+#'}
 #' @references
 #' Walker ML, Dovoedo YH, Chakraborti S, Hilton CW. 2018. An Improved Boxplot for Univariate Data.
 #'  American Statistician 72:348-353. American Statistical Association.
@@ -637,7 +608,7 @@ mixediqr <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FA
   #semiintequantile range component
   semiQRl=  stats::quantile(var, 0.5)- stats::quantile(var, 0.25)
 
-  #SIQRU = Q3 − Q2
+  #SIQRU = Q3 - Q2
   semiQRu=  stats::quantile(var, 0.75) - stats::quantile(var, 0.5)
 
   #Bowley’s Coefficient
@@ -682,11 +653,8 @@ mixediqr <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FA
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -694,16 +662,15 @@ mixediqr <- function(data, var, output, x=3, pc = FALSE, pcvar = NULL, boot = FA
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                           lat = 'decimalLatitude',
 #'                           lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  medout <- medianrule(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-#' }
-#'
+#'  medout <- medianrule(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
+#'}
 medianrule <- function(data, var, output, x=2.3, pc = FALSE, pcvar = NULL, boot = FALSE){
 
   pars <- pcboot(pb = data, var = var, pc = pc, boot = boot, pcvar = pcvar)
@@ -743,26 +710,24 @@ medianrule <- function(data, var, output, x=2.3, pc = FALSE, pcvar = NULL, boot 
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
 #'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
-#'
-#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
 #' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
+#'                           lat = 'decimalLatitude', lon= 'decimalLongitude',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  bxout <- distboxplot(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-#' }
-
+#'  bxout <- distboxplot(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
+#'}
+#'
 distboxplot <- function(data, var, output, p1=0.025, p2 = 0.975, boot = FALSE, pc = FALSE, pcvar = NULL){
 
   kndata <- specleanr::kdat
@@ -798,9 +763,9 @@ distboxplot <- function(data, var, output, p1=0.025, p2 = 0.975, boot = FALSE, p
 
   alphaU <- (2*semiQRu)/kn
 
-  stdalphaL <- qnorm(p1, lower.tail = F)
+  stdalphaL <- qnorm(p1, lower.tail = FALSE)
 
-  stdalphaU <- qnorm(p2, lower.tail = T)
+  stdalphaU <- qnorm(p2, lower.tail = TRUE)
 
   lowbound  = stats::quantile(var, 0.5) - stdalphaL * alphaL
 
@@ -840,11 +805,8 @@ distboxplot <- function(data, var, output, p1=0.025, p2 = 0.975, boot = FALSE, p
 #'
 #' @examples
 #'
-#'\dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -852,14 +814,14 @@ distboxplot <- function(data, var, output, p1=0.025, p2 = 0.975, boot = FALSE, p
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-#'                           colsp = 'speciescheck',
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
+#'                            lat = 'decimalLatitude', lon= 'decimalLongitude',
+#'                           colsp = "scientificName",
 #'                           bbox = db,
 #'                           minpts = 10)
 #'
-#'  sqout <- seqfences(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-#' }
-#'
+#'  sqout <- seqfences(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
+#'}
 #'
 #' @references
 #'
@@ -914,7 +876,7 @@ seqfences <- function(data, var, output, gamma=0.95, mode='eo', pc = FALSE, pcva
 
     mc <- mth[,m][which(mth$p== gamma)]
 
-    tv <- qt(mc/length(var), df, lower.tail = F)
+    tv <- qt(mc/length(var), df, lower.tail = FALSE)
 
     lf[si] <- unname(quantile(var, 0.5)) - (tv/kn)*IQR(var)
     uf[si] <- unname(quantile(var, 0.5)) + (tv/kn)*IQR(var)
@@ -970,28 +932,25 @@ seqfences <- function(data, var, output, gamma=0.95, mode='eo', pc = FALSE, pcva
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #'
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
-#'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
 #' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                        lat = 'decimalLatitude',
 #'                        lon= 'decimalLongitude',
-#'                        colsp = 'speciescheck',
+#'                        colsp = "scientificName",
 #'                       bbox = db,
 #'                        minpts = 10)
 #'
-#' iosd <- isoforest(data = refdata[['Salmo trutta']], size = 0.7,  output='outlier',
+#' iosd <- isoforest(data = refdata[["Thymallus thymallus"]], size = 0.7,  output='outlier',
 #'                   exclude = c("x", "y"))
-#'}
+#' }
 #'
 #' @references
 #' \enumerate{
@@ -1024,9 +983,6 @@ isoforest <- function(data, size, cutoff =0.5, output, exclude = NULL, pc = FALS
   switch (output, clean=return(data[datIn,]), outlier= return(data[-datIn,]))
 }
 
-
-
-
 #' @title Identify outliers using One Class Support Vector Machines
 #'
 #' @param data Dataframe of environmental variables extracted from where the species was recorded present or absent.
@@ -1048,11 +1004,8 @@ isoforest <- function(data, size, cutoff =0.5, output, exclude = NULL, pc = FALS
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -1060,16 +1013,16 @@ isoforest <- function(data, size, cutoff =0.5, output, exclude = NULL, pc = FALS
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                        lat = 'decimalLatitude',
 #'                        lon= 'decimalLongitude',
-#'                        colsp = 'speciescheck',
+#'                        colsp = "scientificName",
 #'                       bbox = db,
 #'                        minpts = 10)
 #'
-#' nedata <- onesvm(data = refdata[['Salmo trutta']], exclude = c("x", "y"),  output='outlier')
-#'}
+#' nedata <- onesvm(data = refdata[["Thymallus thymallus"]], exclude = c("x", "y"),  output='outlier')
 #'
+#'}
 onesvm <- function(data, kernel='radial', tune=FALSE, exclude = NULL, output,
                     tpar = list(gamma = 1^(-1:1), epislon =seq(0, 1, 0.1),
                                 cost =2^2:4, nu = seq(0.05, 1, 0.1)),
@@ -1088,7 +1041,7 @@ onesvm <- function(data, kernel='radial', tune=FALSE, exclude = NULL, output,
 
   if(isFALSE(tune)){
 
-    svm_model <- svm(df, type = 'one-classification', nu=0.1, scale = T, kernel = kernel)
+    svm_model <- svm(df, type = 'one-classification', nu=0.1, scale = TRUE, kernel = kernel)
 
     prediction <- predict(svm_model, df)
 
@@ -1131,11 +1084,8 @@ onesvm <- function(data, kernel='radial', tune=FALSE, exclude = NULL, output,
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -1143,17 +1093,17 @@ onesvm <- function(data, kernel='radial', tune=FALSE, exclude = NULL, output,
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                        lat = 'decimalLatitude',
 #'                        lon= 'decimalLongitude',
-#'                        colsp = 'speciescheck',
+#'                        colsp = "scientificName",
 #'                       bbox = db,
 #'                        minpts = 10)
 #'
-#' lofout <- xlof(data = refdata[['Salmo trutta']], exclude = c("x", "y"),
+#' lofout <- xlof(data = refdata[["Thymallus thymallus"]], exclude = c("x", "y"),
 #'                 output='outlier', metric ='manhattan',
 #'                 minPts = 10, mode = "soft")
-#' }
+#'}
 #'
 xlof <- function(data, output, minPts, exclude = NULL, metric = 'manhattan', mode='soft', pc = FALSE, boot = FALSE, var, pcvar = NULL){
 
@@ -1220,12 +1170,9 @@ xlof <- function(data, output, minPts, exclude = NULL, metric = 'manhattan', mod
 #' @export
 #'
 #' @examples
-#'
-#' \dontrun{
+#' \donttest{
 #'
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -1233,18 +1180,18 @@ xlof <- function(data, output, minPts, exclude = NULL, metric = 'manhattan', mod
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                        lat = 'decimalLatitude',
 #'                        lon= 'decimalLongitude',
-#'                        colsp = 'speciescheck',
+#'                        colsp = "scientificName",
 #'                        bbox = db,
 #'                        minpts = 10)
 #'
-#' lofout <- xknn(data = refdata[['Salmo trutta']], exclude = c("x", "y"),
+#' lofout <- xknn(data = refdata[["Thymallus thymallus"]], exclude = c("x", "y"),
 #'                 output='outlier', metric ='manhattan',
 #'                  mode = "soft")
-#'}
 #'
+#'}
 xknn <- function(data, output, exclude = NULL, metric = 'manhattan', mode='soft', pc = FALSE, boot = FALSE, var, pcvar = NULL){
 
   match.argc(mode, choices = c('robust', 'soft'))
@@ -1314,28 +1261,26 @@ xknn <- function(data, output, exclude = NULL, metric = 'manhattan', mode='soft'
 #' @export
 #'
 #' @examples
-#'\dontrun{
+#'
+#' \donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
-#'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
 #' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                        lat = 'decimalLatitude',
 #'                        lon= 'decimalLongitude',
-#'                        colsp = 'speciescheck',
+#'                        colsp = "scientificName",
 #'                        bbox = db,
 #'                        minpts = 10)
 #'
-#' gloshout <- xglosh(data = refdata[['Salmo trutta']], exclude = c("x", "y"),
+#' gloshout <- xglosh(data = refdata[["Thymallus thymallus"]], exclude = c("x", "y"),
 #'                 output='outlier', metric ='manhattan', k = 3,
 #'                  mode = "soft")
-#'                  }
+#'}
 #
 #' @references
 #' \enumerate{
@@ -1451,7 +1396,7 @@ xglosh <- function(data, k, output, exclude = NULL, metric = 'manhattan', mode='
 #'                             date = c('Date', 'sampling_date'),
 #'                             country = c('JDS4_site_ID'))
 #'
-#' gbd <- check_names(data = datafinal, colsp='species', pct=90, merge=TRUE)
+#' efidata <- check_names(data = datafinal, colsp='species', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -1459,12 +1404,13 @@ xglosh <- function(data, k, output, exclude = NULL, metric = 'manhattan', mode='
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-#'                         colsp = 'speciescheck',
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
+#'                          lat = 'decimalLatitude', lon= 'decimalLongitude',
+#'                         colsp = "scientificName",
 #'                        bbox = db,
 #'                         minpts = 10)
 #'
-#' saldata <- refdata[['Salmo trutta']]
+#' saldata <- refdata[["Thymallus thymallus"]]
 #' #1. checking the annual maean temperature (bio1) are within the ranges in FishBase
 #' salmotherange <- thermal_ranges(x = "Salmo trutta")
 #'
@@ -1721,7 +1667,6 @@ sprange <- function(data, var, minval = NULL, maxval = NULL, ecoparam = NULL, la
   return(datIn)
 }
 
-
 #' @title Flags outliers based on Mahalanobis distance matrix for all records.
 #'
 #' @param data \code{dataframe}. Dataframe to check for outliers or extract the clean data.
@@ -1751,11 +1696,11 @@ sprange <- function(data, var, minval = NULL, maxval = NULL, ecoparam = NULL, la
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #'
 #' data("efidata")
 #'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
+#'
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -1763,19 +1708,17 @@ sprange <- function(data, var, minval = NULL, maxval = NULL, ecoparam = NULL, la
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                        lat = 'decimalLatitude',
 #'                        lon= 'decimalLongitude',
-#'                        colsp = 'speciescheck',
+#'                        colsp = "scientificName",
 #'                       bbox = db,
 #'                        minpts = 10)
 #'
 #' #outliers
-#' outliers <- mahal(data = refdata[['Salmo trutta']], exclude = c("x", "y"),
+#' outliers <- mahal(data = refdata[["Thymallus thymallus"]], exclude = c("x", "y"),
 #'                         output='outlier')
-#'
-#'
-#' }
+#'}
 #' @references
 #' Leys C, Klein O, Dominicy Y, Ley C. 2018. Detecting multivariate outliers:
 #' Use a robust variant of the Mahalanobis distance. Journal of Experimental
@@ -1850,7 +1793,6 @@ mahal <- function(data, exclude = NULL, output = 'outlier', mode = 'soft', pdf =
   }
 }
 
-
 #' @title Flags outliers using kmeans clustering method
 #'
 #' @param data Dataframe to check for outliers
@@ -1878,11 +1820,8 @@ mahal <- function(data, exclude = NULL, output = 'outlier', mode = 'soft', pdf =
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data("efidata")
-#'
-#' gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -1890,18 +1829,16 @@ mahal <- function(data, exclude = NULL, output = 'outlier', mode = 'soft', pdf =
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' refdata <- pred_extract(data = gbd, raster= wcd ,
+#' refdata <- pred_extract(data = efidata, raster= wcd ,
 #'                         lat = 'decimalLatitude',
 #'                         lon= 'decimalLongitude',
-#'                         colsp = 'speciescheck',
+#'                         colsp = "scientificName",
 #'                         bbox = db,
 #'                         minpts = 10)
 #'
-#' kmeansout <- xkmeans(data = refdata[['Salmo trutta']],
+#' kmeansout <- xkmeans(data = refdata[["Thymallus thymallus"]],
 #'                       output='outlier', exclude = c('x', 'y'), mode = 'soft', k=3)
-#' }
-#'
-#'
+#'}
 #'
 xkmeans <- function(data, k, exclude = NULL, output, mode ="soft", method="silhouette",
                     seed = 1135, verbose=FALSE, pc = FALSE, boot = FALSE, var, pcvar = NULL){

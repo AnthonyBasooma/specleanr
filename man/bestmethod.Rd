@@ -39,36 +39,34 @@ Identifies the best method for outlier detection for a single species.
 }
 \examples{
 
-\dontrun{
+\donttest{
 
+data("efidata")
 data("jdsdata")
 
 matchdata <- match_datasets(datasets = list(jds = jdsdata, efi=efidata),
-                            lats = 'lat',
-                            lons = 'lon',
-                            species = c('speciesname','scientificName'),
-                            date = c('Date', 'sampling_date'),
-                            country = c('JDS4_site_ID'))
+                           lats = 'lat',
+                           lons = 'lon',
+                           species = c('speciesname','scientificName'),
+                           date = c('Date', 'sampling_date'),
+                           country = c('JDS4_site_ID'))
 
 
-datacheck <- check_names(matchdata, colsp= 'species', pct = 90, merge =TRUE)
+danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 
-
-db <- sf::st_read(system.file('extdata/danube/basinfinal.shp', package='specleanr'), quiet=TRUE)
-
+db <- sf::st_read(danube, quiet=TRUE)
 
 worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 
-rdata <- pred_extract(data = datacheck,
+rdata <- pred_extract(data = matchdata,
                      raster= worldclim ,
                      lat = 'decimalLatitude',
-                    lon= 'decimalLongitude',
-                    colsp = 'speciescheck',
-                    bbox = db,
-                     multiple = TRUE,
-                    minpts = 10,
-                    list=TRUE,
-                    merge=F)
+                     lon= 'decimalLongitude',
+                     colsp = 'species',
+                     bbox = db,
+                     minpts = 10,
+                     list=TRUE,
+                    merge=FALSE)
 
 
 out_df <- multidetect(data = rdata, multiple = TRUE,
@@ -76,12 +74,8 @@ out_df <- multidetect(data = rdata, multiple = TRUE,
                      output = 'outlier',
                      exclude = c('x','y'),
                      methods = c('zscore', 'adjbox','iqr', 'semiqr','hampel', 'kmeans',
-                                'logboxplot', 'lof','iforest', 'mahal', 'seqfences'))
+                                 'logboxplot', 'lof','iforest', 'mahal', 'seqfences'))
 
-bmout <- bestmethod(x = out_df, sp= 1, threshold = 0.2)#
-
-
+bmout <- bestmethod(x = out_df, sp= 1, threshold = 0.2)
 }
-
-
 }

@@ -17,10 +17,6 @@ Outlier detection method broad classification.
 }
 \examples{
 
-\dontrun{
-
 x <- broad_classify(category = "mult")
-
-}
 
 }

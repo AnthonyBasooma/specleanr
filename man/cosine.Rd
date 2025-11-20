@@ -43,32 +43,28 @@ Cosine similarity index based on (Gautam & Kulkarni 2014; Joy & Renumol 2020)
 }
 \examples{
 
-\dontrun{
+\donttest{
 
 data(efidata)
 
-db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+
+db <- sf::st_read(danube, quiet=TRUE)
 
 wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 
-checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-
-extdf <- pred_extract(data = checkname, raster = wcd,
+extdf <- pred_extract(data = efidata, raster = wcd,
                     lat = 'decimalLatitude', lon = 'decimalLongitude',
-                     colsp = 'speciescheck',
-                     list = TRUE,verbose = F,
-                     minpts = 6,merge = F)#basin removed
+                     colsp = "scientificName",
+                     list = TRUE,verbose = FALSE,
+                     minpts = 6,merge = FALSE)#basin removed
 
  #outlier detection
-
 outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
                          exclude = c('x','y'), multiple = TRUE,
-                         methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-                         showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+                         methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 
-consineout <- cosine(x = outliersdf, sp= 8, threshold = 0.2)#
-
-
+consineout <- cosine(x = outliersdf, sp= 1, threshold = 0.2)#
 }
 
 }

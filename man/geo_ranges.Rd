@@ -7,7 +7,7 @@
 geo_ranges(
   data,
   colsp = NULL,
-  verbose = F,
+  verbose = FALSE,
   pct = 90,
   sn = FALSE,
   warn = FALSE,

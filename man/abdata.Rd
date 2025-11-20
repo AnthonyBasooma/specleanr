@@ -18,11 +18,8 @@ The species data was collated from the Global Biodiversity Information Facility 
 }
 \examples{
 
-\dontrun{
-
 data("abdata")
 abdata
-}
 
 
 }

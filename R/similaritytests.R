@@ -132,33 +132,33 @@ oci <- function(absoluteoutliers, absolute_propn, threshold, listofmethods,
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
+#'
 #' data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
 #'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' extdf <- pred_extract(data = efidata, raster = wcd,
 #'                       lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = "scientificName",
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#basin removed
 #'
 #'  #outlier detection
 #'
 #'outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
 #'                           exclude = c('x','y'), multiple = TRUE,
-#'                           methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                           showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#'                           methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 #'
-#' ociss <- ocindex(x = outliersdf, sp= 8, threshold = 0.2, absolute = TRUE)#
+#' ociss <- ocindex(x = outliersdf, sp= 1, threshold = 0.2, absolute = TRUE)#
 #' #No outliers detected in more than two methods
 #'
-#' }
-#'
+#'}
 #'
 ocindex <- function(x, sp = NULL, threshold = NULL, absolute=FALSE, props=FALSE, warn = FALSE, autothreshold=FALSE){
 
@@ -341,29 +341,29 @@ ocindex <- function(x, sp = NULL, threshold = NULL, absolute=FALSE, props=FALSE,
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #'
 #' data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-#'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' extdf <- pred_extract(data = efidata, raster = wcd,
 #'                       lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = "scientificName",
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#basin removed
 #'
 #'  #outlier detection
 #'outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
 #'                           exclude = c('x','y'), multiple = TRUE,
-#'                           methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                           showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#'                           methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 #'
 #' totabs_counts <- multiabsolute(x = outliersdf, threshold = 0.2)
+#'
 #' }
 #'
 #' @seealso \code{\link{ocindex}}
@@ -474,34 +474,30 @@ multiabsolute <- function(x, threshold = NULL, props = FALSE, warn = FALSE, auto
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-#'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' extdf <- pred_extract(data = efidata, raster = wcd,
 #'                     lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = "scientificName",
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#basin removed
 #'
 #'  #outlier detection
 #'
 #' outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
 #'                          exclude = c('x','y'), multiple = TRUE,
-#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                          showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 #'
-#' jaccardout <- jaccard(x = outliersdf, sp= 8, threshold = 0.2)#
+#' jaccardout <- jaccard(x = outliersdf, sp= 1, threshold = 0.2)#
 #'
-#'
-#' }
-#'
+#'}
 #'
 jaccard <- function(x, sp = NULL, threshold = NULL, warn=FALSE, autothreshold=FALSE){
 
@@ -589,36 +585,30 @@ jaccard <- function(x, sp = NULL, threshold = NULL, warn=FALSE, autothreshold=FA
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
+#'\donttest{
 #' data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-#'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' extdf <- pred_extract(data = efidata, raster = wcd,
 #'                     lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = "scientificName",
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#basin removed
 #'
 #'  #outlier detection
 #'
 #' outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
 #'                          exclude = c('x','y'), multiple = TRUE,
-#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                          showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 #'
-#' overlapout <- overlap(x = outliersdf, sp= 8, threshold = 0.2)#
+#' overlapout <- overlap(x = outliersdf, sp= 1, threshold = 0.2)#
+#'}
 #'
-#'
-#' }
-#'
-#'
-
 overlap <- function(x, sp = NULL, threshold = NULL, warn=FALSE, autothreshold = FALSE){
 
 
@@ -700,35 +690,30 @@ overlap <- function(x, sp = NULL, threshold = NULL, warn=FALSE, autothreshold = 
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #'
 #' data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-#'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' extdf <- pred_extract(data = efidata, raster = wcd,
 #'                     lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = "scientificName",
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#basin removed
 #'
 #'  #outlier detection
-#'
 #' outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
 #'                          exclude = c('x','y'), multiple = TRUE,
-#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                          showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 #'
-#' consineout <- cosine(x = outliersdf, sp= 8, threshold = 0.2)#
-#'
-#'
+#' consineout <- cosine(x = outliersdf, sp= 1, threshold = 0.2)#
 #' }
 #'
-
 cosine <- function(x, sp = NULL,threshold = NULL, warn=FALSE, autothreshold = FALSE){
 
   #check if there are absolute outliers
@@ -810,35 +795,32 @@ cosine <- function(x, sp = NULL,threshold = NULL, warn=FALSE, autothreshold = FA
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #'
 #' data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-#'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' extdf <- pred_extract(data = efidata, raster = wcd,
 #'                       lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = "scientificName",
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#basin removed
 #'
 #'  #outlier detection
 #'
 #' outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
 #'                          exclude = c('x','y'), multiple = TRUE,
-#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                          showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 #'
-#' sordata <- sorensen(x = outliersdf, sp= 8, threshold = 0.2)#
-#'
-#'
+#' sordata <- sorensen(x = outliersdf, sp= 1, threshold = 0.2)#
 #' }
 #'
-
+#'
 sorensen <- function(x, sp = NULL,  threshold=NULL, warn=FALSE, autothreshold = FALSE ){
 
 
@@ -922,37 +904,32 @@ sorensen <- function(x, sp = NULL,  threshold=NULL, warn=FALSE, autothreshold = 
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
+#'
 #' data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-#'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' extdf <- pred_extract(data = efidata, raster = wcd,
 #'                       lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = "scientificName",
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#basin removed
 #'
-#'  #outlier detection
+#'#outlier detection
 #'
 #' outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
 #'                          exclude = c('x','y'), multiple = TRUE,
-#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                          showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 #'
-#' smcout <- smc(x = outliersdf, sp= 8, threshold = 0.2)#
-#'
-#'
+#' smcout <- smc(x = outliersdf, sp= 1, threshold = 0.2)#
 #' }
 #'
-
-
 smc <- function(x, sp=NULL,  threshold = NULL, warn = FALSE, autothreshold = FALSE){
-
 
   #check if there are absolute outliers
   if(isTRUE(autothreshold)){
@@ -1107,35 +1084,31 @@ smc <- function(x, sp=NULL,  threshold = NULL, warn = FALSE, autothreshold = FAL
 #' @export
 #'
 #' @examples
-#'
-#' \dontrun{
-#'
+#'\donttest{
 #' data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-#'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' extdf <- pred_extract(data = efidata, raster = wcd,
 #'                     lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = "scientificName",
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#basin removed
 #'
 #'  #outlier detection
 #'
 #' outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
 #'                          exclude = c('x','y'), multiple = TRUE,
-#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                          showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"))
 #'
-#' hamout <- hamming(x = outliersdf, sp= 8, threshold = 0.2)#
-#'
+#' hamout <- hamming(x = outliersdf, sp= 1, threshold = 0.2)#
 #' }
 #'
-
+#'
 hamming <- function(x, sp=NULL, threshold = NULL, warn = FALSE, autothreshold = FALSE){
 
   #check if there are absolute outliers

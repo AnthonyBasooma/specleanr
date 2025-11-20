@@ -19,31 +19,32 @@ Extract outliers for a one species
 }
 \examples{
 
-\dontrun{
+\donttest{
 
 data(efidata)
 
-db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+
+db <- sf::st_read(danube, quiet=TRUE)
 
 wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 
-checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
 
-extdf <- pred_extract(data = checkname, raster = wcd,
-                      lat = 'decimalLatitude', lon = 'decimalLongitude',
-                     colsp = 'speciescheck',
-                     list = TRUE,verbose = F,
-                     minpts = 6,merge = F)#basin removed
+extdf <- pred_extract(data = efidata, raster = wcd,
+                     lat = 'decimalLatitude', lon = 'decimalLongitude',
+                     colsp = 'scientificName',
+                     list = TRUE,verbose = FALSE,
+                   minpts = 6,merge = FALSE)
 
- #outlier detection
+#outlier detection
 
 outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
                          exclude = c('x','y'), multiple = TRUE,
-                         methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-                         silence_true_errors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+                         methods = c('mixediqr', "iqr", "iqr", "logboxplot"),
+                         silence_true_errors = FALSE,
+                        verbose = FALSE, sdm = TRUE)
 
-extoutlier <- extractoutliers(x=outliersdf, sp = 8)
-
+extoutlier <- extractoutliers(x=outliersdf, sp = 3)
 }
 
 

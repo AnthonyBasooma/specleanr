@@ -15,7 +15,7 @@ getdata(
   verbose = FALSE,
   warn = FALSE,
   pct = 80,
-  sn = F,
+  sn = FALSE,
   ...
 )
 }

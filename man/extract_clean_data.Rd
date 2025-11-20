@@ -58,9 +58,7 @@ Either a \code{list} or \code{dataframe} of cleaned records for multiple species
 Extract final clean data using either absolute or best method generated outliers.
 }
 \examples{
-
-\dontrun{
-
+\donttest{
 data(jdsdata)
 data(efidata)
 matchdata <- match_datasets(datasets = list(jds = jdsdata, efi = efidata),
@@ -70,8 +68,6 @@ matchdata <- match_datasets(datasets = list(jds = jdsdata, efi = efidata),
                             country= c('JDS4_site_ID'),
                             date=c('sampling_date', 'Date'))
 
-datacheck <- check_names(matchdata, colsp= 'species', pct = 90, merge =TRUE)
-
 
 danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 
@@ -80,15 +76,15 @@ db <- sf::st_read(danube, quiet=TRUE)
 
 worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 
-rdata <- pred_extract(data = datacheck,
+rdata <- pred_extract(data = matchdata,
                       raster= worldclim ,
                       lat = 'decimalLatitude',
                       lon= 'decimalLongitude',
-                      colsp = 'speciescheck',
+                      colsp = 'species',
                       bbox = db,
                       minpts = 10,
                       list=TRUE,
-                      merge=F)
+                      merge=FALSE)
 
 
 out_df <- multidetect(data = rdata, multiple = TRUE,

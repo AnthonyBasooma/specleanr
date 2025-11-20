@@ -20,12 +20,8 @@ usage in this package but for more information write to ihg@boku.ac.at
 }
 \examples{
 
-\dontrun{
-
 data("efidata")
 efidata
-}
-
 
 }
 \references{

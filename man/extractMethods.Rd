@@ -13,9 +13,7 @@ List of methods
 List of outlier detection methods implemented in this package.
 }
 \examples{
-\dontrun{
 extractMethods()
-}
 
 
 }

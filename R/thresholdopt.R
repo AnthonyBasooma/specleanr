@@ -203,51 +203,6 @@ search_threshold <- function(data, outliers,
 #' @return Either a \code{list} or \code{dataframe} of cleaned records for multiple species.
 #' @export
 #'
-#' @examples
-#'
-#' \dontrun{
-#'
-#' data(jdsdata)
-#' data(efidata)
-#' matchdata <- match_datasets(datasets = list(jds = jdsdata, efi = efidata),
-#'                             lats = 'lat',
-#'                             lons = 'lon',
-#'                             species = c('speciesname','scientificName'),
-#'                             country= c('JDS4_site_ID'),
-#'                             date=c('sampling_date', 'Date'))
-#'
-#' datacheck <- check_names(matchdata, colsp= 'species', pct = 90, merge =TRUE)
-#'
-#'
-#' db <- sf::st_read(system.file('extdata/danube/basinfinal.shp', package='specleanr'), quiet=TRUE)
-#'
-#'
-#' worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
-#'
-#' rdata <- pred_extract(data = datacheck,
-#'                       raster= worldclim ,
-#'                       lat = 'decimalLatitude',
-#'                       lon= 'decimalLongitude',
-#'                       colsp = 'speciescheck',
-#'                       bbox = db,
-#'                       multiple = TRUE,
-#'                       minpts = 10,
-#'                       list=TRUE,
-#'                       merge=F)
-#'
-#'
-#' out_df <- multidetect(data = rdata, multiple = TRUE,
-#'                       var = 'bio6',
-#'                       output = 'outlier',
-#'                       exclude = c('x','y'),
-#'                       methods = c('zscore', 'adjbox','iqr', 'semiqr','hampel'))
-#'
-#' #extracting optimal threshold for each species
-#'
-#' threshopt <- optimal_threshold(refdata = rdata, outliers = out_df)
-#' }
-#'
-#'
 #'
 
 optimal_threshold <- function(refdata, outliers, var_col = NULL, warn=FALSE, verbose=FALSE,
