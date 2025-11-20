@@ -59,7 +59,7 @@ df_online <- getdata(data = c("Squalius cephalus", 'Salmo trutta',
                                 gbiflim = 50, 
                                 inatlim = 50, 
                                 vertlim = 50, 
-                     verbose = F)
+                     verbose = FALSE)
 
 dim(df_online)
 

@@ -24,9 +24,9 @@ refdata <- pred_extract(data = matchd, raster = wcd,
                         bbox = db,
                         colsp = 'species',
                         list = TRUE,
-                        verbose = F,
+                        verbose = FALSE,
                         minpts = 6,
-                        merge = F)
+                        merge = FALSE)
 
 #using a dataframe of species not a list# change list to FALSE
 
@@ -36,9 +36,9 @@ refdata_df <- pred_extract(data = matchd, raster = wcd,
                            bbox = db,
                            colsp = 'species',
                            list = FALSE,
-                           verbose = F,
+                           verbose = FALSE,
                            minpts = 6,
-                           merge = F)
+                           merge = FALSE)
 
 #single species checks
 spdata <- refdata[['Anguilla anguilla']]
@@ -56,7 +56,7 @@ test_that(desc = "classifying records error and messages",
             expect_message(classify_data(refdata = refdata, outliers = outlierdf))
 
             #EIF computed
-            expect_type(classify_data(refdata = refdata, outliers = outlierdf, EIF = TRUE, verbose = F),'list')
+            expect_type(classify_data(refdata = refdata, outliers = outlierdf, EIF = TRUE, verbose = FALSE),'list')
 
             #contain label
             expect_contains(colnames(classify_data(refdata = refdata, outliers = outlierdf, verbose = FALSE)), 'label')

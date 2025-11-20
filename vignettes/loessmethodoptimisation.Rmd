@@ -7,14 +7,18 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+
+```{r setup, include=FALSE}
+cran <- identical(tolower(Sys.getenv("NOT_CRAN")), "false")
+if (cran || !curl::has_internet()) {
+  knitr::opts_chunk$set(eval = FALSE, collapse = TRUE, comment = "#>")
+} else {
+  knitr::opts_chunk$set(eval = TRUE, collapse = TRUE, comment = "#>")
+}
+
 ```
 
-```{r setup}
+```{r librarydata}
 library(specleanr)
 ```
 
@@ -47,7 +51,7 @@ df_online <- getdata(data = c("Squalius cephalus", 'Salmo trutta',"Thymallus thy
                      gbiflim = 50,
                      inatlim = 50,
                      vertlim = 50,
-                     verbose = F)
+                     verbose = FALSE)
 
 
 mergealldfs <- match_datasets(datasets = list(efi= efidata, jds = jdsdata,
@@ -76,7 +80,7 @@ danube <- sf::st_read(system.file('extdata', 'danube.shp.zip',
 ### Oultier detection, threshold optimisation using LOESS and plotting
 
 ```{r outlierdetoptplot, fig.width = 6, fig.height= 4.5, fig.align='center', dpi=120 }
-par(mfrow = c(2, 2),
+parm <- par(mfrow = c(2, 2),
     mar = c(3,3, 1.5, 0.5),
     oma = c(0, 0, 0, 0),
     mgp = c(1.7, 0.8, 0)
@@ -113,6 +117,7 @@ pltout <- lapply(spp, function(s){
   opt
   
 })
+par(parm)
 ```
 
 ### Summary explanation

@@ -9,7 +9,7 @@ mdf <- match_datasets(datasets = list(jds= jdsdata, efi =efidata),
                       species = c('scientificName', 'speciesname'),
                       date=c('sampling_date','Date'))
 
-mdfclean <- check_names(mdf, colsp = 'species', verbose = F, merge = T)
+mdfclean <- check_names(mdf, colsp = 'species', verbose = FALSE, merge = TRUE)
 
 db <- sf::read_sf(system.file('extdata/danube.shp.zip', package = "specleanr"), quiet = TRUE)
 
@@ -21,9 +21,9 @@ refdata <- pred_extract(data = mdfclean, raster = wcd,
                         bbox = db,
                         colsp = 'speciescheck',
                         list = TRUE,
-                        verbose = F,
+                        verbose = FALSE,
                         minpts = 6,
-                        merge = F)
+                        merge = FALSE)
 
 sp <- refdata[['Salmo trutta']]
 
@@ -45,12 +45,6 @@ test_that(desc = "Adjusted boxplots errors and success",
 
                       #data not a dataframe, list, atomic or vector
                       expect_error(adjustboxplots(data = wcd))
-
-                      # #provide var when the data is atomic, vector or list: var not required
-                      #
-                      # expect_message(adjustboxplots(data = sp$bio6, var = "bio6"))
-                      #
-                      # expect_type(adjustboxplots(data = sp$bio6, output = 'clean'), 'double')
 
                     })
 
@@ -92,15 +86,6 @@ testthat::test_that(desc = "Reverse jack knifing returns a dataframe of outliers
                       expect_s3_class(jknife(data = sp, var = 'bio6', output='clean', mode = 'robust'), 'data.frame')
                       #expect error for missing data
                       expect_error(jknife(var = 'bio6'))
-
-                      # #expect error if var is missing
-                      # expect_error(jknife(data = sp))
-
-                      # #expect error if var is provided more than once
-                      # expect_error(jknife(data = sp, var = c("bio6", 'bio4')))
-                      #
-                      # #expect error if mode is not robust or soft
-                      # expect_error(jknife(data = sp, var = 'bio6', mode = 'out'))
                     })
 
 
@@ -182,10 +167,6 @@ testthat::test_that(desc = "Sequential fences returns a dataframe of outliers.",
 
                       expect_error(seqfences(data = wcd))
 
-                      # #expect double
-                      # expect_type(seqfences(data = c(4,5,5,6,7,45,67,4,3,5,6,5,44, 100, 3, 45, 6, 7, 22),
-                      #                       output = 'clean'), "double")
-
                     })
 
 
@@ -262,10 +243,6 @@ testthat::test_that(desc = "optimal ranges from literature for multiple species"
                                                                             mincol ="mintemp",
                                                                             optspcol = NULL)))
 
-
-
-
-
                     })
 
 testthat::test_that(desc = "optimal ranges from literature for multiple species but only one",
@@ -306,6 +283,7 @@ testthat::test_that(desc = "optimal ranges from literature for multiple species 
 testthat::test_that(desc = "check for temperature or georanges",
                     code = {
                       testthat::skip_if_offline()
+                      testthat::skip_if_offline()
                       #provide var or variable to check, annual temperature (bio1)
                       expect_s3_class(ecological_ranges(data = sp, species = 'Salmo trutta',
                                                         var = 'bio1', output = "outlier",
@@ -327,11 +305,6 @@ testthat::test_that(desc = "check for temperature or georanges",
                       expect_error(ecological_ranges(data = sp, species = 'Salmo trutta',
                                                      output = "outlier",checkfishbase = TRUE, mode = 'geo'))
                     })
-
-
-
-
-
 
 testthat::test_that(desc = "Interquartile range returns a dataframe of outliers.",
                     code = {
@@ -456,7 +429,7 @@ testthat::test_that(desc = "Checks Mahalanobis distance measures whether return 
 
 testthat::test_that(desc = "Checks k-means whether return dataframe of outliers",
                     code = {
-                      kmeanout <- xkmeans(data = sp,output='outlier', exclude = c('x', 'y'),
+                      kmeanout <- xkmeans(data = sp, output='outlier', exclude = c('x', 'y'),
                                           mode = 'soft', k=3)
 
                       testthat::expect_s3_class(object = kmeanout, 'data.frame')

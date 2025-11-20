@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{The data model for outlier detection.}
 }
+\value{
+prints the datacleaner class for this package.
+}
 \description{
 set method for displaying output details after outlier detection.
 }

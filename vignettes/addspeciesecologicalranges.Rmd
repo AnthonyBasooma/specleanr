@@ -21,7 +21,7 @@ library(specleanr)
 
 * Species ecological ranges provide the ecological limits within which the species can survive or reproduce within the ecosystem. These ranges are usually obtained from experimental setups or continued data collection. However, the species' ecological ranges may vary due to colonization of new ranges. Therefore, if the species ecological ranges are available, then records obtained outside the ranges can be flagged as outliers that require further analysis.
 
-* The sources of species ecological ranges include standard databases such as FishBase *(Froese and Pauly 2014)*, www.freshwaterecological.info *(Schmidt-Kloiber and Hering 2015)*, or the International Union for Conservation of Nature. Linking to these databases is not outside the scope of this package. Still, a user can collate a table of species' ecological ranges and use it in this package's **`multidetect`** function to flag outliers. 
+* The sources of species ecological ranges include standard databases such as FishBase *(Froese and Pauly 2014)*, www.freshwaterecology.info *(Schmidt-Kloiber and Hering 2015)*, or the International Union for Conservation of Nature. Linking to these databases is not outside the scope of this package. Still, a user can collate a table of species' ecological ranges and use it in this package's **`multidetect`** function to flag outliers. 
 
 * This method of using species ecological ranges is concertedly used with the other outlier detection methods, including univariate and multivariate methods, as shown below.
 
@@ -43,7 +43,7 @@ matchd <- match_datasets(datasets = list(jds= jdsdata, efi =efidata),
                          species = c('scientificName', 'speciesname'),
                          date=c('sampling_date','Date'))
 
-#matchclean <- check_names(matchd, colsp = 'species', verbose = F, merge = T)
+#matchclean <- check_names(matchd, colsp = 'species', verbose = FALSE, merge = TRUE)
 
 db <- sf::read_sf(system.file('extdata/danube.shp.zip',
                               package = "specleanr"), quiet = TRUE)
@@ -60,9 +60,9 @@ refdata <- pred_extract(data = matchd, raster = wcd,
                         bbox = db,
                         colsp = 'species',
                         list = TRUE,
-                        verbose = F,
+                        verbose = FALSE,
                         minpts = 6,
-                        merge = F)
+                        merge = FALSE)
 
 ```
 
@@ -149,7 +149,7 @@ ggenvironmentalspace(squalius_qc_labeled,
 
 ### References
 1. Schmidt-Kloiber, A., & Hering, D. (2015). www. freshwaterecology. info–an online tool that unifies, standardizes and codifies more than 20,000 European freshwater organisms and their ecological preferences. Ecological Indicators, 53, 271-282.
-2. Froese. R and Pauly D (2014). FishBase. world wide web electronic publication. http://www. fishbase. org.
+2. Froese. R and Pauly D (2014). FishBase. world wide web electronic publication. fishbase. org.
 
 
 

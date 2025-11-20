@@ -29,18 +29,15 @@ Computes semi-interquantile range to flag suspicious outliers
 }
 \details{
 SemiInterquantile Ranges introduced adjusts for whiskers on either
-side to flag suspicious outliers [Q1 – 3(Q2 (median) − Q1); Q3 + 3(Q3 − Q2)] \code{((Kimber 1990))}.
+side to flag suspicious outliers [Q1 – 3(Q2 (median) - Q1); Q3 + 3(Q3 - Q2)] \code{((Kimber 1990))}.
 However, SIQR introduced the same constant values for bounding fences
 for the lower and upper quartiles \code{(Rousseeuw & Hubert 2011)}, which leads to
 outlier swamping and masking.
 }
 \examples{
-
-\dontrun{
+\donttest{
 
 data("efidata")
-
-gbd <- check_names(data = efidata, colsp='scientificName', pct=90, merge=TRUE)
 
 danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 
@@ -48,13 +45,13 @@ db <- sf::st_read(danube, quiet=TRUE)
 
 wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 
-refdata <- pred_extract(data = gbd, raster= wcd , lat = 'decimalLatitude', lon= 'decimalLongitude',
-                          colsp = 'speciescheck',
+refdata <- pred_extract(data = efidata, raster= wcd ,
+                          lat = 'decimalLatitude', lon= 'decimalLongitude',
+                          colsp = "scientificName",
                           bbox = db,
                           minpts = 10)
 
- semiout <- semiIQR(data = refdata[['Salmo trutta']], var = 'bio6', output='outlier')
-
+ semiout <- semiIQR(data = refdata[["Thymallus thymallus"]], var = 'bio6', output='outlier')
 }
 
 }

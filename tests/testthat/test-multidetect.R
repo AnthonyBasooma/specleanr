@@ -24,9 +24,9 @@ refdata <- pred_extract(data = matchd, raster = wcd,
                         bbox = db,
                         colsp = 'species',
                         list = TRUE,
-                        verbose = F,
+                        verbose = FALSE,
                         minpts = 6,
-                        merge = F)
+                        merge = FALSE)
 
 #using a dataframe of species not a list# change list to FALSE
 
@@ -36,9 +36,9 @@ refdata_df <- pred_extract(data = matchd, raster = wcd,
                         bbox = db,
                         colsp = 'species',
                         list = FALSE,
-                        verbose = F,
+                        verbose = FALSE,
                         minpts = 6,
-                        merge = F)
+                        merge = FALSE)
 
 #for multiple species
 outlist <- multidetect(data = refdata, var = 'bio6', output = 'outlier',
@@ -341,13 +341,13 @@ test_that(desc = 'Test for success and errors during outlier detection and extra
 
                       #errors since no outliers in threshold of 0.8
 
-                      expect_error(ocindex(x=outlierdf, sp=1,  threshold = 0.8, warn = F))
+                      expect_error(ocindex(x=outlierdf, sp=1,  threshold = 0.8, warn = FALSE))
 
                       #both threshold = NULL and autothreshold =FALSE
-                      expect_error(ocindex(x=outlierdf, sp=1,  threshold = NULL, warn = F, autothreshold = FALSE))
+                      expect_error(ocindex(x=outlierdf, sp=1,  threshold = NULL, warn = FALSE, autothreshold = FALSE))
 
                       #both threshold = NOT NULL and autothreshold = TRUE
-                      expect_error(ocindex(x=outlierdf, sp=1,  threshold = 0.2, warn = F, autothreshold = TRUE))
+                      expect_error(ocindex(x=outlierdf, sp=1,  threshold = 0.2, warn = FALSE, autothreshold = TRUE))
 
                       #expect warning sinc the threshold is below 0.5
                       expect_warning(ocindex(x=outlierdf, sp=1, threshold = 0.2, warn = T))
@@ -432,15 +432,15 @@ test_that(desc = "Errors and success for extract outliers, extractoutliers, mult
 
 testthat::test_that(desc = 'Test for different method if they return a character/suitable method',
                     code = {
-                      testthat::expect_type(jaccard(x=outlierdf, sp=1, warn = F, threshold = 0.2), 'character')
-                      testthat::expect_type(sorensen(x=outlierdf, sp=1,  warn = F, threshold = 0.2), 'character')
-                      testthat::expect_type(cosine(x=outlierdf, sp=1, warn = F, threshold = 0.2), 'character')
-                      testthat::expect_type(smc(x=outlierdf, sp=1,  warn = F, threshold = 0.2), 'character')
-                      testthat::expect_type(hamming(x=outlierdf, sp=1,  warn = F, threshold = 0.2), 'character')
-                      testthat::expect_type(overlap(x=outlierdf, sp=1,  warn = F, threshold = 0.2), 'character')
+                      testthat::expect_type(jaccard(x=outlierdf, sp=1, warn = FALSE, threshold = 0.2), 'character')
+                      testthat::expect_type(sorensen(x=outlierdf, sp=1,  warn = FALSE, threshold = 0.2), 'character')
+                      testthat::expect_type(cosine(x=outlierdf, sp=1, warn = FALSE, threshold = 0.2), 'character')
+                      testthat::expect_type(smc(x=outlierdf, sp=1,  warn = FALSE, threshold = 0.2), 'character')
+                      testthat::expect_type(hamming(x=outlierdf, sp=1,  warn = FALSE, threshold = 0.2), 'character')
+                      testthat::expect_type(overlap(x=outlierdf, sp=1,  warn = FALSE, threshold = 0.2), 'character')
 
                       #check for absolute = TRUE: expect a vector
-                      testthat::expect_type(ocindex(x=outlierdf, threshold = 0.2, absolute = TRUE, warn = F, sp = 1), 'double')
+                      testthat::expect_type(ocindex(x=outlierdf, threshold = 0.2, absolute = TRUE, warn = FALSE, sp = 1), 'double')
 
                       #check for absolute = TRUE and prop=TRUE: expect a dataframe
                       testthat::expect_s3_class(ocindex(x=outlierdf, threshold = 0.2, absolute = TRUE, warn = FALSE,
@@ -451,7 +451,7 @@ testthat::test_that(desc = 'Test for different method if they return a character
                                                         warn = FALSE, sp=1 ), 'character')
 
                       #expect error: wrong data set for outliers. only accepts datacleaner
-                      testthat::expect_error(ocindex(x=wcd, threshold = 0.2, absolute = TRUE, warn = F, sp = 1))
+                      testthat::expect_error(ocindex(x=wcd, threshold = 0.2, absolute = TRUE, warn = FALSE, sp = 1))
 
                     })
 
@@ -460,13 +460,13 @@ testthat::test_that(desc = 'Test for different method if they return a character
 testthat::test_that(desc = "Success and errors expected and checked for best method selection.",
                     code = {
                       #one species
-                      expect_type(bestmethod(x=outlierdf, sp=1, threshold = 0.2, warn = F, verbose = F),'character')
+                      expect_type(bestmethod(x=outlierdf, sp=1, threshold = 0.2, warn = FALSE, verbose = FALSE),'character')
 
                       #expect error if the index is not provided yet the outlierdf is from multiple object.
-                      expect_error(bestmethod(x=outlierdf, threshold = 0.2, warn = F, verbose = F))
+                      expect_error(bestmethod(x=outlierdf, threshold = 0.2, warn = FALSE, verbose = FALSE))
 
                       #expect error if x is not provided.
-                      expect_error(bestmethod(threshold = 0.2, warn = F, verbose = F, sp = 1))
+                      expect_error(bestmethod(threshold = 0.2, warn = FALSE, verbose = FALSE, sp = 1))
 
 
                       #threshold greater than 1
@@ -481,7 +481,7 @@ testthat::test_that(desc = "Success and errors expected and checked for best met
 
 
                       #multiple species, expect dataframe
-                      expect_s3_class(multibestmethod(x=outlierdf, threshold = 0.2, warn = F, verbose = F),
+                      expect_s3_class(multibestmethod(x=outlierdf, threshold = 0.2, warn = FALSE, verbose = FALSE),
                                       'data.frame')
 
                       #use the one species for Anguilla anguilla (spdata): expect error because this can be extracted in

@@ -3,6 +3,7 @@ test_that(desc = 'Return species data',
           code = {
 
             skip_on_cran()
+            skip_if_offline()
 
             ondata <- getdata(data = 'Gymnocephalus baloni', gbiflim = 10, vertlim = 10,
                               inatlim = 10, verbose = FALSE)
@@ -17,6 +18,7 @@ test_that(desc = 'Return species data',
 test_that(desc = "Expect error when data is not provided",
           code = {
             skip_on_cran()
+            skip_if_offline()
             expect_error(getdata(gbiflim = 10, vertlim = 10,inatlim = 10, verbose = FALSE))
           })
 

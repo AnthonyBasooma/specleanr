@@ -8,10 +8,18 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
+cran <- identical(tolower(Sys.getenv("NOT_CRAN")), "false")
+if (cran || !curl::has_internet()) {
+  knitr::opts_chunk$set(eval = FALSE,
   collapse = TRUE,
   comment = "#>"
-)
+  )
+} else {
+  knitr::opts_chunk$set(eval = TRUE,
+  collapse = TRUE,
+  comment = "#>"
+  )
+}
 ```
 
 ```{r setup, warning=FALSE, message=FALSE}
@@ -125,7 +133,7 @@ multspp_outliers <- multidetect(data = multspreference_data,
                        exclude = c('x','y'), 
                        methods = c('adjbox', "hampel", 'zscore', 
                                    'lof', 'jknife', 'kmeans', 'mahal'),
-                       silence_true_errors = FALSE, warn = F, verbose = F)
+                       silence_true_errors = FALSE, warn = FALSE, verbose = FALSE)
 
 #Flag outlier in single species data (multiple = FALSE)
 
@@ -136,7 +144,7 @@ fagus_outliers <- multidetect(data = fagus_data_reference,
                        exclude = c('x','y'), 
                        methods = c('adjbox', "hampel", 'zscore', 
                                    'lof', 'jknife', 'kmeans', 'mahal'),
-                       silence_true_errors = FALSE, warn = F, verbose = F)
+                       silence_true_errors = FALSE, warn = FALSE, verbose = FALSE)
 
 ```
 ### Visualizing outliers flagged by each method

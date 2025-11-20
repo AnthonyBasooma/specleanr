@@ -17,12 +17,8 @@ A \code{tibble} The data consist the
 The data is extracted from \code{(Schwertman & de Silva 2007)}.
 }
 \examples{
-
-\dontrun{
-
 data("mth")
 mth
-}
 
 
 

@@ -23,7 +23,7 @@ rdata <- pred_extract(data = matchdata,
                       bbox = db,
                       minpts = 10,
                       list=TRUE,
-                      merge=F)
+                      merge=FALSE)
 
 
 
@@ -54,7 +54,7 @@ rdata1 <- pred_extract(data = thymallus,
                       colsp = 'species',
                       minpts = 10,
                       list=TRUE,
-                      merge=F)
+                      merge=FALSE)
 
 #suppress warning of not enough data
 toutliers1 <- suppressWarnings(multidetect(data = rdata1, multiple = FALSE,

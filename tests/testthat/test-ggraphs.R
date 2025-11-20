@@ -13,10 +13,6 @@ moutl <- multidetect(data = iris, var = 'Sepal.Width',
 
 test_that(desc = "count the classes produced",
           code = {
-            expect_equal(length(class(ggoutliers(soutl))), 2)
+            expect_equal(length(class(ggoutliers(soutl))), 5)
 
           })
-
-
-
-
