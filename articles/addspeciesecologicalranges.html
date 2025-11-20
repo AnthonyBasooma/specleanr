@@ -62,7 +62,7 @@
       <h1>Flag outliers based on species ecological ranges.</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/AnthonyBasooma/specleanr/blob/v1.0.0.0/vignettes/addspeciesecologicalranges.Rmd" class="external-link"><code>vignettes/addspeciesecologicalranges.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AnthonyBasooma/specleanr/blob/master/vignettes/addspeciesecologicalranges.Rmd" class="external-link"><code>vignettes/addspeciesecologicalranges.Rmd</code></a></small>
       <div class="d-none name"><code>addspeciesecologicalranges.Rmd</code></div>
     </div>
 
@@ -84,12 +84,12 @@ are available, then records obtained outside the ranges can be flagged
 as outliers that require further analysis.</p></li>
 <li><p>The sources of species ecological ranges include standard
 databases such as FishBase <em>(Froese and Pauly 2014)</em>,
-www.freshwaterecological.info <em>(Schmidt-Kloiber and Hering
-2015)</em>, or the International Union for Conservation of Nature.
-Linking to these databases is not outside the scope of this package.
-Still, a user can collate a table of species’ ecological ranges and use
-it in this package’s <strong><code>multidetect</code></strong> function
-to flag outliers.</p></li>
+www.freshwaterecology.info <em>(Schmidt-Kloiber and Hering 2015)</em>,
+or the International Union for Conservation of Nature. Linking to these
+databases is not outside the scope of this package. Still, a user can
+collate a table of species’ ecological ranges and use it in this
+package’s <strong><code>multidetect</code></strong> function to flag
+outliers.</p></li>
 <li><p>This method of using species ecological ranges is concertedly
 used with the other outlier detection methods, including univariate and
 multivariate methods, as shown below.</p></li>
@@ -114,7 +114,7 @@ methods.<a class="anchor" aria-label="anchor" href="#example-using-species-ecolo
 <span>                         species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'scientificName'</span>, <span class="st">'speciesname'</span><span class="op">)</span>,</span>
 <span>                         date<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sampling_date'</span>,<span class="st">'Date'</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#matchclean &lt;- check_names(matchd, colsp = 'species', verbose = F, merge = T)</span></span>
+<span><span class="co">#matchclean &lt;- check_names(matchd, colsp = 'species', verbose = FALSE, merge = TRUE)</span></span>
 <span></span>
 <span><span class="va">db</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/danube.shp.zip'</span>,</span>
 <span>                              package <span class="op">=</span> <span class="st">"specleanr"</span><span class="op">)</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -128,9 +128,9 @@ dataset</strong></p>
 <span>                        bbox <span class="op">=</span> <span class="va">db</span>,</span>
 <span>                        colsp <span class="op">=</span> <span class="st">'species'</span>,</span>
 <span>                        list <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                        verbose <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>                        verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                        minpts <span class="op">=</span> <span class="fl">6</span>,</span>
-<span>                        merge <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<span>                        merge <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><strong>3. Preparing ecological ranges for Squalius
 cephalus</strong></p>
 <p><strong>NOTE</strong></p>
@@ -182,7 +182,7 @@ dirction of whether greater or lower are not required to be set.</li>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/ggoutliers.html">ggoutliers</a></span><span class="op">(</span><span class="va">squalius_outlier</span><span class="op">)</span></span></code></pre></div>
-<p><img src="addspeciesecologicalranges_files/figure-html/ploting-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="addspeciesecologicalranges_files/figure-html/ploting-1.png" class="r-plt" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="obtaining-quality-controlled-dataset-using-loess-method-or-data-labeling">Obtaining quality controlled dataset using loess method or data
@@ -217,7 +217,7 @@ labeling<a class="anchor" aria-label="anchor" href="#obtaining-quality-controlle
 <span>                     legend_position <span class="op">=</span> <span class="st">'blank'</span>,</span>
 <span>                     ylab <span class="op">=</span> <span class="st">"Number of records"</span>,</span>
 <span>                     xlab <span class="op">=</span> <span class="st">"Outlier labels"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="addspeciesecologicalranges_files/figure-html/clean%20data%20extraction%20and%20labelling_multiple-1.png" width="432" style="display: block; margin: auto;"></p>
+<p><img src="addspeciesecologicalranges_files/figure-html/clean%20data%20extraction%20and%20labelling_multiple-1.png" class="r-plt" width="432" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="summary-explanation">Summary explanation<a class="anchor" aria-label="anchor" href="#summary-explanation"></a>
@@ -239,8 +239,7 @@ freshwaterecology. info–an online tool that unifies, standardizes and
 codifies more than 20,000 European freshwater organisms and their
 ecological preferences. Ecological Indicators, 53, 271-282.</li>
 <li>Froese. R and Pauly D (2014). FishBase. world wide web electronic
-publication. <a href="http://www" class="external-link uri">http://www</a>. fishbase.
-org.</li>
+publication. fishbase. org.</li>
 </ol>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -254,7 +253,7 @@ org.</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

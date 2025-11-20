@@ -36,7 +36,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Check for environmental outliers using species optimal ranges.</h1>
-      <small class="dont-index">Source: <a href="https://github.com/AnthonyBasooma/specleanr/blob/v1.0.0.0/R/outliermethods.R" class="external-link"><code>R/outliermethods.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AnthonyBasooma/specleanr/blob/master/R/outliermethods.R" class="external-link"><code>R/outliermethods.R</code></a></small>
       <div class="d-none name"><code>ecological_ranges.Rd</code></div>
     </div>
 
@@ -167,7 +167,7 @@ the defualt is <code>FALSE</code>:</p></dd>
 <span class="r-in"><span>                            date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Date'</span>, <span class="st">'sampling_date'</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                            country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'JDS4_site_ID'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">gbd</span> <span class="op">&lt;-</span> <span class="fu"><a href="check_names.html">check_names</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">datafinal</span>, colsp<span class="op">=</span><span class="st">'species'</span>, pct<span class="op">=</span><span class="fl">90</span>, merge<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">efidata</span> <span class="op">&lt;-</span> <span class="fu"><a href="check_names.html">check_names</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">datafinal</span>, colsp<span class="op">=</span><span class="st">'species'</span>, pct<span class="op">=</span><span class="fl">90</span>, merge<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">danube</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/danube.shp.zip'</span>, package<span class="op">=</span><span class="st">'specleanr'</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -175,12 +175,13 @@ the defualt is <code>FALSE</code>:</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">wcd</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/worldclim.tiff'</span>, package<span class="op">=</span><span class="st">'specleanr'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">refdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="pred_extract.html">pred_extract</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">gbd</span>, raster<span class="op">=</span> <span class="va">wcd</span> , lat <span class="op">=</span> <span class="st">'decimalLatitude'</span>, lon<span class="op">=</span> <span class="st">'decimalLongitude'</span>,</span></span>
-<span class="r-in"><span>                        colsp <span class="op">=</span> <span class="st">'speciescheck'</span>,</span></span>
+<span class="r-in"><span><span class="va">refdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="pred_extract.html">pred_extract</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">efidata</span>, raster<span class="op">=</span> <span class="va">wcd</span> ,</span></span>
+<span class="r-in"><span>                         lat <span class="op">=</span> <span class="st">'decimalLatitude'</span>, lon<span class="op">=</span> <span class="st">'decimalLongitude'</span>,</span></span>
+<span class="r-in"><span>                        colsp <span class="op">=</span> <span class="st">"scientificName"</span>,</span></span>
 <span class="r-in"><span>                       bbox <span class="op">=</span> <span class="va">db</span>,</span></span>
 <span class="r-in"><span>                        minpts <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">saldata</span> <span class="op">&lt;-</span> <span class="va">refdata</span><span class="op">[[</span><span class="st">'Salmo trutta'</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">saldata</span> <span class="op">&lt;-</span> <span class="va">refdata</span><span class="op">[[</span><span class="st">"Thymallus thymallus"</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="co">#1. checking the annual maean temperature (bio1) are within the ranges in FishBase</span></span></span>
 <span class="r-in"><span><span class="va">salmotherange</span> <span class="op">&lt;-</span> <span class="fu"><a href="thermal_ranges.html">thermal_ranges</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Salmo trutta"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -245,7 +246,7 @@ the defualt is <code>FALSE</code>:</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

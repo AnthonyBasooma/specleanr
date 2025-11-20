@@ -1,0 +1,112 @@
+# Flags outliers using kmeans clustering method
+
+Flags outliers using kmeans clustering method
+
+## Usage
+
+``` r
+xkmeans(
+  data,
+  k,
+  exclude = NULL,
+  output,
+  mode = "soft",
+  method = "silhouette",
+  seed = 1135,
+  verbose = FALSE,
+  pc = FALSE,
+  boot = FALSE,
+  var,
+  pcvar = NULL
+)
+```
+
+## Arguments
+
+- data:
+
+  Dataframe to check for outliers
+
+- k:
+
+  The number of clusters to be used for optimization. It should be
+  greater than 1. For many species k should be be greater 10 to ably
+  cater for each species search for optimal k using the different
+  optimization methods in kmethod
+
+- exclude:
+
+  Exclude variables that should not be considered in the fitting the one
+  class model, for example x and y columns or latitude/longitude or any
+  column that the user doesn't want to consider.
+
+- output:
+
+  Either clean: for a data set with no outliers or outlier: to output a
+  data frame with outliers.
+
+- mode:
+
+  Either robust, if a robust mode is used which uses median instead of
+  mean and median absolute deviation from median.
+
+- method:
+
+  The method to be used for the kmeans clustering. Default is
+  `silhouette`. `Elbow method` can be used but user input is required,
+  and therefore multiple outlier detection method is not possible.
+
+- seed:
+
+  An integer to fix the maintain the iterations by during the kmeans
+  method optimisation.
+
+- verbose:
+
+  To indicate messages and the default is FALSE.
+
+- pc:
+
+  Whether principal component analysis will be computed. Default `FALSE`
+
+- boot:
+
+  Whether bootstrapping will be computed. Default `FALSE`
+
+- var:
+
+  The variable of concern, which is vital for univariate outlier
+  detection methods
+
+- pcvar:
+
+  Principal component analysis to e used for outlier detection after
+  PCA. Default `PC1`
+
+## Value
+
+Dataframe with or with no outliers.
+
+## Examples
+
+``` r
+# \donttest{
+data("efidata")
+
+danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+
+db <- sf::st_read(danube, quiet=TRUE)
+
+wcd <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
+
+refdata <- pred_extract(data = efidata, raster= wcd ,
+                        lat = 'decimalLatitude',
+                        lon= 'decimalLongitude',
+                        colsp = "scientificName",
+                        bbox = db,
+                        minpts = 10)
+
+kmeansout <- xkmeans(data = refdata[["Thymallus thymallus"]],
+                      output='outlier', exclude = c('x', 'y'), mode = 'soft', k=3)
+# }
+```

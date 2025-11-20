@@ -36,7 +36,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Extract final clean data using either absolute or best method generated outliers.</h1>
-      <small class="dont-index">Source: <a href="https://github.com/AnthonyBasooma/specleanr/blob/v1.0.0.0/R/classify_data.R" class="external-link"><code>R/classify_data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AnthonyBasooma/specleanr/blob/master/R/classify_data.R" class="external-link"><code>R/classify_data.R</code></a></small>
       <div class="d-none name"><code>classify_data.Rd</code></div>
     </div>
 
@@ -117,7 +117,7 @@ All classifications have been used in the function and each affects the data clu
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">jdsdata</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">efidata</span><span class="op">)</span></span></span>
@@ -128,24 +128,23 @@ All classifications have been used in the function and each affects the data clu
 <span class="r-in"><span>                            country<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'JDS4_site_ID'</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                            date<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sampling_date'</span>, <span class="st">'Date'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">datacheck</span> <span class="op">&lt;-</span> <span class="fu"><a href="check_names.html">check_names</a></span><span class="op">(</span><span class="va">matchdata</span>, var_col<span class="op">=</span> <span class="st">'species'</span>, pct <span class="op">=</span> <span class="fl">90</span>, merge <span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">danube</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/danube.shp.zip'</span>, package<span class="op">=</span><span class="st">'specleanr'</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">db</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/danube/basinfinal.shp'</span>, package<span class="op">=</span><span class="st">'specleanr'</span><span class="op">)</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">db</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="va">danube</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">worldclim</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/worldclim.tiff'</span>, package<span class="op">=</span><span class="st">'specleanr'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="pred_extract.html">pred_extract</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">datacheck</span>,</span></span>
+<span class="r-in"><span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="pred_extract.html">pred_extract</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">matchdata</span>,</span></span>
 <span class="r-in"><span>                      raster<span class="op">=</span> <span class="va">worldclim</span> ,</span></span>
 <span class="r-in"><span>                      lat <span class="op">=</span> <span class="st">'decimalLatitude'</span>,</span></span>
 <span class="r-in"><span>                      lon<span class="op">=</span> <span class="st">'decimalLongitude'</span>,</span></span>
-<span class="r-in"><span>                      var_col <span class="op">=</span> <span class="st">'speciescheck'</span>,</span></span>
+<span class="r-in"><span>                      colsp <span class="op">=</span> <span class="st">'species'</span>,</span></span>
 <span class="r-in"><span>                      bbox <span class="op">=</span> <span class="va">db</span>,</span></span>
-<span class="r-in"><span>                      multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                      minpts <span class="op">=</span> <span class="fl">10</span>,</span></span>
 <span class="r-in"><span>                      list<span class="op">=</span><span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>                      merge<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                      merge<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">out_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="multidetect.html">multidetect</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">rdata</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
@@ -156,8 +155,8 @@ All classifications have been used in the function and each affects the data clu
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#extracting use the absolute method for one species</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">extractabs</span> <span class="op">&lt;-</span> <span class="fu">extract_clean_data_label</span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">rdata</span>, outliers <span class="op">=</span> <span class="va">out_df</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="va">extractabs</span> <span class="op">&lt;-</span> <span class="fu">classify_data</span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">rdata</span>, outliers <span class="op">=</span> <span class="va">out_df</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -170,7 +169,7 @@ All classifications have been used in the function and each affects the data clu
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

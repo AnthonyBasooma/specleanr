@@ -62,7 +62,7 @@
       <h1>Detecting environmental outliers in species distribution models for plants.</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/AnthonyBasooma/specleanr/blob/v1.0.0.0/vignettes/Plants.Rmd" class="external-link"><code>vignettes/Plants.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AnthonyBasooma/specleanr/blob/master/vignettes/Plants.Rmd" class="external-link"><code>vignettes/Plants.Rmd</code></a></small>
       <div class="d-none name"><code>Plants.Rmd</code></div>
     </div>
 
@@ -244,7 +244,7 @@ or machine learning models</strong>: local outlier factor:
 <span>                       exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>,<span class="st">'y'</span><span class="op">)</span>, </span>
 <span>                       methods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'adjbox'</span>, <span class="st">"hampel"</span>, <span class="st">'zscore'</span>, </span>
 <span>                                   <span class="st">'lof'</span>, <span class="st">'jknife'</span>, <span class="st">'kmeans'</span>, <span class="st">'mahal'</span><span class="op">)</span>,</span>
-<span>                       silence_true_errors <span class="op">=</span> <span class="cn">FALSE</span>, warn <span class="op">=</span> <span class="cn">F</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span>                       silence_true_errors <span class="op">=</span> <span class="cn">FALSE</span>, warn <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Flag outlier in single species data (multiple = FALSE)</span></span>
 <span></span>
@@ -255,7 +255,7 @@ or machine learning models</strong>: local outlier factor:
 <span>                       exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>,<span class="st">'y'</span><span class="op">)</span>, </span>
 <span>                       methods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'adjbox'</span>, <span class="st">"hampel"</span>, <span class="st">'zscore'</span>, </span>
 <span>                                   <span class="st">'lof'</span>, <span class="st">'jknife'</span>, <span class="st">'kmeans'</span>, <span class="st">'mahal'</span><span class="op">)</span>,</span>
-<span>                       silence_true_errors <span class="op">=</span> <span class="cn">FALSE</span>, warn <span class="op">=</span> <span class="cn">F</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<span>                       silence_true_errors <span class="op">=</span> <span class="cn">FALSE</span>, warn <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="visualizing-outliers-flagged-by-each-method">Visualizing outliers flagged by each method<a class="anchor" aria-label="anchor" href="#visualizing-outliers-flagged-by-each-method"></a>
@@ -271,19 +271,19 @@ number of occurrences if <strong>FALSE</strong></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/ggoutliers.html">ggoutliers</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">multspp_outliers</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Plants_files/figure-html/visualize%20outliers-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="Plants_files/figure-html/visualize%20outliers-1.png" class="r-plt" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">#for one species: no index needed</span></span>
 <span><span class="fu"><a href="../reference/ggoutliers.html">ggoutliers</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">fagus_outliers</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Plants_files/figure-html/visualize%20outliers-2.png" width="576" style="display: block; margin: auto;">
+<p><img src="Plants_files/figure-html/visualize%20outliers-2.png" class="r-plt" width="576" style="display: block; margin: auto;">
 ### Identify the best threshold using loess model.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">optimal1</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimal_threshold.html">optimal_threshold</a></span><span class="op">(</span>refdata <span class="op">=</span> <span class="va">fagus_data_reference</span>, </span>
 <span>                             outliers <span class="op">=</span> <span class="va">fagus_outliers</span>, </span>
 <span>                             plot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>plot <span class="op">=</span> <span class="cn">TRUE</span>, group <span class="op">=</span> <span class="st">"Fagus sylvatica"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Plants_files/figure-html/threshold%20identifcation-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="Plants_files/figure-html/threshold%20identifcation-1.png" class="r-plt" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
@@ -330,7 +330,7 @@ data. For more information, check (Basooma et al., 2025).</li>
 <span>                     ylab <span class="op">=</span> <span class="st">"Precipitation of Warmest Quarter"</span>,</span>
 <span>                     scalecolor <span class="op">=</span> <span class="st">'viridis'</span>,</span>
 <span>                     pointsize <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Plants_files/figure-html/2d%20plots%20single%20species-1.png" width="518.4" style="display: block; margin: auto;"></p>
+<p><img src="Plants_files/figure-html/2d%20plots%20single%20species-1.png" class="r-plt" width="518.4" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">#for single species</span></span>
@@ -341,7 +341,7 @@ data. For more information, check (Basooma et al., 2025).</li>
 <span>                     ylab <span class="op">=</span> <span class="st">"Precipitation of Warmest Quarter"</span>,</span>
 <span>                     scalecolor <span class="op">=</span> <span class="st">'viridis'</span>,</span>
 <span>                     pointsize <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Plants_files/figure-html/2d%20plots%20multiple%20species-1.png" width="710.4" style="display: block; margin: auto;"></p>
+<p><img src="Plants_files/figure-html/2d%20plots%20multiple%20species-1.png" class="r-plt" width="710.4" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="visualising-records-in-environmental-space-in-3d">Visualising records in environmental space in 3d<a class="anchor" aria-label="anchor" href="#visualising-records-in-environmental-space-in-3d"></a>
@@ -361,7 +361,7 @@ data. For more information, check (Basooma et al., 2025).</li>
 <span>                     scalecolor <span class="op">=</span> <span class="st">'viridis'</span>,</span>
 <span>                     lpos3d <span class="op">=</span> <span class="st">"right"</span>,</span>
 <span>                     pointsize <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Plants_files/figure-html/3d%20plots%20single%20species-1.png" width="710.4" style="display: block; margin: auto;"></p>
+<p><img src="Plants_files/figure-html/3d%20plots%20single%20species-1.png" class="r-plt" width="710.4" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -394,7 +394,7 @@ Accessed on 24 June 2024.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

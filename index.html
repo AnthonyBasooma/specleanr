@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Detecting Environmental Outliers in Biogeographical Modeling Workflows • specleanr</title>
+<title>Detecting Environmental Outliers in Data Analysis Pipelines • specleanr</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Detecting Environmental Outliers in Biogeographical Modeling Workflows">
-<meta name="description" content="A framework used to detect and remove environmental outliers in species distribution models across taxa and environmental predictors. Also, data retrieval and preprocessing, model fitting to enable performance comparisions are allowed.">
-<meta property="og:description" content="A framework used to detect and remove environmental outliers in species distribution models across taxa and environmental predictors. Also, data retrieval and preprocessing, model fitting to enable performance comparisions are allowed.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Detecting Environmental Outliers in Data Analysis Pipelines">
+<meta name="description" content="A framework used to detect and handle outliers during data analysis workflows. Outlier detection is a statistical concept with applications in data analysis workflows, highlighting records that are suspiciously high or low. Outlier detection in distribution models was initiated by Chapman (1991) (available at &lt;https://www.researchgate.net/publication/332537800_Quality_control_and_validation_of_point-sourced_environmental_resource_data&gt;), who developed the reverse jackknifing method. The concept was further developed and incorporated into different R packages, including flexsdm (Velazco et al., 2022, &lt;doi:10.1111/2041-210X.13874&gt;) and biogeo (Robertson et al., 2016 &lt;doi:10.1111/ecog.02118&gt;). We compiled various outlier detection methods obtained from the literature, including those elaborated in Dastjerdy et al. (2023) &lt;doi:10.3390/geotechnics3020022&gt; and Liu et al. (2008) &lt;doi:10.1109/ICDM.2008.17&gt;. In this package, we introduced the ensembling aspect, where multiple outlier detection methods are used to flag the record as either an absolute outlier. The concept can also be applied in general data analysis, as well as during the development of species distribution models.">
+<meta property="og:description" content="A framework used to detect and handle outliers during data analysis workflows. Outlier detection is a statistical concept with applications in data analysis workflows, highlighting records that are suspiciously high or low. Outlier detection in distribution models was initiated by Chapman (1991) (available at &lt;https://www.researchgate.net/publication/332537800_Quality_control_and_validation_of_point-sourced_environmental_resource_data&gt;), who developed the reverse jackknifing method. The concept was further developed and incorporated into different R packages, including flexsdm (Velazco et al., 2022, &lt;doi:10.1111/2041-210X.13874&gt;) and biogeo (Robertson et al., 2016 &lt;doi:10.1111/ecog.02118&gt;). We compiled various outlier detection methods obtained from the literature, including those elaborated in Dastjerdy et al. (2023) &lt;doi:10.3390/geotechnics3020022&gt; and Liu et al. (2008) &lt;doi:10.1109/ICDM.2008.17&gt;. In this package, we introduced the ensembling aspect, where multiple outlier detection methods are used to flag the record as either an absolute outlier. The concept can also be applied in general data analysis, as well as during the development of species distribution models.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -81,7 +81,7 @@ Figure 1. Workflow for processing species occurrence data within the specleanr R
 <li>
 <strong>Arranging of species records and environmental data</strong>.</li>
 </ol>
-<p>This includes collecting species data from either online sources or locally stored data. The user can check for species records for geographical, taxonomic, or temporal inconsistencies such as missing coordinates, interchanged coordinates, species name spelling mistakes, and wrong event dates. Environmental data, mainly in the raster format, is based chiefly on user needs, but numerous sources include WORLDCLIM (Fick &amp; Hijmans, 2017) and CHELSA (Karger et al., 2017) for bioclimatic variables; Hydrography90m for stream or river-based hydromorphological parameters such as stream order, flow accumulation, stream power index, and stream transportation index (Amatulli et al., 2022); and Copernicus for land use changes <a href="https://www.copernicus.eu/en" class="external-link uri">https://www.copernicus.eu/en</a>. A comprehensive database for environmental predictors can be accessed at <a href="https://hydrography.org/environment90m/environment90m_layers" class="external-link uri">https://hydrography.org/environment90m/environment90m_layers</a>.</p>
+<p>This includes collecting species data from either online sources or locally stored data. The user can check for species records for geographical, taxonomic, or temporal inconsistencies such as missing coordinates, interchanged coordinates, species name spelling mistakes, and wrong event dates. Environmental data, mainly in the raster format, is based chiefly on user needs, but numerous sources include WORLDCLIM (Fick &amp; Hijmans, 2017) and CHELSA (Karger et al., 2017) for bioclimatic variables; Hydrography90m for stream or river-based hydromorphological parameters such as stream order, flow accumulation, stream power index, and stream transportation index (Amatulli et al., 2022); and Copernicus for land use changes. A comprehensive database for environmental predictors can be accessed at <a href="https://hydrography.org/environment90m/environment90m_layers" class="external-link uri">https://hydrography.org/environment90m/environment90m_layers</a>.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>
 <strong>Extracting the environmental predictors</strong>.</li>
@@ -253,7 +253,7 @@ After environmental outlier removal, the user can examine the improvement in the
 <div class="section level3">
 <h3 id="package-citation">Package citation<a class="anchor" aria-label="anchor" href="#package-citation"></a>
 </h3>
-<p>Under review</p>
+<p>Basooma, A., Schmidt-Kloiber, A., Domisch, S., Torres-Cambas, Y., Smederevac-Lalić, M., Bremerich, V., Meulenbroek, P., Tschikof, M., Funk, A., Hein, T. and Borgwardt, F. 2025. ‘specleanr’: an R package for automated flagging of environmental outliers in ecological data for modeling workflows. Ecography 2025: e08221 (ver. 1.0).</p>
 </div>
 <div class="section level3">
 <h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -265,7 +265,7 @@ After environmental outlier removal, the user can examine the improvement in the
 <li><p>Karger, D. N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza, R. W., Zimmermann, N. E., Linder, H. P., &amp; Kessler, M. (2017). Climatologies at high resolution for the earth’s land surface areas. Scientific Data, 4. <a href="https://doi.org/10.1038/sdata.2017.122" class="external-link uri">https://doi.org/10.1038/sdata.2017.122</a></p></li>
 <li><p>Loader, C. (2004). Smoothing: local regression techniques. Handbook of Computational Statistics: Concepts and Methods, Art. 12.</p></li>
 <li><p>Logez, M., Belliard, J., Melcher, A., Kremser, H., Pletterbauer, F., Schmutz, S., Gorges, G., Delaigue, O., &amp; Pont, D. (2012). Deliverable D5.1-3: BQEs sensitivity to global/climate change in European rivers: implications for reference conditions and pressure-impact-recovery chains.</p></li>
-<li><p>IUCN Standards and Petitions Committee. (2022). THE IUCN RED LIST OF THREATENED SPECIESTM Guidelines for Using the IUCN Red List Categories and Criteria Prepared by the Standards and Petitions Committee of the IUCN Species Survival Commission. <a href="https://www.iucnredlist.org/documents/RedListGuidelines.pdf" class="external-link uri">https://www.iucnredlist.org/documents/RedListGuidelines.pdf</a>.</p></li>
+<li><p>IUCN Standards and Petitions Committee. (2022). THE IUCN RED LIST OF THREATENED SPECIESTM Guidelines for Using the IUCN Red List Categories and Criteria Prepared by the Standards and Petitions Committee of the IUCN Species Survival Commission. <a href="https://cmsdocs.s3.amazonaws.com/RedListGuidelines.pdf" class="external-link uri">https://cmsdocs.s3.amazonaws.com/RedListGuidelines.pdf</a>.</p></li>
 </ol>
 </div>
 </div>
@@ -310,8 +310,9 @@ After environmental outlier removal, the user can examine the improvement in the
 <ul class="list-unstyled">
 <li><a href="http://www.gnu.org/licenses/gpl-3.0.html" class="external-link"><img src="https://img.shields.io/badge/License-GPL%20%28%3E=%203%29-lightgrey.svg?style=flat" alt="License"></a></li>
 <li><a href="https://github.com/AnthonyBasooma/specleanr/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/AnthonyBasooma/specleanr/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/AnthonyBasooma/specleanr" class="external-link"><img src="https://codecov.io/gh/AnthonyBasooma/specleanr/graph/badge.svg?token=M9431LXVLG" alt="codecov"></a></li>
-<li><a href="https://github.com/AnthonyBasooma/specleanr/repo/releases" class="external-link"><img src="https://img.shields.io/github/downloads/AnthonyBasooma/specleanr/repo/total.svg" alt="GitHub Downloads"></a></li>
+<li><a href="https://app.codecov.io/gh/AnthonyBasooma/specleanr" class="external-link"><img src="https://codecov.io/gh/AnthonyBasooma/specleanr/graph/badge.svg?token=M9431LXVLG" alt="codecov"></a></li>
+<li><a href="https://cran.r-project.org/package=specleanr" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/specleanr?color=orange" alt="CRAN downloads"></a></li>
+<li><a href="https://doi.org/10.1002/ecog.08221" class="external-link"><img src="https://img.shields.io/badge/DOI-10.1002/ecog.08221-orange" alt="DOI"></a></li>
 </ul>
 </div>
 
@@ -324,7 +325,7 @@ After environmental outlier removal, the user can examine the improvement in the
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
