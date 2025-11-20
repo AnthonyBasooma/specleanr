@@ -109,9 +109,7 @@ cleandata <- function(data, outliers,
 #' @seealso \code{\link{search_threshold}}
 #'
 #' @examples
-#'
-#' \dontrun{
-#'
+#'\donttest{
 #' data(jdsdata)
 #' data(efidata)
 #' matchdata <- match_datasets(datasets = list(jds = jdsdata, efi = efidata),
@@ -121,8 +119,6 @@ cleandata <- function(data, outliers,
 #'                             country= c('JDS4_site_ID'),
 #'                             date=c('sampling_date', 'Date'))
 #'
-#' datacheck <- check_names(matchdata, colsp= 'species', pct = 90, merge =TRUE)
-#'
 #'
 #' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
@@ -131,15 +127,15 @@ cleandata <- function(data, outliers,
 #'
 #' worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' rdata <- pred_extract(data = datacheck,
+#' rdata <- pred_extract(data = matchdata,
 #'                       raster= worldclim ,
 #'                       lat = 'decimalLatitude',
 #'                       lon= 'decimalLongitude',
-#'                       colsp = 'speciescheck',
+#'                       colsp = 'species',
 #'                       bbox = db,
 #'                       minpts = 10,
 #'                       list=TRUE,
-#'                       merge=F)
+#'                       merge=FALSE)
 #'
 #'
 #' out_df <- multidetect(data = rdata, multiple = TRUE,
@@ -157,10 +153,9 @@ cleandata <- function(data, outliers,
 #' bestmout_bm <- extract_clean_data(refdata = rdata, outliers = out_df,
 #'                                   mode = 'best', threshold = 0.6,
 #'                                  autothreshold = FALSE)
-#' }
+#'}
 #'
 #' @export
-#'
 #'
 
 extract_clean_data <- function(refdata, outliers, mode ='abs',var_col = NULL,

@@ -198,7 +198,7 @@ classify <- function(refdata, outliers, sp = NULL,
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #'
 #' data(jdsdata)
 #' data(efidata)
@@ -209,24 +209,23 @@ classify <- function(refdata, outliers, sp = NULL,
 #'                             country= c('JDS4_site_ID'),
 #'                             date=c('sampling_date', 'Date'))
 #'
-#' datacheck <- check_names(matchdata, var_col= 'species', pct = 90, merge =TRUE)
 #'
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
-#' db <- sf::st_read(system.file('extdata/danube/basinfinal.shp', package='specleanr'), quiet=TRUE)
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #'
 #' worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#' rdata <- pred_extract(data = datacheck,
+#' rdata <- pred_extract(data = matchdata,
 #'                       raster= worldclim ,
 #'                       lat = 'decimalLatitude',
 #'                       lon= 'decimalLongitude',
-#'                       var_col = 'speciescheck',
+#'                       colsp = 'species',
 #'                       bbox = db,
-#'                       multiple = TRUE,
 #'                       minpts = 10,
 #'                       list=TRUE,
-#'                       merge=F)
+#'                       merge=FALSE)
 #'
 #'
 #' out_df <- multidetect(data = rdata, multiple = TRUE,
@@ -237,7 +236,7 @@ classify <- function(refdata, outliers, sp = NULL,
 #'
 #' #extracting use the absolute method for one species
 #'
-#' extractabs <- extract_clean_data_label(refdata = rdata, outliers = out_df)
+#' extractabs <- classify_data(refdata = rdata, outliers = out_df)
 #' }
 #'
 #' @export
@@ -245,7 +244,7 @@ classify <- function(refdata, outliers, sp = NULL,
 #' @references Akoglu, H. 2018. User’s guide to correlation coefficients. - Turk J Emerg Med 18: 91–93.
 
 classify_data <- function(refdata, outliers, var_col = NULL,
-                                    threshold = 0.1, warn=FALSE,
+                                    threshold = 0.1, warn = FALSE,
                                     verbose = TRUE,classify = 'med',
                           EIF = FALSE){
 

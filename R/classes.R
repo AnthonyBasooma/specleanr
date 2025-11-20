@@ -17,9 +17,8 @@ setClassUnion("vetcorOrNULL", c("vector", "NULL"))
 #' @slot pcretained the number data columns retained. the default is 3.
 #' @slot maxrecords the maximum number of records used for bootstrapping.
 #'
-#'
-
 #' @export
+#'
 setClass(Class = 'datacleaner',
          representation = list(result     ='list',
                                mode       = 'logical',
@@ -43,8 +42,9 @@ setClass(Class = 'datacleaner',
 #'
 #' @importFrom methods show
 #'
-#'
 #' @export
+#'
+#' @return prints the datacleaner class for this package.
 #'
 setMethod(f='show', signature = 'datacleaner', definition = function(object){
 

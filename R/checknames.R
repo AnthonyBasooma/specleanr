@@ -65,7 +65,7 @@
 #'
 #'
 
-check_names <- function(data, colsp = NULL, verbose= FALSE, pct = 90, merge=F, sn=FALSE, ecosystem = FALSE, rm_duplicates= FALSE){
+check_names <- function(data, colsp = NULL, verbose= FALSE, pct = 90, merge=FALSE, sn=FALSE, ecosystem = FALSE, rm_duplicates= FALSE){
 
   if(inherits(data, 'sf') ) {
 
@@ -207,7 +207,7 @@ check_names <- function(data, colsp = NULL, verbose= FALSE, pct = 90, merge=F, s
     } else{
 
       #handle morph types by only considering species scientific epithet
-      txt = scan(text = species_clean, what = ' ', quiet = T)
+      txt = scan(text = species_clean, what = ' ', quiet = TRUE)
 
       sp_ex = paste0(txt[1],' ',txt[2])
 

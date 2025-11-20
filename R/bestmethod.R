@@ -18,37 +18,34 @@
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #'
-# #' data("efidata")
+#' data("efidata")
 #' data("jdsdata")
 #'
 #' matchdata <- match_datasets(datasets = list(jds = jdsdata, efi=efidata),
-#'                             lats = 'lat',
-#'                             lons = 'lon',
-#'                             species = c('speciesname','scientificName'),
-#'                             date = c('Date', 'sampling_date'),
-#'                             country = c('JDS4_site_ID'))
+#'                            lats = 'lat',
+#'                            lons = 'lon',
+#'                            species = c('speciesname','scientificName'),
+#'                            date = c('Date', 'sampling_date'),
+#'                            country = c('JDS4_site_ID'))
 #'
 #'
-#'datacheck <- check_names(matchdata, colsp= 'species', pct = 90, merge =TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
 #'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
-#'db <- sf::st_read(system.file('extdata/danube/basinfinal.shp', package='specleanr'), quiet=TRUE)
+#' worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
 #'
-#'
-#'worldclim <- terra::rast(system.file('extdata/worldclim.tiff', package='specleanr'))
-#'
-#'rdata <- pred_extract(data = datacheck,
+#' rdata <- pred_extract(data = matchdata,
 #'                      raster= worldclim ,
 #'                      lat = 'decimalLatitude',
-#'                     lon= 'decimalLongitude',
-#'                     colsp = 'speciescheck',
-#'                     bbox = db,
-#'                      multiple = TRUE,
-#'                     minpts = 10,
-#'                     list=TRUE,
-#'                     merge=F)
+#'                      lon= 'decimalLongitude',
+#'                      colsp = 'species',
+#'                      bbox = db,
+#'                      minpts = 10,
+#'                      list=TRUE,
+#'                     merge=FALSE)
 #'
 #'
 #'out_df <- multidetect(data = rdata, multiple = TRUE,
@@ -56,15 +53,10 @@
 #'                      output = 'outlier',
 #'                      exclude = c('x','y'),
 #'                      methods = c('zscore', 'adjbox','iqr', 'semiqr','hampel', 'kmeans',
-#'                                 'logboxplot', 'lof','iforest', 'mahal', 'seqfences'))
-
+#'                                  'logboxplot', 'lof','iforest', 'mahal', 'seqfences'))
 #'
-#' bmout <- bestmethod(x = out_df, sp= 1, threshold = 0.2)#
-#'
-#'
-#' }
-#'
-#'
+#'bmout <- bestmethod(x = out_df, sp= 1, threshold = 0.2)
+#'}
 
 bestmethod <- function(x, sp = NULL, threshold= NULL, autothreshold=FALSE,
                        warn=FALSE, verbose=FALSE){
@@ -175,32 +167,33 @@ bestmethod <- function(x, sp = NULL, threshold= NULL, autothreshold=FALSE,
 #' @export
 #'
 #' @examples
+#' \donttest{
 #'
-#' \dontrun{
-#' data(efidata)
+# data(efidata)
 #'
-#' db <- sf::read_sf(system.file('extdata/danube/basinfinal.shp', package = "specleanr"), quiet = TRUE)
+#' danube <- system.file('extdata/danube.shp.zip', package='specleanr')
+#'
+#' db <- sf::st_read(danube, quiet=TRUE)
 #'
 #' wcd <- terra::rast(system.file('extdata/worldclim.tiff', package = "specleanr"))
 #'
-#' checkname <- check_names(data=efidata, colsp ='scientificName', pct = 90, merge = T)
-#'
-#' extdf <- pred_extract(data = checkname, raster = wcd,
+#' preddata <- pred_extract(data = efidata, raster = wcd,
 #'                       lat = 'decimalLatitude', lon = 'decimalLongitude',
-#'                      colsp = 'speciescheck',
-#'                      list = TRUE,verbose = F,
-#'                      minpts = 6,merge = F)#basin removed
+#'                      colsp = 'scientificName',
+#'                      list = TRUE,verbose = FALSE,
+#'                      minpts = 6,merge = FALSE)#'basin removed
 #'
 #'  #outlier detection
 #'
-#' outliersdf <- multidetect(data = extdf, output='outlier', var = 'bio6',
-#'                          exclude = c('x','y'), multiple = TRUE,
-#'                          methods = c('mixediqr', "iqr", "mahal", "iqr", "logboxplot"),
-#'                          showErrors = FALSE, warn = TRUE, verbose = FALSE, sdm = TRUE)
+#' outliersdf <- multidetect(data = preddata, multiple = TRUE,
+#'                       var = 'bio6',
+#'                       output = 'outlier',
+#'                       exclude = c('x','y'),
+#'                       methods = c('zscore', 'adjbox','iqr', 'semiqr','hampel', 'kmeans',
+#'                                   'logboxplot', 'lof','iforest', 'mahal', 'seqfences'))
 #'
 #' multbm <- multibestmethod(x = outliersdf, threshold = 0.2)#
-#'
-#' }
+#'}
 #'
 
 multibestmethod<- function(x, threshold = NULL, warn=FALSE, verbose=FALSE, autothreshold = FALSE){

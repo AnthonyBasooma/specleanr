@@ -6,9 +6,10 @@ specleanr package for outlier detection
 
 [![License](https://img.shields.io/badge/License-GPL%20%28%3E=%203%29-lightgrey.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html)
 [![R-CMD-check](https://github.com/AnthonyBasooma/specleanr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AnthonyBasooma/specleanr/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/AnthonyBasooma/specleanr/graph/badge.svg?token=M9431LXVLG)](https://codecov.io/gh/AnthonyBasooma/specleanr)
-[![GitHub
-Downloads](https://img.shields.io/github/downloads/AnthonyBasooma/specleanr/repo/total.svg)](https://github.com/AnthonyBasooma/specleanr/repo/releases)
+[![codecov](https://codecov.io/gh/AnthonyBasooma/specleanr/graph/badge.svg?token=M9431LXVLG)](https://app.codecov.io/gh/AnthonyBasooma/specleanr)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/specleanr?color=orange)](https://cran.r-project.org/package=specleanr)
+[![DOI](https://img.shields.io/badge/DOI-10.1002/ecog.08221-orange)](https://doi.org/10.1002/ecog.08221)
 
 <!-- badges: end -->
 
@@ -59,8 +60,8 @@ is based chiefly on user needs, but numerous sources include WORLDCLIM
 variables; Hydrography90m for stream or river-based hydromorphological
 parameters such as stream order, flow accumulation, stream power index,
 and stream transportation index (Amatulli et al., 2022); and Copernicus
-for land use changes <https://www.copernicus.eu/en>. A comprehensive
-database for environmental predictors can be accessed at
+for land use changes. A comprehensive database for environmental
+predictors can be accessed at
 <https://hydrography.org/environment90m/environment90m_layers>.
 
 2.  **Extracting the environmental predictors**.
@@ -188,7 +189,11 @@ it website on [specleanr](https://AnthonyBasooma.github.io/specleanr/)
 
 ### Package citation
 
-Under review
+Basooma, A., Schmidt-Kloiber, A., Domisch, S., Torres-Cambas, Y.,
+Smederevac-Lalić, M., Bremerich, V., Meulenbroek, P., Tschikof, M.,
+Funk, A., Hein, T. and Borgwardt, F. 2025. ‘specleanr’: an R package for
+automated flagging of environmental outliers in ecological data for
+modeling workflows. Ecography 2025: e08221 (ver. 1.0).
 
 ### References
 
@@ -227,4 +232,4 @@ Under review
     THREATENED SPECIESTM Guidelines for Using the IUCN Red List
     Categories and Criteria Prepared by the Standards and Petitions
     Committee of the IUCN Species Survival Commission.
-    <https://www.iucnredlist.org/documents/RedListGuidelines.pdf>.
+    <https://cmsdocs.s3.amazonaws.com/RedListGuidelines.pdf>.

@@ -14,15 +14,10 @@
 #'
 #' @format A \code{tibble} 99 rows and 23 columns.
 #'
-#'
 #' @examples
-#'
-#' \dontrun{
 #'
 #' data("efidata")
 #' efidata
-#' }
-#'
 #'
 #' @references Logez M, Belliard J, Melcher A, Kremser H, Pletterbauer F, Schmutz S, Gorges G, Delaigue O, Pont D. 2012.
 #' Deliverable D5.1-3: BQEs sensitivity to global/climate change in European rivers: implications for reference conditions
@@ -48,11 +43,8 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
 #' data("jdsdata")
 #' jdsdata
-#' }
 #'
 #'
 #' @references https://www.danubesurvey.org/jds4/about
@@ -77,11 +69,8 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
 #' data("kdat")
 #' kdat
-#' }
 #'
 #' @references Schwertman NC, de Silva R. 2007. Identifying outliers with sequential fences.
 #' Computational Statistics and Data Analysis 51:3800–3810.
@@ -105,12 +94,8 @@
 #'
 #'
 #' @examples
-#'
-#' \dontrun{
-#'
 #' data("mth")
 #' mth
-#' }
 #'
 #'
 #'
@@ -139,11 +124,9 @@
 #
 #@examples
 #
-#\dontrun{
 #
 #data("naturalist")
 #naturalist
-#}
 #
 #@references https://www.eea.europa.eu/themes/biodiversity/natura-2000.
 
@@ -167,11 +150,8 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
 #' data("abdata")
 #' abdata
-#' }
 #'
 #'
 "abdata"
@@ -190,14 +170,10 @@
 #'
 #' @format A \code{tibble} 100 rows and 8 columns.
 #'
-#'
 #' @examples
-#'
-#' \dontrun{
 #'
 #' data("ttdata")
 #' ttdata
-#' }
 #'
 #'
 "ttdata"
