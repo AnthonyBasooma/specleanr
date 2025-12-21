@@ -122,9 +122,9 @@ pltout <- lapply(spp, function(s){
 })
 #> [1] 11
 #> [1] 15
-#> [1] 78
-#> [1] 99
-#> [1] 83
+#> [1] 84
+#> [1] 98
+#> [1] 82
 ```
 
 ![](loessmethodoptimisation_files/figure-html/outlierdetoptplot-1.png)
