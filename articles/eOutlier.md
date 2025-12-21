@@ -67,7 +67,7 @@ data(efidata) #Data extract from EFIPLUS data
 data(jdsdata) #Data extract from JDS4 data 
 
 #===================================
-#Step 1aii: Retrieve online data for the species: polygon to limit the extent to get records.
+#Step 1aii: Retrieve online datas for the species: polygon to limit the extent to get records.
 #=====================================
 danube <- sf::st_read(system.file('extdata', "danube.shp.zip",
                                   package = 'specleanr'), quiet=TRUE)
