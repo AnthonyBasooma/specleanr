@@ -121,7 +121,7 @@ fagus_data_reference <-  pred_extract(data= fagus_data_filtered,
 
 ### 3. Detecting outliers using multiple outlier detection methods
 
-* To detect outliers we selected ensembled seven outlier detection methods at least from different categories i.e., 1) **univariate methods**: adjusted boxplot **`adjbox()`**, Hampel filter: **`hampel()`**, Z-score **`zscore()`** and reverse jackknifing **`jknife()`**; 2) **Multivariate methods or machine learning models**: local outlier factor: **`lof()`**, K-means: **`kmeans()`**, and Mahalanobis distance measure **`mahal()`**.
+* To detect outliers we selected ensembled seven outlier detection methods at least from different categories i.e., 1) **univariate methods**: adjusted boxplot **`adjbox()`**, Hampel filter: **`hampel()`**, Z-score **`zscore()`** and reverse jackknifing **`jknife()`**; 2) **Multivariate methods or machine learning models**: local outlier factor: **`lof()`**, k-means: **`kmeans()`**, and Mahalanobis distance measure **`mahal()`**.
 
 ```{r oultlier detection}
 
