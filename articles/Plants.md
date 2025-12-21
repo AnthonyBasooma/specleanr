@@ -145,7 +145,7 @@ fagus_data_reference <-  pred_extract(data= fagus_data_filtered,
   and reverse jackknifing
   **[`jknife()`](https://anthonybasooma.github.io/specleanr/reference/jknife.md)**; 2)
   **Multivariate methods or machine learning models**: local outlier
-  factor: **`lof()`**, K-means:
+  factor: **`lof()`**, k-means:
   **[`kmeans()`](https://rdrr.io/r/stats/kmeans.html)**, and Mahalanobis
   distance measure
   **[`mahal()`](https://anthonybasooma.github.io/specleanr/reference/mahal.md)**.
