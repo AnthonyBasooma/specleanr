@@ -203,6 +203,10 @@ multipreclened <-  pred_extract(data= speciesfiltered,
                              bbox  = danube,  
                              list= TRUE, 
                              minpts = 10, merge = FALSE)
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
 names(multipreclened)
 #> [1] "Anguilla anguilla"   "Salmo trutta"        "Squalius cephalus"  
 #> [4] "Thymallus thymallus"
@@ -220,6 +224,10 @@ thymallus_referencedata <-  pred_extract(data= thymallusdata, raster= worldclim,
                              bbox  = danube,
                              list= TRUE, 
                              minpts = 10)
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
 dim(thymallus_referencedata)
 #> [1] 82 21
 ```

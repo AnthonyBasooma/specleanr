@@ -63,6 +63,10 @@ refdata <- pred_extract(data = matchd, raster = wcd,
                         verbose = FALSE,
                         minpts = 6,
                         merge = FALSE)
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
 ```
 
 **3. Preparing ecological ranges for Squalius cephalus**

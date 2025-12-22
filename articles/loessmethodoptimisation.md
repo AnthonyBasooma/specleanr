@@ -120,10 +120,30 @@ pltout <- lapply(spp, function(s){
   opt
   
 })
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
 #> [1] 11
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
 #> [1] 15
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
 #> [1] 84
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
 #> [1] 98
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
+#> although coordinates are longitude/latitude, st_intersects assumes that they
+#> are planar
 #> [1] 82
 ```
 
