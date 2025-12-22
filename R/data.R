@@ -179,6 +179,48 @@
 "ttdata"
 
 
+#' @title Plant species occurences obtained from GBIF, iNaturalist and VertNet.
+#'
+#' @description A \code{tibble}
+#'
+#' @docType data
+#'
+#' @details The data was incorporated for testing the package only and the licence for citation and further use are included in the file.
+#'
+#' @usage data(plantdf1)
+#'
+#' @keywords Danube plants data including Populus nigra and Fagus sylvatica
+#'
+#' @format A \code{tibble} 1600 rows and 8 columns.
+#'
+#' @examples
+#'
+#' data("plantdf1")
+#' plantdf1
+#'
+#' @references gbif, iNaturalist and VertNet
+#'
+"plantdf1"
 
-
-
+#' @title Fish species occurrences obtained from GBIF, iNaturalist and VertNet.
+#'
+#' @description A \code{tibble}
+#'
+#' @docType data
+#'
+#' @details The data was incorporated for testing the package only and the licence for citation and further use are included in the file.
+#'
+#' @usage data(fishdata)
+#'
+#' @keywords Danube fish species data including Squalius cephalus, Salmo trutta,Thymallus thymallus, and Anguilla anguilla
+#'
+#' @format A \code{tibble} 400 rows and 8 columns.
+#'
+#' @examples
+#'
+#' data("fishdata")
+#' fishdata
+#'
+#' @references gbif, iNaturalist and VertNet
+#'
+"fishdata"

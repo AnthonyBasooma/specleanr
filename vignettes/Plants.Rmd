@@ -36,16 +36,17 @@ To test the workflow on two plant species, namely the black poplar (*Populus nig
 Data was retrieved from the iNaturalist (https://www.inaturalist.org/) and Global Biodiversity Information Facility-GBIF (https://www.gbif.org/). We use the **`getdata()`** function, built around rvertnet, rgbif, and rinat packages. We limited the occurrence records from GBIF to 700 and iNaturalist to 100. 
 * **Note**: If the user has locally saved data, then after extracting the online data, the **`match_datasets()`** function can be used to merge all the data sets. 
 
-* We set the bounding box **`(extent)`** parameter for **`getdata()`** to return only records within the Danube basin. However, the user can set this to suit the area of concern. If not set, the user data will download records globally, which is time-consuming and likely to break during the download. Therefore, it is strongly advisable to set the **`bounding box`**. Also, if a shapefile is available, the user can provide it instead of the bounding box, and the function will automatically extract the bounding box.
+* We set the bounding box **`(extent)`** parameter for **`getdata()`** to return only records within the Danube basin. However, the user can set this to suit the area of concern. If not set, the user data will download records globally, which is time-consuming and likely to break during the download. Therefore, it is strongly advisable to set the **`bounding box`**. Also, if a shapefile is available, the user can provide it instead of the bounding box, and the function will automatically extract the bounding box. Due to errors from duckdb on CRAN servers, the data has been ported with the package but the code is available for testing.
 
 ```{r get species occurences}
 
-plantdf <- getdata(data = c( "Populus nigra", "Fagus sylvatica"), 
-                    gbiflim = 700, inatlim = 100,
-                     hasCoordinate = TRUE, 
-                   extent = list(xmin = 8.15250, ymin = 42.08333, xmax=29.73583, ymax = 50.24500),
-                   verbose = FALSE, warn = FALSE)
+# plantdf1 <- getdata(data = c( "Populus nigra", "Fagus sylvatica"), 
+#                     gbiflim = 700, inatlim = 100,
+#                      hasCoordinate = TRUE, 
+#                    extent = list(xmin = 8.15250, ymin = 42.08333, xmax=29.73583, ymax = 50.24500),
+#                    verbose = FALSE, warn = FALSE)
 
+data(plantdf1)
 
 ```
 ### 1. Data acquisition: b) Environmental predictors
@@ -94,7 +95,7 @@ danube_basin <- sf::st_read(system.file('extdata', "danube.shp.zip", package = '
 
 #Environmental predictors extraction for multiple species (multiple = TRUE)
 
-multspreference_data <-  pred_extract(data= plantdf, 
+multspreference_data <-  pred_extract(data= plantdf1, 
                              raster= worldclim, 
                              lat = 'decimalLatitude',
                              lon = 'decimalLongitude',
@@ -104,7 +105,7 @@ multspreference_data <-  pred_extract(data= plantdf,
                              minpts = 10, merge = FALSE, verbose = FALSE, warn = FALSE)
 
 #Environmental prediction extraction for a single species (multiple = FALSE)
-fagus_data_filtered <- subset(plantdf, species=="Fagus sylvatica")
+fagus_data_filtered <- subset(plantdf1, species=="Fagus sylvatica")
 
 fagus_data_reference <-  pred_extract(data= fagus_data_filtered, 
                              raster= worldclim, 

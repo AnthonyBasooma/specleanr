@@ -9,15 +9,7 @@ vignette: >
 
 
 ```{r setup, include=FALSE}
-Sys.setenv(DUCKDB_DISABLE_EXTENSIONS = "1")
-options(sf_use_s2 = FALSE)
-cran <- identical(tolower(Sys.getenv("NOT_CRAN")), "false")
-if (cran || !curl::has_internet()) {
-  knitr::opts_chunk$set(eval = FALSE, collapse = TRUE, comment = "#>")
-} else {
-  knitr::opts_chunk$set(eval = TRUE, collapse = TRUE, comment = "#>")
-}
-
+knitr::opts_chunk$set(eval = TRUE, collapse = TRUE, comment = "#>")
 ```
 
 ```{r librarydata}
@@ -48,17 +40,10 @@ data(jdsdata)
 danube <- sf::st_read(system.file('extdata', "danube.shp.zip",
                                   package = 'specleanr'), quiet=TRUE)
 
-
-df_online <- getdata(data = c("Squalius cephalus", 'Salmo trutta',"Thymallus thymallus"),
-                     extent = danube,
-                     gbiflim = 50,
-                     inatlim = 50,
-                     vertlim = 50,
-                     verbose = FALSE)
-
+data(fishdata)
 
 mergealldfs <- match_datasets(datasets = list(efi= efidata, jds = jdsdata,
-                                              onlinedata = df_online),
+                                              fishdata = fishdata),
                               country = c('JDS4_sampling_ID'),
                               lats = 'lat', lons = 'lon',
                               species = c('speciesname', 'scientificName'))

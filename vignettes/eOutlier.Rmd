@@ -8,15 +8,7 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-Sys.setenv(DUCKDB_DISABLE_EXTENSIONS = "1")
-options(sf_use_s2 = FALSE)
-cran <- identical(tolower(Sys.getenv("NOT_CRAN")), "false")
-if (cran || !curl::has_internet()) {
-  knitr::opts_chunk$set(eval = FALSE, collapse = TRUE, comment = "#>")
-} else {
   knitr::opts_chunk$set(eval = TRUE, collapse = TRUE, comment = "#>")
-}
-
 ```
 
 ```{r libraries, echo=TRUE, warning=FALSE, message=FALSE}
@@ -57,16 +49,16 @@ data(jdsdata) #Data extract from JDS4 data
 danube <- sf::st_read(system.file('extdata', "danube.shp.zip",
                                   package = 'specleanr'), quiet=TRUE)
 
+# df_online <- getdata(data = c("Squalius cephalus", 'Salmo trutta', 
+#                               "Thymallus thymallus","Anguilla anguilla"), 
+#                                 extent = danube,
+#                                 gbiflim = 50, 
+#                                 inatlim = 50, 
+#                                 vertlim = 50, 
+#                      verbose = FALSE)
+data(fishdata)
 
-df_online <- getdata(data = c("Squalius cephalus", 'Salmo trutta', 
-                              "Thymallus thymallus","Anguilla anguilla"), 
-                                extent = danube,
-                                gbiflim = 50, 
-                                inatlim = 50, 
-                                vertlim = 50, 
-                     verbose = FALSE)
-
-dim(df_online)
+dim(fishdata)
 
 ```
 
@@ -79,7 +71,7 @@ The online data sources from **`getdata()`** and local files are merged using th
 ```{r merging and harmonising species records handling, warning=FALSE}
 
 mergealldfs <- match_datasets(datasets = list(efi= efidata, jds = jdsdata, 
-                                        onlinedata = df_online),
+                                        fishdata = fishdata),
                 country = c('JDS4_sampling_ID'),
                 lats = 'lat', lons = 'lon',
                 species = c('speciesname', 'scientificName'))
