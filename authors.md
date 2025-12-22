@@ -26,13 +26,13 @@ Source:
 [`DESCRIPTION`](https://github.com/AnthonyBasooma/specleanr/blob/master/DESCRIPTION)
 
 Basooma A (2025). *specleanr: Detecting Environmental Outliers in Data
-Analysis Pipelines*. R package version 1.0.0,
+Analysis Pipelines*. R package version 1.0.1,
 <https://anthonybasooma.github.io/specleanr/>.
 
     @Manual{,
       title = {specleanr: Detecting Environmental Outliers in Data Analysis Pipelines},
       author = {Anthony Basooma},
       year = {2025},
-      note = {R package version 1.0.0},
+      note = {R package version 1.0.1},
       url = {https://anthonybasooma.github.io/specleanr/},
     }

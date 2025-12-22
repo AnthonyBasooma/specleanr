@@ -124,10 +124,6 @@ multspreference_data <-  pred_extract(data= plantdf1,
                              bbox = danube_basin,
                              list= TRUE, 
                              minpts = 10, merge = FALSE, verbose = FALSE, warn = FALSE)
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
 
 #Environmental prediction extraction for a single species (multiple = FALSE)
 fagus_data_filtered <- subset(plantdf1, species=="Fagus sylvatica")
@@ -140,10 +136,6 @@ fagus_data_reference <-  pred_extract(data= fagus_data_filtered,
                              bbox = danube_basin, 
                              minpts = 10, merge = FALSE, 
                            verbose = FALSE, warn = FALSE)
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
 ```
 
 ### 3. Detecting outliers using multiple outlier detection methods
