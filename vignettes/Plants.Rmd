@@ -18,11 +18,10 @@ if (cran || !curl::has_internet()) {
 }
 ```
 
-```{r setup, warning=FALSE, message=FALSE}
+```{r library, warning=FALSE, message=FALSE}
 
 library(specleanr)
-options(sf_use_s2 = FALSE)
-Sys.setenv(DUCKDB_DISABLE_EXTENSIONS = "1")
+
 
 
 ```

@@ -7,14 +7,18 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+```{r setup, include=FALSE}
+Sys.setenv(DUCKDB_DISABLE_EXTENSIONS = "1")
+options(sf_use_s2 = FALSE)
+cran <- identical(tolower(Sys.getenv("NOT_CRAN")), "false")
+if (cran || !curl::has_internet()) {
+  knitr::opts_chunk$set(eval = FALSE, collapse = TRUE, comment = "#>")
+} else {
+  knitr::opts_chunk$set(eval = TRUE, collapse = TRUE, comment = "#>")
+}
 ```
 
-```{r setup}
+```{r libraries}
 library(specleanr)
 ```
 ### Introduction to outlier detection based on species ecological ranges.

@@ -9,6 +9,8 @@ vignette: >
 
 
 ```{r setup, include=FALSE}
+Sys.setenv(DUCKDB_DISABLE_EXTENSIONS = "1")
+options(sf_use_s2 = FALSE)
 cran <- identical(tolower(Sys.getenv("NOT_CRAN")), "false")
 if (cran || !curl::has_internet()) {
   knitr::opts_chunk$set(eval = FALSE, collapse = TRUE, comment = "#>")
@@ -20,6 +22,7 @@ if (cran || !curl::has_internet()) {
 
 ```{r librarydata}
 library(specleanr)
+
 ```
 
 ## Identifying the optimal threshold for identifying absolute outliers using the local regression method (LOESS).
