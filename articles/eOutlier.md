@@ -11,7 +11,7 @@ The workflow for environmental outlier detection and removal is similar
 across taxa, regions, or ecological realms. However, we included the
 **[`check_names()`](https://anthonybasooma.github.io/specleanr/reference/check_names.md)**
 function to cater for fish species names exhaustively. In this worked
-example, we tried the functionalities on the fish species from the
+example, we tested the functionalities on the fish species from the
 Danube River Basin, with extracts of species records from Joint Danube
 Survey (JDS) and EFI+ data archived in the package. We complimented the
 data with fish species occurrences from online sources including Global
