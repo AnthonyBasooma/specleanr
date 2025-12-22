@@ -108,15 +108,19 @@ globally, which is time-consuming and likely to break during the
 download. Therefore, it is strongly advisable to set the
 <strong><code>bounding box</code></strong>. Also, if a shapefile is
 available, the user can provide it instead of the bounding box, and the
-function will automatically extract the bounding box.</li>
+function will automatically extract the bounding box. Due to errors from
+duckdb on CRAN servers, the data has been ported with the package but
+the code is available for testing.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">plantdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getdata.html">getdata</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="st">"Populus nigra"</span>, <span class="st">"Fagus sylvatica"</span><span class="op">)</span>, </span>
-<span>                    gbiflim <span class="op">=</span> <span class="fl">700</span>, inatlim <span class="op">=</span> <span class="fl">100</span>,</span>
-<span>                     hasCoordinate <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                   extent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="fl">8.15250</span>, ymin <span class="op">=</span> <span class="fl">42.08333</span>, xmax<span class="op">=</span><span class="fl">29.73583</span>, ymax <span class="op">=</span> <span class="fl">50.24500</span><span class="op">)</span>,</span>
-<span>                   verbose <span class="op">=</span> <span class="cn">FALSE</span>, warn <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># plantdf1 &lt;- getdata(data = c( "Populus nigra", "Fagus sylvatica"), </span></span>
+<span><span class="co">#                     gbiflim = 700, inatlim = 100,</span></span>
+<span><span class="co">#                      hasCoordinate = TRUE, </span></span>
+<span><span class="co">#                    extent = list(xmin = 8.15250, ymin = 42.08333, xmax=29.73583, ymax = 50.24500),</span></span>
+<span><span class="co">#                    verbose = FALSE, warn = FALSE)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">plantdf1</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-acquisition-b-environmental-predictors">1. Data acquisition: b) Environmental predictors<a class="anchor" aria-label="anchor" href="#data-acquisition-b-environmental-predictors"></a>
@@ -197,7 +201,7 @@ collated from the Hydrography90m basin files (<a href="https://hydrography.org/h
 <span></span>
 <span><span class="co">#Environmental predictors extraction for multiple species (multiple = TRUE)</span></span>
 <span></span>
-<span><span class="va">multspreference_data</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/pred_extract.html">pred_extract</a></span><span class="op">(</span>data<span class="op">=</span> <span class="va">plantdf</span>, </span>
+<span><span class="va">multspreference_data</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/pred_extract.html">pred_extract</a></span><span class="op">(</span>data<span class="op">=</span> <span class="va">plantdf1</span>, </span>
 <span>                             raster<span class="op">=</span> <span class="va">worldclim</span>, </span>
 <span>                             lat <span class="op">=</span> <span class="st">'decimalLatitude'</span>,</span>
 <span>                             lon <span class="op">=</span> <span class="st">'decimalLongitude'</span>,</span>
@@ -211,7 +215,7 @@ collated from the Hydrography90m basin files (<a href="https://hydrography.org/h
 <span><span class="co">#&gt; are planar</span></span>
 <span></span>
 <span><span class="co">#Environmental prediction extraction for a single species (multiple = FALSE)</span></span>
-<span><span class="va">fagus_data_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">plantdf</span>, <span class="va">species</span><span class="op">==</span><span class="st">"Fagus sylvatica"</span><span class="op">)</span></span>
+<span><span class="va">fagus_data_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">plantdf1</span>, <span class="va">species</span><span class="op">==</span><span class="st">"Fagus sylvatica"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">fagus_data_reference</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/pred_extract.html">pred_extract</a></span><span class="op">(</span>data<span class="op">=</span> <span class="va">fagus_data_filtered</span>, </span>
 <span>                             raster<span class="op">=</span> <span class="va">worldclim</span>, </span>

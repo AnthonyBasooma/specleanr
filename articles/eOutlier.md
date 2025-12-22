@@ -72,16 +72,16 @@ data(jdsdata) #Data extract from JDS4 data
 danube <- sf::st_read(system.file('extdata', "danube.shp.zip",
                                   package = 'specleanr'), quiet=TRUE)
 
+# df_online <- getdata(data = c("Squalius cephalus", 'Salmo trutta', 
+#                               "Thymallus thymallus","Anguilla anguilla"), 
+#                                 extent = danube,
+#                                 gbiflim = 50, 
+#                                 inatlim = 50, 
+#                                 vertlim = 50, 
+#                      verbose = FALSE)
+data(fishdata)
 
-df_online <- getdata(data = c("Squalius cephalus", 'Salmo trutta', 
-                              "Thymallus thymallus","Anguilla anguilla"), 
-                                extent = danube,
-                                gbiflim = 50, 
-                                inatlim = 50, 
-                                vertlim = 50, 
-                     verbose = FALSE)
-
-dim(df_online)
+dim(fishdata)
 #> [1] 400   8
 ```
 
@@ -108,7 +108,7 @@ another column **speciescheck** that contain the clean names.
 ``` r
 
 mergealldfs <- match_datasets(datasets = list(efi= efidata, jds = jdsdata, 
-                                        onlinedata = df_online),
+                                        fishdata = fishdata),
                 country = c('JDS4_sampling_ID'),
                 lats = 'lat', lons = 'lon',
                 species = c('speciesname', 'scientificName'))
@@ -203,10 +203,6 @@ multipreclened <-  pred_extract(data= speciesfiltered,
                              bbox  = danube,  
                              list= TRUE, 
                              minpts = 10, merge = FALSE)
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
 names(multipreclened)
 #> [1] "Anguilla anguilla"   "Salmo trutta"        "Squalius cephalus"  
 #> [4] "Thymallus thymallus"
@@ -224,10 +220,6 @@ thymallus_referencedata <-  pred_extract(data= thymallusdata, raster= worldclim,
                              bbox  = danube,
                              list= TRUE, 
                              minpts = 10)
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
 dim(thymallus_referencedata)
 #> [1] 82 21
 ```

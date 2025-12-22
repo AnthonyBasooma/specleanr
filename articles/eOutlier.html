@@ -137,16 +137,16 @@ limitations.</p>
 <span><span class="va">danube</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">"danube.shp.zip"</span>,</span>
 <span>                                  package <span class="op">=</span> <span class="st">'specleanr'</span><span class="op">)</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># df_online &lt;- getdata(data = c("Squalius cephalus", 'Salmo trutta', </span></span>
+<span><span class="co">#                               "Thymallus thymallus","Anguilla anguilla"), </span></span>
+<span><span class="co">#                                 extent = danube,</span></span>
+<span><span class="co">#                                 gbiflim = 50, </span></span>
+<span><span class="co">#                                 inatlim = 50, </span></span>
+<span><span class="co">#                                 vertlim = 50, </span></span>
+<span><span class="co">#                      verbose = FALSE)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fishdata</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df_online</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getdata.html">getdata</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Squalius cephalus"</span>, <span class="st">'Salmo trutta'</span>, </span>
-<span>                              <span class="st">"Thymallus thymallus"</span>,<span class="st">"Anguilla anguilla"</span><span class="op">)</span>, </span>
-<span>                                extent <span class="op">=</span> <span class="va">danube</span>,</span>
-<span>                                gbiflim <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                                inatlim <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                                vertlim <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                     verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">df_online</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">fishdata</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 400   8</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="merging-and-harmonizing-species-records-from-different-sources">Merging and harmonizing species records from different sources<a class="anchor" aria-label="anchor" href="#merging-and-harmonizing-species-records-from-different-sources"></a>
@@ -170,7 +170,7 @@ names.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">mergealldfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_datasets.html">match_datasets</a></span><span class="op">(</span>datasets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>efi<span class="op">=</span> <span class="va">efidata</span>, jds <span class="op">=</span> <span class="va">jdsdata</span>, </span>
-<span>                                        onlinedata <span class="op">=</span> <span class="va">df_online</span><span class="op">)</span>,</span>
+<span>                                        fishdata <span class="op">=</span> <span class="va">fishdata</span><span class="op">)</span>,</span>
 <span>                country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'JDS4_sampling_ID'</span><span class="op">)</span>,</span>
 <span>                lats <span class="op">=</span> <span class="st">'lat'</span>, lons <span class="op">=</span> <span class="st">'lon'</span>,</span>
 <span>                species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'speciesname'</span>, <span class="st">'scientificName'</span><span class="op">)</span><span class="op">)</span></span>
@@ -284,10 +284,6 @@ data. Important in the next steps.</p></li>
 <span>                             bbox  <span class="op">=</span> <span class="va">danube</span>,  </span>
 <span>                             list<span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                             minpts <span class="op">=</span> <span class="fl">10</span>, merge <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; although coordinates are longitude/latitude, st_intersects assumes that they</span></span>
-<span><span class="co">#&gt; are planar</span></span>
-<span><span class="co">#&gt; although coordinates are longitude/latitude, st_intersects assumes that they</span></span>
-<span><span class="co">#&gt; are planar</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">multipreclened</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Anguilla anguilla"   "Salmo trutta"        "Squalius cephalus"  </span></span>
 <span><span class="co">#&gt; [4] "Thymallus thymallus"</span></span>
@@ -305,10 +301,6 @@ data. Important in the next steps.</p></li>
 <span>                             bbox  <span class="op">=</span> <span class="va">danube</span>,</span>
 <span>                             list<span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                             minpts <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; although coordinates are longitude/latitude, st_intersects assumes that they</span></span>
-<span><span class="co">#&gt; are planar</span></span>
-<span><span class="co">#&gt; although coordinates are longitude/latitude, st_intersects assumes that they</span></span>
-<span><span class="co">#&gt; are planar</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">thymallus_referencedata</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 82 21</span></span></code></pre></div>
 </div>

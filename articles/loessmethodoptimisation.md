@@ -48,17 +48,10 @@ data(jdsdata)
 danube <- sf::st_read(system.file('extdata', "danube.shp.zip",
                                   package = 'specleanr'), quiet=TRUE)
 
-
-df_online <- getdata(data = c("Squalius cephalus", 'Salmo trutta',"Thymallus thymallus"),
-                     extent = danube,
-                     gbiflim = 50,
-                     inatlim = 50,
-                     vertlim = 50,
-                     verbose = FALSE)
-
+data(fishdata)
 
 mergealldfs <- match_datasets(datasets = list(efi= efidata, jds = jdsdata,
-                                              onlinedata = df_online),
+                                              fishdata = fishdata),
                               country = c('JDS4_sampling_ID'),
                               lats = 'lat', lons = 'lon',
                               species = c('speciesname', 'scientificName'))
@@ -120,30 +113,10 @@ pltout <- lapply(spp, function(s){
   opt
   
 })
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> [1] 11
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
+#> [1] 23
 #> [1] 15
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
 #> [1] 84
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
 #> [1] 98
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
-#> although coordinates are longitude/latitude, st_intersects assumes that they
-#> are planar
 #> [1] 82
 ```
 

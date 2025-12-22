@@ -44,15 +44,19 @@ function can be used to merge all the data sets.
   during the download. Therefore, it is strongly advisable to set the
   **`bounding box`**. Also, if a shapefile is available, the user can
   provide it instead of the bounding box, and the function will
-  automatically extract the bounding box.
+  automatically extract the bounding box. Due to errors from duckdb on
+  CRAN servers, the data has been ported with the package but the code
+  is available for testing.
 
 ``` r
 
-plantdf <- getdata(data = c( "Populus nigra", "Fagus sylvatica"), 
-                    gbiflim = 700, inatlim = 100,
-                     hasCoordinate = TRUE, 
-                   extent = list(xmin = 8.15250, ymin = 42.08333, xmax=29.73583, ymax = 50.24500),
-                   verbose = FALSE, warn = FALSE)
+# plantdf1 <- getdata(data = c( "Populus nigra", "Fagus sylvatica"), 
+#                     gbiflim = 700, inatlim = 100,
+#                      hasCoordinate = TRUE, 
+#                    extent = list(xmin = 8.15250, ymin = 42.08333, xmax=29.73583, ymax = 50.24500),
+#                    verbose = FALSE, warn = FALSE)
+
+data(plantdf1)
 ```
 
 ### 1. Data acquisition: b) Environmental predictors
@@ -112,7 +116,7 @@ danube_basin <- sf::st_read(system.file('extdata', "danube.shp.zip", package = '
 
 #Environmental predictors extraction for multiple species (multiple = TRUE)
 
-multspreference_data <-  pred_extract(data= plantdf, 
+multspreference_data <-  pred_extract(data= plantdf1, 
                              raster= worldclim, 
                              lat = 'decimalLatitude',
                              lon = 'decimalLongitude',
@@ -126,7 +130,7 @@ multspreference_data <-  pred_extract(data= plantdf,
 #> are planar
 
 #Environmental prediction extraction for a single species (multiple = FALSE)
-fagus_data_filtered <- subset(plantdf, species=="Fagus sylvatica")
+fagus_data_filtered <- subset(plantdf1, species=="Fagus sylvatica")
 
 fagus_data_reference <-  pred_extract(data= fagus_data_filtered, 
                              raster= worldclim, 

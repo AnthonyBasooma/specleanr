@@ -69,6 +69,10 @@
 - [`extractoutliers()`](https://anthonybasooma.github.io/specleanr/reference/extractoutliers.md)
   : Extract outliers for a one species
 
+- [`fishdata`](https://anthonybasooma.github.io/specleanr/reference/fishdata.md)
+  : Fish species occurrences obtained from GBIF, iNaturalist and
+  VertNet.
+
 - [`geo_ranges()`](https://anthonybasooma.github.io/specleanr/reference/geo_ranges.md)
   : Checks for geographic ranges from FishBase
 
@@ -169,6 +173,10 @@
 
 - [`pcboot()`](https://anthonybasooma.github.io/specleanr/reference/pcboot.md)
   : To package both principal component analysis and bootstrapping.
+
+- [`plantdf1`](https://anthonybasooma.github.io/specleanr/reference/plantdf1.md)
+  : Plant species occurences obtained from GBIF, iNaturalist and
+  VertNet.
 
 - [`pred_extract()`](https://anthonybasooma.github.io/specleanr/reference/pred_extract.md)
   : Preliminary data cleaning including removing duplicates, records
