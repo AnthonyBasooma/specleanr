@@ -7,8 +7,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-  knitr::opts_chunk$set(eval = TRUE, collapse = TRUE, comment = "#>")
+```{r, include = FALSE}
+cran <- identical(tolower(Sys.getenv("NOT_CRAN")), "false")
+if (cran || !curl::has_internet()) {
+  knitr::opts_chunk$set(eval = FALSE, collapse = TRUE, comment = "#>")
+} else {
+  knitr::opts_chunk$set(eval = TRUE, collapse = TRUE,comment = "#>")
+}
 ```
 
 ```{r libraries, echo=TRUE, warning=FALSE, message=FALSE}

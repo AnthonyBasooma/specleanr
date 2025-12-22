@@ -189,7 +189,7 @@
 #'
 #' @usage data(plantdf1)
 #'
-#' @keywords Danube plants data including Populus nigra and Fagus sylvatica
+#' @keywords Danube plants data
 #'
 #' @format A \code{tibble} 1600 rows and 8 columns.
 #'
@@ -212,7 +212,7 @@
 #'
 #' @usage data(fishdata)
 #'
-#' @keywords Danube fish species data including Squalius cephalus, Salmo trutta,Thymallus thymallus, and Anguilla anguilla
+#' @keywords Danube fish species data.
 #'
 #' @format A \code{tibble} 400 rows and 8 columns.
 #'
