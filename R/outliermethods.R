@@ -974,7 +974,7 @@ isoforest <- function(data, size, cutoff =0.5, output, exclude = NULL, pc = FALS
 
   if(!is.null(exclude))  df<- pcdf[!colnames(pcdf)%in%exclude] else df <- pcdf
 
-  isomodel <- isolation.forest(data= df, sample_size = size, ntrees = 100, 1)
+  isomodel <- isolation.forest(data= df, sample_size = size, ntrees = 100, 1, nthreads = 1)
 
   isopred <- predict(isomodel,df)
 
