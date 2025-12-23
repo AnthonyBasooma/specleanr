@@ -26,11 +26,5 @@ plantdf1
 gbif, iNaturalist and VertNet
 }
 \keyword{Danube}
-\keyword{Fagus}
-\keyword{Populus}
-\keyword{and}
 \keyword{data}
-\keyword{including}
-\keyword{nigra}
 \keyword{plants}
-\keyword{sylvatica}

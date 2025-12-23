@@ -25,16 +25,7 @@ fishdata
 \references{
 gbif, iNaturalist and VertNet
 }
-\keyword{Anguilla}
 \keyword{Danube}
-\keyword{Salmo}
-\keyword{Squalius}
-\keyword{and}
-\keyword{anguilla}
-\keyword{cephalus,}
-\keyword{data}
+\keyword{data.}
 \keyword{fish}
-\keyword{including}
 \keyword{species}
-\keyword{thymallus,}
-\keyword{trutta,Thymallus}

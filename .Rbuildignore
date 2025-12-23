@@ -10,3 +10,4 @@
 testfolder
 httptests
 .Rhistory
+^cran-comments\.md$
