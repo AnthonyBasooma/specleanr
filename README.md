@@ -10,6 +10,9 @@ specleanr package for outlier detection
 [![GitHub
 Downloads](https://img.shields.io/github/downloads/AnthonyBasooma/specleanr/repo/total.svg)](https://github.com/AnthonyBasooma/specleanr/repo/releases)
 
+[![Launch RStudio on MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AnthonyBasooma/specleanr/tree/aquabranch/HEAD)
+[![Replay](https://img.shields.io/badge/launch-EGI%20Replay-F5A252.svg)](https://replay.notebooks.egi.eu/v2/gh/AnthonyBasooma/specleanr/tree/aquabranch/HEAD)
+
 <!-- badges: end -->
 
 <img src = "man/figures/specleanlogo.png" align ="right" alt="logo" width="150" height="190" />
